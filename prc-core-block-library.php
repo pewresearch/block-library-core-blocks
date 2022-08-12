@@ -25,13 +25,22 @@ define( 'PRC_CORE_BLOCK_LIBRARY_DIR', __DIR__ );
 class PRC_Core_Block_Library {
 	public function __construct($init = false) {
 		require_once plugin_dir_path( __FILE__ ) . '/src/column/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/columns/index.php';
 
 		$this->init_blocks();
 	}
 
 	public function init_blocks() {
 		new Column(true);
+		new Columns(true);
 	}
+
+	public function dynamically_change_block_theme_style_variation($style_variation_name = false) {
+		// Something like this...
+		// $dark_mode = get_query_arg('style_variation') === 'dark';
+		// $this->dynamically_change_block_theme_style_variation('dark-mode');
+	}
+
 }
 
 new PRC_Core_Block_Library();
