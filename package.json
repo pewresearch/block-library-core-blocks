@@ -1,0 +1,36 @@
+{
+  "name": "@pewresearch/core-block-library",
+  "version": "1.0.0",
+  "description": "A starting point for anyone looking to add functionality, control, and create your own custom block library using core/blocks.",
+  "main": "index.js",
+  "dependencies": {
+    "@wordpress/scripts": "^23.7.0"
+  },
+  "devDependencies": {
+    "@wordpress/block-editor": "^9.7.0",
+    "@wordpress/blocks": "^11.14.0",
+    "@wordpress/components": "^19.17.0",
+    "@wordpress/compose": "^5.13.0",
+    "@wordpress/element": "^4.13.0",
+    "@wordpress/hooks": "^3.15.0",
+    "@wordpress/i18n": "^4.15.0"
+  },
+  "scripts": {
+    "build": "wp-scripts build ./src/social-link/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pewresearch/core-block-library.git"
+  },
+  "keywords": [
+    "gutenberg",
+    "block",
+    "library"
+  ],
+  "author": "Seth Rubenstein",
+  "license": "GPL-2.0-only",
+  "bugs": {
+    "url": "https://github.com/wpnaa/block-library/issues"
+  },
+  "homepage": "https://github.com/wpnaa/block-library#readme"
+}
