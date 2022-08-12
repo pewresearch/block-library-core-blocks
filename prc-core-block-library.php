@@ -3,7 +3,7 @@
  * @wordpress-plugin
  * Plugin Name:       Core Block Library by Pew Research Center
  * Plugin URI:        https://github.com/pewresearch/core-block-library/
- * Description:       A starting point for anyone looking to add functionality, control, and create your own custom block library using core/blocks.
+ * Description:       A starting point for anyone looking to add functionality, extra control to and or create your own custom block library using core/blocks. Built with easier extensibility in mind.
  * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
