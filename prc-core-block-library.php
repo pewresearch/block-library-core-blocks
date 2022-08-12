@@ -24,8 +24,14 @@ define( 'PRC_CORE_BLOCK_LIBRARY_DIR', __DIR__ );
 
 class PRC_Core_Block_Library {
 	public function __construct($init = false) {
+		require_once plugin_dir_path( __FILE__ ) . '/src/column/index.php';
 
+		$this->init_blocks();
+	}
+
+	public function init_blocks() {
+		new Column(true);
 	}
 }
 
-new PRC_Core_Block_Library(true);
+new PRC_Core_Block_Library();
