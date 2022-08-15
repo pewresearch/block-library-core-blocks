@@ -9,6 +9,8 @@ A starting point for anyone looking to add functionality, extra control to and o
 - Columns
 - Cover
 - Group
+- Home Link
+  - Adds `iconId` and `iconSlug`. Allows you to set a image/svg file for an icon, or, utilizing your own icon library a slug to reference the icon.
 - Navigation Link
   - Adds `iconId` and `iconSlug`. Allows you to set a image/svg file for an icon, or, utilizing your own icon library a slug to reference the icon.
 - Navigation Submenu

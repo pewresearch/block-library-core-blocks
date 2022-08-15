@@ -10,6 +10,23 @@ class Navigation_Link extends PRC_Core_Block_Library {
 			self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
 			self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
 
+			// Example
+			add_filter( 'prc_cbl__icon__library', function($icons){
+				if ( false === $icons ) {
+					$icons = array();
+				}
+				return array_merge($icons, array(
+					array(
+						'label' => "Home",
+						'value' => "home"
+					),
+					array(
+						'label' => "Facebook",
+						'value' => "facebook"
+					),
+				));
+			}, 10, 1 );
+
 			add_filter( 'block_type_metadata', array( $this, 'add_attributes' ), 100, 1 );
 			add_action( 'enqueue_block_editor_assets', array($this, 'register') );
 			add_filter( 'render_block', array($this, 'render_callback'), 10, 2 );
@@ -47,6 +64,19 @@ class Navigation_Link extends PRC_Core_Block_Library {
 
 	public function register() {
 		self::$script_handle = register_block_script_handle( self::$block_json, 'editorScript' );
+		$icon_library = apply_filters( 'prc_cbl__icon__library', false );
+		if ( false !== $icon_library ) {
+			// Set default
+			array_unshift( $icon_library, array(
+				'label' => 'None',
+				'value' => ''
+			) );
+			wp_localize_script(
+				self::$script_handle,
+				'prcCBLIconLibrary',
+				$icon_library
+			);
+		}
 		wp_enqueue_script( self::$script_handle );
 	}
 
@@ -63,11 +93,12 @@ class Navigation_Link extends PRC_Core_Block_Library {
 			$icon = wp_get_attachment_image_src( $icon_id, 'thumbnail' );
 			$icon = "<img src='{$icon[0]}' width='{$icon[0]}' height='{$icon[2]}' alt='{$block['attrs']['label']}'/>";
 		} elseif ( $icon_slug ) {
-			$icon = '<span class="' . $icon_slug . '"></span>';
+			$icon = apply_filters( 'prc_cbl__icon__return_slug', $icon_slug );
 		}
 		if ( false !== $icon ) {
 			$pattern = '/<span class="wp-block-navigation-item__label">(.*?)<\/span>/';
-			$block_content = preg_replace( $pattern, $icon . '$0', $block_content );
+			$block_content = preg_replace( $pattern, $icon, $block_content );
+			$block_content = str_replace( 'wp-block-navigation-item wp-block-navigation-link', 'wp-block-navigation-item wp-block-navigation-link has-icon', $block_content );
 		}
 
 		return $block_content;
