@@ -18,6 +18,7 @@ class Navigation_Link extends PRC_Core_Block_Library {
 
 			add_filter( 'block_type_metadata', array( $this, 'add_attributes' ), 100, 1 );
 			add_action( 'enqueue_block_editor_assets', array($this, 'register') );
+			add_filter( 'render_block', array($this, 'render_callback'), 10, 2 );
 		}
 	}
 
@@ -55,7 +56,38 @@ class Navigation_Link extends PRC_Core_Block_Library {
 		wp_enqueue_script( self::$script_handle );
 	}
 
-	public function render_callback() {
+	public function render_callback( $block_content, $block ) {
+		if ( self::$block_name !== $block['blockName'] || is_admin() ) {
+			return $block_content;
+		}
 
+		$hash_id = md5($block_content);
+		$icon_id = is_array($block['attrs']) && array_key_exists('iconId', $block['attrs']) ? $block['attrs']['iconId'] : false;
+		$icon_slug = is_array($block['attrs']) && array_key_exists('iconSlug', $block['attrs']) ? $block['attrs']['iconSlug'] : false;
+
+		$icon = false;
+		if ( $icon_id ) {
+			$icon = wp_get_attachment_image_src( $icon_id, 'thumbnail' );
+			$icon = "<img src='{$icon[0]}' width='{$icon[0]}' height='{$icon[2]}' alt='{$block['attrs']['label']}'/>";
+		} elseif ( $icon_slug ) {
+			$icon = '<span class="' . $icon_slug . '"></span>';
+		}
+		error_log("Navigation Link " . print_r($block_content, true));
+
+		if ( false !== $icon ) {
+			$pattern = '/<span class="wp-block-navigation-item__label">(.*?)<\/span>/';
+			$block_content = preg_replace( $pattern, $icon . '$0', $block_content );
+		}
+
+		$block_content = apply_filters( 'prc_cbl_navigation_link', $block_content, $block );
+
+		// if ( false !== $carousel ) {
+		// 	$block_content = wp_sprintf(
+		// 		'<div class="prc-group-block--carousel">%s</div>',
+		// 		$block_content
+		// 	);
+		// }
+
+		return $block_content;
 	}
 }

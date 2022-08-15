@@ -64,7 +64,6 @@ addFilter(
 
 				return (
 					<Fragment>
-						<BlockEdit {...props} />
 						<InspectorAdvancedControls>
 							<p>Icon will display on frontend</p>
 							<MediaDropZone
@@ -100,7 +99,9 @@ addFilter(
 									setAttributes({ iconSlug: value });
 								}}
 							/>
+							<CardDivider />
 						</InspectorAdvancedControls>
+						<BlockEdit {...props} />
 					</Fragment>
 				);
 			},
