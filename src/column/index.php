@@ -19,7 +19,10 @@ class Column extends PRC_Core_Block_Library {
 	}
 
 	/**
-	 * Register additional attributes for group block.
+	 * Register additional attributes for column block.
+	 * - "minWidth" is a custom string attribute that is used to set the min-width in whatever unit desired of the column.
+	 * - "fillWidth" is a custom boolean attribute that is used to set the column to fill the width of the container.
+	 *
 	 * @param mixed $metadata
 	 * @return mixed
 	 */

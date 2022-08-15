@@ -17,8 +17,10 @@
     "@wordpress/edit-site": "^4.12.0",
     "@wordpress/element": "^4.13.0",
     "@wordpress/hooks": "^3.15.0",
-    "@wordpress/i18n": "^4.15.0"
+    "@wordpress/i18n": "^4.15.0",
+    "underscore": "^1.13.4"
   },
+  "prettier": "@pewresearch/prettier-config",
   "scripts": {
     "build": "wp-scripts build"
   },
@@ -30,11 +32,11 @@
     "gutenberg",
     "block",
     "library",
-		"core block library",
-		"pew research",
-		"pew research center"
+    "core block library",
+    "pew research",
+    "pew research center"
   ],
-  "author": "Seth Rubenstein",
+  "author": "Seth Rubenstein and Ben Wormald",
   "license": "GPL-2.0-only",
   "bugs": {
     "url": "https://github.com/pewresearch/core-block-library/issues"

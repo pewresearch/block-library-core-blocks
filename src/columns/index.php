@@ -19,7 +19,9 @@ class Columns extends PRC_Core_Block_Library {
 	}
 
 	/**
-	 * Register additional attributes for group block.
+	 * Register additional attributes for columns block.
+	 * - "fillViewportHeight" is a custom boolean attribute that is used to set the columns to fill the height of the viewport.
+	 *
 	 * @param mixed $metadata
 	 * @return mixed
 	 */

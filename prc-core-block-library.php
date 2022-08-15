@@ -23,9 +23,13 @@ define( 'PRC_CORE_BLOCK_LIBRARY_FILE', __FILE__ );
 define( 'PRC_CORE_BLOCK_LIBRARY_DIR', __DIR__ );
 
 class PRC_Core_Block_Library {
+	public $enable_hi_fidelity = false;
+
 	public function __construct($init = false) {
 		require_once plugin_dir_path( __FILE__ ) . '/src/column/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/columns/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-link/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-submenu/index.php';
 
 		$this->init_blocks();
 	}
@@ -33,6 +37,8 @@ class PRC_Core_Block_Library {
 	public function init_blocks() {
 		new Column(true);
 		new Columns(true);
+		new Navigation_Link(true);
+		new Navigation_Submenu(true);
 	}
 
 	public function dynamically_change_block_theme_style_variation($style_variation_name = false) {
