@@ -9,7 +9,6 @@ class Navigation_Link extends PRC_Core_Block_Library {
 	public static $block_name = 'core/navigation-link';
 	public static $block_json = null;
 	public static $script_handle = null;
-	// public $enable_hi_fidelity = true;
 
 	public function __construct($init = false) {
 		if ( true === $init ) {
@@ -40,7 +39,7 @@ class Navigation_Link extends PRC_Core_Block_Library {
 		}
 		// Otherwise, if you have an icon library you'd like to add you can add that here.
 		// There are multiple ways you could add your icon from this attribute.
-		// One way would be to use this slug to get a specific SVG fromn your library and then output that,
+		// One way would be to use this slug to get a specific SVG from your library and then output that,
 		// or you could use it to add a classname to the icon and use a CSS based library to output the icon.
 		if ( ! array_key_exists( 'iconSlug', $metadata['attributes'] ) ) {
 			$metadata['attributes']['iconSlug'] = array(
@@ -54,7 +53,6 @@ class Navigation_Link extends PRC_Core_Block_Library {
 	public function register() {
 		self::$script_handle = register_block_script_handle( self::$block_json, 'editorScript' );
 		wp_enqueue_script( self::$script_handle );
-		do_action("qm/debug", $this->enable_hi_fidelity ? 'hi-fidelity' : 'lo-fidelity');
 	}
 
 	public function render_callback() {
