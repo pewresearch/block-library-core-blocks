@@ -1,10 +1,4 @@
 <?php
-// navigation link needs mulitple styles
-// one style should change the sub menu to like a sub tree view
-// attribute toggle to allow for changing the url to a hashed url when you open a sub menu so a visitor can share that pre-opened.
-//// ability to set a icon which would hide the label and show the icon instead.
-// A new sub  block or ability for navigation links to also have an expand button, i guess this is similair to sub tree view but styled slightly different.
-
 class Navigation_Link extends PRC_Core_Block_Library {
 	public static $block_name = 'core/navigation-link';
 	public static $block_json = null;
@@ -61,7 +55,6 @@ class Navigation_Link extends PRC_Core_Block_Library {
 			return $block_content;
 		}
 
-		$hash_id = md5($block_content);
 		$icon_id = is_array($block['attrs']) && array_key_exists('iconId', $block['attrs']) ? $block['attrs']['iconId'] : false;
 		$icon_slug = is_array($block['attrs']) && array_key_exists('iconSlug', $block['attrs']) ? $block['attrs']['iconSlug'] : false;
 
@@ -72,21 +65,10 @@ class Navigation_Link extends PRC_Core_Block_Library {
 		} elseif ( $icon_slug ) {
 			$icon = '<span class="' . $icon_slug . '"></span>';
 		}
-		error_log("Navigation Link " . print_r($block_content, true));
-
 		if ( false !== $icon ) {
 			$pattern = '/<span class="wp-block-navigation-item__label">(.*?)<\/span>/';
 			$block_content = preg_replace( $pattern, $icon . '$0', $block_content );
 		}
-
-		$block_content = apply_filters( 'prc_cbl_navigation_link', $block_content, $block );
-
-		// if ( false !== $carousel ) {
-		// 	$block_content = wp_sprintf(
-		// 		'<div class="prc-group-block--carousel">%s</div>',
-		// 		$block_content
-		// 	);
-		// }
 
 		return $block_content;
 	}
