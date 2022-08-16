@@ -1,0 +1,9 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "prc-core-block-library/navigation-submenu",
+	"title": "Navigation Sub Menu",
+	"editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+	"style": "file:./view.css"
+}

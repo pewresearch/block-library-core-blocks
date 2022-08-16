@@ -1,0 +1,5 @@
+// https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/navigation/style.scss
+
+.wp-block-navigation  .wp-block-navigation-item.has-child.is-style-sub-tree :where(.wp-block-navigation__submenu-container) {
+	position: relative!important;
+}
