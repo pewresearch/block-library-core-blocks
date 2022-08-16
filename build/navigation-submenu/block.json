@@ -3,7 +3,8 @@
   "apiVersion": 2,
   "name": "prc-core-block-library/navigation-submenu",
   "title": "Navigation Sub Menu",
-  "editorScript": "file:./index.js",
+  "viewScript": "file:./view.js",
+  "editorScript": "file:./editor.js",
   "editorStyle": "file:./editor.css",
   "style": "file:./view.css"
 }

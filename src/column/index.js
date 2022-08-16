@@ -91,7 +91,7 @@ addFilter(
 								rootClientId: rootBlockClientId,
 								rootAttributes,
 							};
-							console.log('core/column->advanced', toReturn);
+							// console.log('core/column->advanced', toReturn);
 							return toReturn;
 						},
 						[clientId],

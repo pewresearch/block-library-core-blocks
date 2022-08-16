@@ -9,59 +9,98 @@
 class Navigation_Submenu extends PRC_Core_Block_Library {
 	public static $block_name = 'core/navigation-submenu';
 	public static $block_json = null;
-
-	public static $sub_tree_style_handle = null;
-	public static $sub_expand_style_handle = null;
-	// public $enable_hi_fidelity = true;
+	public static $view_handle = null;
+	public static $editor_script_handle = null;
+	public static $editor_style_handle = null;
 
 	public function __construct($init = false) {
 		if ( true === $init ) {
-			// $block_json_file = PRC_CORE_BLOCK_LIBRARY_DIR . '/build/navigation-submenu/block.json';
-			// self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
-			// self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
-			self::$sub_tree_style_handle = apply_filters( 'prc_core_navigation_submenu_sub_tree_style_handle', 'prc-core-navigation-submenu-sub-tree' );
-			self::$sub_expand_style_handle = apply_filters( 'prc_core_navigation_submenu_sub_expand_style_handle', 'prc-core-navigation-submenu-sub-expand' );
+			$block_json_file = PRC_CORE_BLOCK_LIBRARY_DIR . '/build/navigation-submenu/block.json';
+			self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
+			self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
 
-			add_action('wp_enqueue_scripts', array($this, 'register_stylesheets'));
-			add_action('init', array($this, 'register_block_styles'));
+			add_action( 'enqueue_block_editor_assets', array($this, 'register_editor_assets') );
+			add_action( 'init', array($this, 'register_stylesheets'), 10 );
+			add_action( 'init', array($this, 'register_block_styles'), 11 );
+			add_filter( 'render_block', array($this, 'render_callback'), 10, 2 );
 		}
 	}
 
-	public function register_stylesheets() {
+	public function register_editor_assets() {
+		wp_enqueue_style( self::$editor_style_handle );
+		wp_enqueue_script( self::$editor_script_handle );
+	}
 
+	public function register_stylesheets() {
+		self::$view_handle = register_block_style_handle( self::$block_json, 'style' );
+		self::$editor_style_handle = register_block_style_handle( self::$block_json, 'editorStyle' );
+		self::$editor_script_handle = register_block_script_handle( self::$block_json, 'editorScript' );
 	}
 
 	public function register_block_styles() {
+		wp_enqueue_style( self::$view_handle );
 		register_block_style(
-			'core/navigation-submenu',
+			self::$block_name,
 			array(
 				'name'  => 'sub-tree',
 				'label' => __( 'Sub Tree', 'prc-core-block-library' ),
-				'inline_style' => '
-					.wp-block-navigation  .wp-block-navigation-item.has-child.is-style-sub-tree :where(.wp-block-navigation__submenu-container) {
-						position: relative!important;
-					}
-				'
+				'style' => self::$view_handle,
 			)
 		);
 
 		register_block_style(
-			'core/navigation-submenu',
+			self::$block_name,
 			array(
 				'name'  => 'sub-expand',
 				'label' => __( 'Sub Expand', 'prc-core-block-library' ),
-				'style' => self::$sub_expand_style_handle,
+				'style' => self::$view_handle,
 			)
 		);
 	}
 
-	// public function register() {
-	// 	self::$script_handle = register_block_script_handle( self::$block_json, 'editorScript' );
-	// 	wp_enqueue_script( self::$script_handle );
-	// 	do_action("qm/debug", $this->enable_hi_fidelity ? 'hi-fidelity' : 'lo-fidelity');
-	// }
+	/**
+	 * Register additional attributes for navigation-submenu block.
+	 * @param mixed $metadata
+	 * @return mixed
+	 */
+	public function add_attributes( $metadata ) {
+		if ( self::$block_name !== $metadata['name'] ) {
+			return $metadata;
+		}
 
-	public function render_callback() {
+		// You can direct the icon to be a specific one off file.
+		if ( ! array_key_exists( 'subExpandOpenedLabel', $metadata['attributes'] ) ) {
+			$metadata['attributes']['subExpandOpenedLabel'] = array(
+				'type'    => 'string',
+				'default' => __( 'Less', 'prc-core-block-library' ),
+			);
+		}
 
+		return $metadata;
+	}
+
+	public function render_callback( $block_content, $block ) {
+		if ( self::$block_name !== $block['blockName'] || is_admin() ) {
+			return $block_content;
+		}
+		$classname = is_array($block['attrs']) && array_key_exists('className', $block['attrs']) ? $block['attrs']['className'] : false;
+		// If this is not the sub-tree or sub-expand style then return.
+		if ( false === $classname || ( false === strpos($classname, 'is-style-sub-expand') && false === strpos($classname, 'is-style-sub-tree') ) ) {
+			return $block_content;
+		}
+		$label_closed = is_array($block['attrs']) && array_key_exists('label', $block['attrs']) ? $block['attrs']['label'] : false;
+		$label_opened = is_array($block['attrs']) && array_key_exists('subExpandOpenedLabel', $block['attrs']) ? $block['attrs']['subExpandOpenedLabel'] : false;
+
+		do_action('qm/debug', print_r($block['attrs'], true));
+
+		if ( false === $label_opened ) {
+			return $block_content;
+		}
+
+		$pattern = '/<button aria-label="(.*)" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label">(.*)<\/span><\/button>/';
+		$replacement = '<button aria-label="Expandable submenu" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label" aria-label="'.$label_opened.'">'.$label_closed.'</span></button>';
+		$block_content = preg_replace($pattern, $replacement, $block_content);
+
+		return $block_content;
 	}
 }
