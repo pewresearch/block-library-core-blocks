@@ -26,6 +26,7 @@ class PRC_Core_Block_Library {
 	public function __construct($init = false) {
 		require_once plugin_dir_path( __FILE__ ) . '/src/column/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/columns/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/home-link/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-link/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-submenu/index.php';
 
@@ -33,10 +34,35 @@ class PRC_Core_Block_Library {
 	}
 
 	public function init_blocks() {
+		// Example
+		add_filter( 'prc_cbl__icon__library', function($icons){
+			if ( false === $icons ) {
+				$icons = array();
+			}
+			return array_merge($icons, array(
+				array(
+					'label' => "Home",
+					'value' => "home"
+				),
+				array(
+					'label' => "Facebook",
+					'value' => "facebook"
+				),
+			));
+		}, 10, 1 );
+
+		add_filter('prc_cbl__icon__return_slug', array($this, 'output_icon'), 10, 1);
+
 		new Column(true);
 		new Columns(true);
+		new Home_Link(true);
 		new Navigation_Link(true);
 		new Navigation_Submenu(true);
+	}
+
+	public function output_icon($slug) {
+		// return '<i class="icon icon-' . $slug . '"></i>';
+		return $slug;
 	}
 
 	public function dynamically_change_block_theme_style_variation($style_variation_name = false) {

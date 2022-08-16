@@ -37,7 +37,11 @@ class Navigation_Submenu extends PRC_Core_Block_Library {
 			array(
 				'name'  => 'sub-tree',
 				'label' => __( 'Sub Tree', 'prc-core-block-library' ),
-				'style' => self::$sub_tree_style_handle
+				'inline_style' => '
+					.wp-block-navigation  .wp-block-navigation-item.has-child.is-style-sub-tree :where(.wp-block-navigation__submenu-container) {
+						position: relative!important;
+					}
+				'
 			)
 		);
 
