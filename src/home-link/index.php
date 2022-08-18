@@ -9,6 +9,7 @@ class Home_Link extends PRC_Core_Block_Library {
 			$block_json_file = PRC_CORE_BLOCK_LIBRARY_DIR . '/build/home-link/block.json';
 			self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
 			self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
+
 			add_filter( 'block_type_metadata', array( $this, 'add_attributes' ), 100, 1 );
 			add_action( 'enqueue_block_editor_assets', array($this, 'register') );
 			add_filter( 'render_block', array($this, 'render_callback'), 10, 2 );
@@ -73,8 +74,6 @@ class Home_Link extends PRC_Core_Block_Library {
 			$icon = apply_filters( 'prc_cbl__icon__return_slug', $icon_slug );
 		}
 		if ( false !== $icon ) {
-			//<li class=" wp-block-navigation-item wp-block-home-link"><a class="wp-block-home-link__content wp-block-navigation-item__content" rel="home" href="http://sethrubenstein.vipdev.lndo.site">Home</a></li>
-			// pattern to match the inside content of .wp-block-navigation-item__content
 			$pattern = '/<a class="wp-block-home-link__content wp-block-navigation-item__content" rel="home" href="(.*)">(.*)<\/a>/';
 			$replacement = '<a class="wp-block-home-link__content wp-block-navigation-item__content" rel="home" href="$1">' . $icon . '</a>';
 			$block_content = preg_replace( $pattern, $replacement, $block_content );

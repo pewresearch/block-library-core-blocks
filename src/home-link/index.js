@@ -9,7 +9,7 @@ import { InspectorAdvancedControls } from '@wordpress/block-editor';
 /**
  * Internal Dependencies
  */
-import { IconLibrary } from '../_shared';
+import { IconControl } from '../_shared';
 
 console.log('Hello World -> src/home-link/index.js');
 
@@ -27,7 +27,7 @@ addFilter(
 				return (
 					<Fragment>
 						<InspectorAdvancedControls>
-							<IconLibrary
+							<IconControl
 								attributes={attributes}
 								setAttributes={setAttributes}
 							/>

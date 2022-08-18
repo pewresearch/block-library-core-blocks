@@ -1,4 +1,4 @@
-import IconLibrary from './icon-library-selector';
+import IconControl from './icon-control';
 import MediaDropZone from './media-dropzone';
 
-export { IconLibrary, MediaDropZone };
+export { IconControl, MediaDropZone };

@@ -14,7 +14,8 @@ import { TextControl, PanelBody } from '@wordpress/components';
 import './editor.scss';
 
 /**
- * Modify default settings on core/navigation-submenu block. Sometimes defining attributes via PHP is not enough and this is, oddly, one of them.
+ * @NOTE: Modify default settings on core/navigation-submenu block. Sometimes defining attributes via PHP is not enough and this is one of those times.
+ * I'm assuming this is because this block is still quite experimental and the API is not fully fleshed out yet, re: Site Editor vs Post Editor.
  *
  * @param {*} settings
  * @param {*} name
@@ -27,10 +28,17 @@ addFilter(
 		if ('core/navigation-submenu' !== name) {
 			return settings;
 		}
-		settings.attributes.subExpandOpenedLabel = {
-			type: 'string',
+		const s = settings;
+		// if settings object has attributes and attributes has a label property, then add a new property to the label property
+		if (settings.attributes && !settings.attributes.subExpandOpenedLabel) {
+			s.attributes.subExpandOpenedLabel = {
+				type: 'string',
+			};
+		}
+		return {
+			...settings,
+			...s,
 		};
-		return settings;
 	},
 );
 
@@ -68,7 +76,10 @@ addFilter(
 							>
 								<TextControl
 									label={__('Expanded Label', 'prc-core-block-library')}
-									help="The label to display when the submenu is expanded."
+									help={__(
+										'Label for expanded submenu',
+										'prc-core-block-library',
+									)}
 									value={subExpandOpenedLabel}
 									onChange={(value) =>
 										setAttributes({ subExpandOpenedLabel: value })

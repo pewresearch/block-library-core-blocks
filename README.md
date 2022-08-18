@@ -1,12 +1,10 @@
 # Core Block Library by Pew Research Center
 ### `(prc-core-block-library)`
+## Work in Progress, not for production use
 
 A starting point for anyone looking to add functionality, extra control to and or create your own custom block library using core/blocks. Built with easier extensibility in mind
 
 ### Blocks Included:
-- Column
-  - Adds `minWdith` and `fillWidth` to block. Allows you to set a minimum width or a shortcut to have the column fill remaining available width.
-- Columns
 - Cover
 - Group
 - Heading

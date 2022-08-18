@@ -11,13 +11,14 @@
 }
 
 .wp-block-navigation-item.wp-block.wp-block-navigation-submenu.is-style-sub-expand {
-	&.open-on-click.is-selected,
-	&.open-on-click.has-child-selected {
+	&.is-selected,
+	&.has-child-selected,
+	&:hover {
 		& > .wp-block-navigation__submenu-icon:after {
 			content: "-";
 		}
 	}
-	& > button.wp-block-navigation-item__content {
+	& > .wp-block-navigation-item__content {
 		order: 1;
 	}
 	& > .wp-block-navigation__submenu-icon {

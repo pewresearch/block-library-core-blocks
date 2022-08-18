@@ -17,7 +17,7 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal Dependencies
  */
-import { IconLibrary } from '../_shared';
+import { IconControl } from '../_shared';
 
 console.log('Hello World -> src/navigation-link/index.js');
 
@@ -35,7 +35,7 @@ addFilter(
 				return (
 					<Fragment>
 						<InspectorAdvancedControls>
-							<IconLibrary
+							<IconControl
 								attributes={attributes}
 								setAttributes={setAttributes}
 							/>
