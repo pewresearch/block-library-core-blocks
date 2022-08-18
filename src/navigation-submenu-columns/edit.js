@@ -11,7 +11,7 @@ import { TextControl, PanelBody } from '@wordpress/components';
 /**
  * Internal Dependencies
  */
-import './editor.scss';
+import './edit.scss';
 
 /**
  * @NOTE: Modify default settings on core/navigation-submenu block. Sometimes defining attributes via PHP is not enough and this is one of those times.

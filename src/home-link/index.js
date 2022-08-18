@@ -13,14 +13,17 @@ import { IconControl } from '../_shared';
 
 console.log('Hello World -> src/home-link/index.js');
 
+const BLOCKNAME = 'core/home-link';
+const BLOCKIDENTIFIER = 'prc-core-block-library/home-link';
+
 addFilter(
 	'editor.BlockEdit',
-	'prc-core-block-library/home-link',
+	BLOCKIDENTIFIER,
 	createHigherOrderComponent(
 		(BlockEdit) =>
 			function HomeLinkBlockAdvancedControls(props) {
 				const { name, attributes, setAttributes } = props;
-				if ('core/home-link' !== name) {
+				if (BLOCKNAME !== name) {
 					return <BlockEdit {...props} />;
 				}
 

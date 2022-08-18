@@ -23,7 +23,9 @@ define( 'PRC_CORE_BLOCK_LIBRARY_FILE', __FILE__ );
 define( 'PRC_CORE_BLOCK_LIBRARY_DIR', __DIR__ );
 
 class PRC_Core_Block_Library {
-	public function __construct($init = false) {
+	public function __construct() {
+
+		require_once plugin_dir_path( __FILE__ ) . '/src/group/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/home-link/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-link/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-submenu/index.php';
@@ -51,6 +53,7 @@ class PRC_Core_Block_Library {
 
 		add_filter('prc_cbl__icon__return_slug', array($this, 'output_icon'), 10, 1);
 
+		new Group(true);
 		new Home_Link(true);
 		new Navigation_Link(true);
 		new Navigation_Submenu(true);

@@ -2983,10 +2983,10 @@
     "@babel/runtime" "^7.16.0"
     jest-matcher-utils "^27.4.2"
 
-"@wordpress/jest-preset-default@^8.5.0":
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/@wordpress/jest-preset-default/-/jest-preset-default-8.5.0.tgz#9f654b0ac15dbb470e534e3c5dcb606753b90188"
-  integrity sha512-b4o82oZfHCuS0XEDrN0A/Nf2U1AIYPaqwYbkud8UEPZomxMOdtaivnZMMlo/CxW6hB9/pr75N03Lu5GZYEEzhw==
+"@wordpress/jest-preset-default@^8.5.2":
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/@wordpress/jest-preset-default/-/jest-preset-default-8.5.2.tgz#af1356c7b33c0cb97967382bb621740d8837e00a"
+  integrity sha512-xlo8LNDcjuXbb1OVI9SFDm2u6JeWXu945Jo8LtPtWbRgCfgBZfQh4Y/csMbkiiIRq/Hpi5/VK2WWJJXSe5EsRQ==
   dependencies:
     "@wojtekmaj/enzyme-adapter-react-17" "^0.6.1"
     "@wordpress/jest-console" "^5.4.0"
@@ -3137,10 +3137,10 @@
     memize "^1.1.0"
     rememo "^4.0.0"
 
-"@wordpress/scripts@^23.7.0":
-  version "23.7.0"
-  resolved "https://registry.yarnpkg.com/@wordpress/scripts/-/scripts-23.7.0.tgz#b2c862a2d730fe2283509e6d083627394c14900c"
-  integrity sha512-4M05+TI50YEx1iJ+2Y07uHCKit+ciVa/2wLNqdNb69YxWQEvDi/Z9vYF3/+G3ZzV6NarcUoK4bc8+7bYLHKXSw==
+"@wordpress/scripts@^23.7.1":
+  version "23.7.2"
+  resolved "https://registry.yarnpkg.com/@wordpress/scripts/-/scripts-23.7.2.tgz#93f38354d799ed91cc9adc27144927c6935ce413"
+  integrity sha512-/VyDK5IeiJyB3abGsj/NbNgnj6fA9AkITCGQkelZX/IbNbGekR1+ocEr2qD2aigHuXVF10Be7W8yRBAXdHy/VQ==
   dependencies:
     "@babel/core" "^7.16.0"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.5.2"
@@ -3149,7 +3149,7 @@
     "@wordpress/browserslist-config" "^4.1.2"
     "@wordpress/dependency-extraction-webpack-plugin" "^3.7.0"
     "@wordpress/eslint-plugin" "^12.9.0"
-    "@wordpress/jest-preset-default" "^8.5.0"
+    "@wordpress/jest-preset-default" "^8.5.2"
     "@wordpress/npm-package-json-lint-config" "^4.1.2"
     "@wordpress/postcss-plugins-preset" "^3.10.0"
     "@wordpress/prettier-config" "^1.4.0"
@@ -4885,6 +4885,11 @@ enhanced-resolve@^5.10.0:
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
+
+enquire.js@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/enquire.js/-/enquire.js-2.1.6.tgz#3e8780c9b8b835084c3f60e166dbc3c2a3c89814"
+  integrity sha512-/KujNpO+PT63F7Hlpu4h3pE3TokKRHN26JYmQpPyjkRD/N57R7bPDNojMXdi7uveAKjYB7yQnartCxZnFWr0Xw==
 
 entities@^2.0.0:
   version "2.2.0"

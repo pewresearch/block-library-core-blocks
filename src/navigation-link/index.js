@@ -19,16 +19,19 @@ import { useSelect } from '@wordpress/data';
  */
 import { IconControl } from '../_shared';
 
+const BLOCKNAME = 'core/navigation-link';
+const BLOCKIDENTIFIER = 'prc-core-block-library/navigation-link';
+
 console.log('Hello World -> src/navigation-link/index.js');
 
 addFilter(
 	'editor.BlockEdit',
-	'prc-core-block-library/navigation-link',
+	BLOCKIDENTIFIER,
 	createHigherOrderComponent(
 		(BlockEdit) =>
 			function NavigationLinkBlockAdvancedControls(props) {
 				const { name, attributes, setAttributes, clientId } = props;
-				if ('core/navigation-link' !== name) {
+				if (BLOCKNAME !== name) {
 					return <BlockEdit {...props} />;
 				}
 
