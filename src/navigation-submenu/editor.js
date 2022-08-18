@@ -13,7 +13,26 @@ import { TextControl, PanelBody } from '@wordpress/components';
  */
 import './editor.scss';
 
-console.log('Hello World -> src/navigation-submenu/index.js');
+/**
+ * Modify default settings on core/navigation-submenu block. Sometimes defining attributes via PHP is not enough and this is, oddly, one of them.
+ *
+ * @param {*} settings
+ * @param {*} name
+ * @returns
+ */
+addFilter(
+	'blocks.registerBlockType',
+	'prc-core-block-library/navigation-submenu',
+	(settings, name) => {
+		if ('core/navigation-submenu' !== name) {
+			return settings;
+		}
+		settings.attributes.subExpandOpenedLabel = {
+			type: 'string',
+		};
+		return settings;
+	},
+);
 
 addFilter(
 	'editor.BlockEdit',
@@ -21,7 +40,7 @@ addFilter(
 	createHigherOrderComponent(
 		(BlockEdit) =>
 			function NavigationSubmenublockAdvancedControls(props) {
-				const { name, attributes, setAttributes, clientId } = props;
+				const { name, attributes, setAttributes } = props;
 				if ('core/navigation-submenu' !== name) {
 					return <BlockEdit {...props} />;
 				}

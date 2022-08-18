@@ -87,9 +87,10 @@ class Navigation_Submenu extends PRC_Core_Block_Library {
 			return $block_content;
 		}
 
-		$pattern = '/<button aria-label="(.*)" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label">(.*)<\/span><\/button>/';
-		$replacement = '<button aria-label="Expandable submenu" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label" aria-label="'.$label_opened.'">'.$label_closed.'</span></button>';
-		return preg_replace($pattern, $replacement, $block_content);
+		$pattern = '/<button aria-label="(.*)" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label">'.$label_closed.'<\/span><\/button>/';
+		$replacement = '<button aria-label="Expandable submenu" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label"><span class="wp-block-navigation-submenu__label__closed">'.$label_closed.'</span><span class="wp-block-navigation-submenu__label__opened">'.$label_opened.'</span></span></button>';
+		$replaced = preg_replace($pattern, $replacement, $block_content);
+		return $replaced;
 	}
 
 	public function render_callback( $block_content, $block ) {

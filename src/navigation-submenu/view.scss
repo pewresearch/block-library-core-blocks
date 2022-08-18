@@ -20,18 +20,24 @@
 	// }
 	& > button.wp-block-navigation-item__content {
 		order: 1;
+		.wp-block-navigation-submenu__label__opened {
+			display: none;
+		}
 		&[aria-expanded="true"] {
-			.wp-block-navigation-item__label {
-				// use aria-label from parent element as content and hide the text already in here
-				content: attr(aria-label);
+			.wp-block-navigation-submenu__label__opened {
+				display: inline;
 			}
-			:where(.wp-block-navigation__submenu-icon) {
+			.wp-block-navigation-submenu__label__closed {
+				display: none;
+			}
+			& + .wp-block-navigation__submenu-icon {
 				&:after {
 					content: "-";
 				}
 			}
 		}
 	}
+
 	& > .wp-block-navigation__submenu-icon {
 		order: 0;
 		&:after {
