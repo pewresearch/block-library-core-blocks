@@ -79,19 +79,9 @@ class Navigation_Submenu extends PRC_Core_Block_Library {
 		return $metadata;
 	}
 
-	public function render_callback( $block_content, $block ) {
-		if ( self::$block_name !== $block['blockName'] || is_admin() ) {
-			return $block_content;
-		}
-		$classname = is_array($block['attrs']) && array_key_exists('className', $block['attrs']) ? $block['attrs']['className'] : false;
-		// If this is not the sub-tree or sub-expand style then return.
-		if ( false === $classname || ( false === strpos($classname, 'is-style-sub-expand') && false === strpos($classname, 'is-style-sub-tree') ) ) {
-			return $block_content;
-		}
+	public function modify_button_label_open_close($block_content, $block) {
 		$label_closed = is_array($block['attrs']) && array_key_exists('label', $block['attrs']) ? $block['attrs']['label'] : false;
 		$label_opened = is_array($block['attrs']) && array_key_exists('subExpandOpenedLabel', $block['attrs']) ? $block['attrs']['subExpandOpenedLabel'] : false;
-
-		do_action('qm/debug', print_r($block['attrs'], true));
 
 		if ( false === $label_opened ) {
 			return $block_content;
@@ -99,7 +89,19 @@ class Navigation_Submenu extends PRC_Core_Block_Library {
 
 		$pattern = '/<button aria-label="(.*)" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label">(.*)<\/span><\/button>/';
 		$replacement = '<button aria-label="Expandable submenu" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label" aria-label="'.$label_opened.'">'.$label_closed.'</span></button>';
-		$block_content = preg_replace($pattern, $replacement, $block_content);
+		return preg_replace($pattern, $replacement, $block_content);
+	}
+
+	public function render_callback( $block_content, $block ) {
+		if ( self::$block_name !== $block['blockName'] || is_admin() ) {
+			return $block_content;
+		}
+		$classname = is_array($block['attrs']) && array_key_exists('className', $block['attrs']) ? $block['attrs']['className'] : false;
+
+		// The sub-expand style should modify its button to have an open and close state.
+		if ( false !== $classname && false !== strpos($classname, 'is-style-sub-expand') ) {
+			$block_content = $this->modify_button_label_open_close($block_content, $block);
+		}
 
 		return $block_content;
 	}

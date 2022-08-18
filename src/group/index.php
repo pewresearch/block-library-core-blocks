@@ -1,0 +1,2 @@
+<?php
+// responsive attachment
