@@ -1,5 +1,12 @@
 <?php
 /**
+ * PRC Core Block Library
+ *
+ * @package           PRC_Core_Block_Library
+ * @author            Seth Rubenstein
+ * @copyright         2022 Pew Research Center
+ * @license           GPL-2.0-or-later
+ *
  * @wordpress-plugin
  * Plugin Name:       Core Block Library by Pew Research Center
  * Plugin URI:        https://github.com/pewresearch/core-block-library/
@@ -23,6 +30,19 @@ define( 'PRC_CORE_BLOCK_LIBRARY_FILE', __FILE__ );
 define( 'PRC_CORE_BLOCK_LIBRARY_DIR', __DIR__ );
 
 class PRC_Core_Block_Library {
+	/**
+	 * Easily accessible variable that points to the plugin filepath.
+	 *
+	 * @var string
+	 */
+	public static $plugin_file = __FILE__;
+	/**
+	 * Version, change whenever you push a change to production otherwise script concatenation will break Gutenberg.
+	 *
+	 * @var string
+	 */
+	public static $version = '1.0.0';
+
 	public function __construct() {
 
 		require_once plugin_dir_path( __FILE__ ) . '/src/group/index.php';
@@ -34,34 +54,10 @@ class PRC_Core_Block_Library {
 	}
 
 	public function init_blocks() {
-		// Example
-		add_filter( 'prc_cbl__icon__library', function($icons){
-			if ( false === $icons ) {
-				$icons = array();
-			}
-			return array_merge($icons, array(
-				array(
-					'label' => "Home",
-					'value' => "home"
-				),
-				array(
-					'label' => "Facebook",
-					'value' => "facebook"
-				),
-			));
-		}, 10, 1 );
-
-		add_filter('prc_cbl__icon__return_slug', array($this, 'output_icon'), 10, 1);
-
 		new Group(true);
 		new Home_Link(true);
 		new Navigation_Link(true);
 		new Navigation_Submenu(true);
-	}
-
-	public function output_icon($slug) {
-		// return '<i class="icon icon-' . $slug . '"></i>';
-		return $slug;
 	}
 
 	public function dynamically_change_block_theme_style_variation($style_variation_name = false) {
