@@ -36,8 +36,11 @@ function ResizeGrid({
 	children,
 }) {
 	const containerRef = createRef();
+	const [blockElm, setBlockElm] = useState(null);
 	const [resizingColumn, setResizingColumn] = useState(-1);
+	const [max, setMax] = useState(0);
 	const [xPos, setXPos] = useState(0);
+	const [width, setWidth] = useState(0);
 	const [height, setHeight] = useState(0);
 	const [direction, setDirection] = useState('right');
 	const [top, setTop] = useState(0);
@@ -48,16 +51,15 @@ function ResizeGrid({
 	);
 
 	const getNearestColumn = (direction, mouse) => {
-		const { totalColumns, layoutGrid } = this.props;
-		const start = layoutGrid.getStart(this.state.resizingColumn);
-		const span = layoutGrid.getSpan(this.state.resizingColumn);
+		const start = layoutGrid.getStart(resizingColumn);
+		const span = layoutGrid.getSpan(resizingColumn);
 		const nearest = Math.min(
 			totalColumns,
 			Math.max(
 				0,
 				findNearest(
-					this.containerRef.current,
-					this.getMouseX(mouse),
+					containerRef.current,
+					getMouseX(mouse),
 					direction,
 					totalColumns,
 				),
@@ -103,22 +105,19 @@ function ResizeGrid({
 	};
 
 	const getAdjustedOffset = (offset, optionalWidth = 0) => {
-		const { width } = this.state;
 		const handleWidth = 0 < optionalWidth ? optionalWidth : width;
 
 		return (
 			offset -
-			this.containerRef.current.getBoundingClientRect().left -
+			containerRef.current.getBoundingClientRect().left -
 			handleWidth / 2
 		);
 	};
 
 	const getAdjustedTop = (offset) =>
-		offset - this.containerRef.current.getBoundingClientRect().top;
+		offset - containerRef.current.getBoundingClientRect().top;
 
 	const getRestrictedOffset = (offset) => {
-		const { direction, max, width } = this.state;
-
 		// Ensure we dont go beyond or before the end of the other side of our block
 		if ('left' === direction) {
 			return Math.min(max - width, offset);
@@ -129,6 +128,8 @@ function ResizeGrid({
 
 	const getChildPosition = (element) => {
 		let pos = 0;
+
+		console.log('getChildPosition', element);
 
 		while (null !== element.previousSibling) {
 			element = element.previousSibling;
@@ -141,39 +142,38 @@ function ResizeGrid({
 	const onMouseDown = (ev) => {
 		const { target } = ev;
 
+		console.log('onMouseDown', target);
+
 		// This is a bit of hardcoded DOM searching - we check if the current click is on a resize handle and then find the column associated with that
 		// There may be a better way.
 		if (
 			(0 === ev.button || ev.touches) &&
 			(target.dataset.resizeRight || target.dataset.resizeLeft)
 		) {
-			this.block = target.closest('.wp-block');
+			const block = target.closest('.wp-block');
 
-			const { height, right, left, top } = this.block.getBoundingClientRect();
+			const { height, right, left, top } = block.getBoundingClientRect();
 			const { width } = target.getBoundingClientRect();
-			const pos = this.getChildPosition(this.block);
 			const isLeft = target.dataset.resizeLeft;
 
-			this.setState({
-				resizingColumn: pos,
-				xPos: this.getAdjustedOffset(this.getMouseX(ev), width),
-				height,
-				width,
-				top: this.getAdjustedTop(top),
-				direction: isLeft ? 'left' : 'right',
-				max: isLeft
-					? this.getAdjustedOffset(right, width)
-					: this.getAdjustedOffset(left, width),
-			});
+			setBlockElm(block);
+
+			setResizingColumn(getChildPosition(block));
+			setHeight(height);
+			setWidth(width);
+			setTop(getAdjustedTop(top));
+			setDirection(isLeft ? 'left' : 'right');
+			setMax(isLeft ? getAdjustedOffset(left, width) : getAdjustedOffset(right, width));
+			setXPos(getAdjustedOffset(getMouseX(ev), width));
 
 			if (0 === ev.button) {
-				document.addEventListener('mousemove', this.onMouseMove);
-				document.addEventListener('mouseup', this.onMouseUp);
+				document.addEventListener('mousemove', onMouseMove);
+				document.addEventListener('mouseup', onMouseUp);
 
 				ev.preventDefault();
 			} else {
-				document.addEventListener('touchmove', this.onMouseMove);
-				document.addEventListener('touchend', this.onMouseUp);
+				document.addEventListener('touchmove', onMouseMove);
+				document.addEventListener('touchend', onMouseUp);
 			}
 
 			ev.stopPropagation();
@@ -187,19 +187,15 @@ function ResizeGrid({
 			ev.preventDefault();
 		}
 
-		const { height } = this.block.getBoundingClientRect();
+		const { height } = blockElm.getBoundingClientRect();
 
-		this.setState({
-			xPos: this.getRestrictedOffset(
-				this.getAdjustedOffset(this.getMouseX(ev)),
-			),
-			height,
-		});
+		setXPos(getRestrictedOffset(getAdjustedOffset(getMouseX(ev))));
+		setHeight(height);
 
 		// Finally pass this up if a grid adjustment has been triggered
-		const adjustment = this.getNearestColumn(this.state.direction, ev);
+		const adjustment = getNearestColumn(direction, ev);
 		if (adjustment) {
-			this.props.onResize(this.state.resizingColumn, adjustment);
+			onResize(resizingColumn, adjustment);
 		}
 	};
 
@@ -218,6 +214,10 @@ function ResizeGrid({
 		onTouchStart: onMouseDown,
 		ref: containerRef,
 	});
+
+	useEffect(()=>{
+		console.log("Resizing...", resizingColumn);
+	}, [resizingColumn]);
 
 	return (
 		<div {...blockProps}>
