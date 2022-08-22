@@ -42,7 +42,7 @@ class Home_Link extends PRC_Block_Library_Primitives {
 
 	public function register() {
 		self::$script_handle = register_block_script_handle( self::$block_json, 'editorScript' );
-		$icon_library = apply_filters( 'prc_cbl__icon__library', false );
+		$icon_library = apply_filters( 'prc_icon_library', false );
 		if ( false !== $icon_library ) {
 			// Set default
 			array_unshift( $icon_library, array(
@@ -51,11 +51,15 @@ class Home_Link extends PRC_Block_Library_Primitives {
 			) );
 			wp_localize_script(
 				self::$script_handle,
-				'prcCBLIconLibrary',
+				'prcIconLibrary',
 				$icon_library
 			);
 		}
 		wp_enqueue_script( self::$script_handle );
+	}
+
+	public function get_icon( $icon_slug ) {
+		return apply_filters( 'prc_icon_library_from_slug', $icon_slug );
 	}
 
 	public function render_callback( $block_content, $block ) {
@@ -71,7 +75,7 @@ class Home_Link extends PRC_Block_Library_Primitives {
 			$icon = wp_get_attachment_image_src( $icon_id, 'thumbnail' );
 			$icon = "<img src='{$icon[0]}' width='{$icon[0]}' height='{$icon[2]}' alt='{$block['attrs']['label']}'/>";
 		} elseif ( $icon_slug ) {
-			$icon = apply_filters( 'prc_cbl__icon__return_slug', $icon_slug );
+			$icon = $this->get_icon( $icon_slug );
 		}
 		if ( false !== $icon ) {
 			$pattern = '/<a class="wp-block-home-link__content wp-block-navigation-item__content" rel="home" href="(.*)">(.*)<\/a>/';

@@ -42,7 +42,7 @@ class PRC_Block_Library_Primitives {
 	 *
 	 * @var string
 	 */
-	public static $version = '1.0.0';
+	public static $version = '1.0.1';
 
 	public function __construct() {
 

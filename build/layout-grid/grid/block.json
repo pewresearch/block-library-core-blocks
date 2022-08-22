@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "prc-core-block-library/layout-grid",
+  "name": "prc-block-library/layout-grid",
   "description": "Align blocks to a global grid, with support for responsive breakpoints, gutter gap, and server side filtering of content and classes.",
   "title": "Layout Grid",
   "category": "design",
@@ -17,7 +17,7 @@
     },
     "innerBlocks": [
       {
-        "name": "prc-core-block-library/layout-grid-column",
+        "name": "prc-block-library/layout-grid-column",
         "innerBlocks": [
           {
             "name": "core/paragraph",
@@ -30,7 +30,7 @@
         ]
       },
       {
-        "name": "prc-core-block-library/layout-grid-column",
+        "name": "prc-block-library/layout-grid-column",
         "innerBlocks": [
           {
             "name": "core/image",
@@ -50,6 +50,10 @@
     "addGutterEnds": {
       "type": "boolean",
       "default": true
+    },
+    "enableVerticalDivider": {
+      "type": "boolean",
+      "default": false
     },
     "verticalAlignment": {
       "type": "string"

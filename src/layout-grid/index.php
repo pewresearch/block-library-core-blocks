@@ -21,7 +21,7 @@ class Layout_Grid extends PRC_Block_Library_Primitives {
 			add_filter(
 				'excerpt_allowed_wrapper_blocks',
 				function( $allowed_wrapper_blocks ) {
-					return array_merge( $allowed_wrapper_blocks, array( 'prc-core-block-library/layout-grid', 'prc-core-block-library/layout-grid-column' ) );
+					return array_merge( $allowed_wrapper_blocks, array( 'prc-block-library/layout-grid', 'prc-block-library/layout-grid-column' ) );
 				}
 			);
 		}
@@ -29,7 +29,7 @@ class Layout_Grid extends PRC_Block_Library_Primitives {
 
 	public function render_grid_block_callback( $attributes, $content, $block ) {
 		// $this->render_grid_column_block();
-		// $css_classes = apply_filters( 'prc_block_library_primitives_layout_grid_css_classes', array(), $attributes, $block );
+		// $css_classes = apply_filters( 'prc_block_library_layout_grid_css_classes', array(), $attributes, $block );
 		return $content;
 	}
 

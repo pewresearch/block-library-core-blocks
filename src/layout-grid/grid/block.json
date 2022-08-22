@@ -49,6 +49,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"enableVerticalDivider": {
+			"type": "boolean",
+			"default": false
+		},
 		"verticalAlignment": {
 			"type": "string"
 		}

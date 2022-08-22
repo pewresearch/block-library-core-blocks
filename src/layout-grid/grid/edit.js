@@ -64,7 +64,7 @@ import {
 
 import './css/editor.scss';
 
-const ALLOWED_BLOCKS = [ 'prc-core-block-library/layout-grid-column' ];
+const ALLOWED_BLOCKS = [ 'prc-block-library/layout-grid-column' ];
 const MINIMUM_RESIZE_SIZE = 50; // Empirically determined to be a good size
 
 class Edit extends Component {
@@ -260,7 +260,7 @@ class Edit extends Component {
 		const inspectorDeviceType = this.getInspectorMode();
 		const layoutGrid = new LayoutGrid( attributes, previewMode, columns );
 
-		const { gutterSize, addGutterEnds, verticalAlignment } = attributes;
+		const { gutterSize, addGutterEnds, enableVerticalDivider, verticalAlignment } = attributes;
 
 		const extra = getAsEditorCSS(
 			previewMode,
@@ -322,24 +322,44 @@ class Edit extends Component {
 		}
 
 		const toggleControl = (
-			<ToggleControl
-				label={ __( 'Add end gutters', 'layout-grid' ) }
-				help={
-					addGutterEnds
-						? __(
-								'Toggle off to remove the spacing left and right of the grid.',
-								'layout-grid'
-						)
-						: __(
-								'Toggle on to add space left and right of the layout grid. ',
-								'layout-grid'
-						)
-				}
-				checked={ addGutterEnds }
-				onChange={ ( newValue ) =>
-					setAttributes( { addGutterEnds: newValue } )
-				}
-			/>
+			<Fragment>
+				<ToggleControl
+					label={ __( 'Add end gutters', 'layout-grid' ) }
+					help={
+						addGutterEnds
+							? __(
+									'Toggle off to remove the spacing left and right of the grid.',
+									'layout-grid'
+							)
+							: __(
+									'Toggle on to add space left and right of the layout grid. ',
+									'layout-grid'
+							)
+					}
+					checked={ addGutterEnds }
+					onChange={ () =>
+						setAttributes( { addGutterEnds: !addGutterEnds } )
+					}
+				/>
+				<ToggleControl
+					label={ __( 'Add vertical divider lines', 'layout-grid' ) }
+					help={
+						addGutterEnds
+							? __(
+									'Toggle off to remove the divider line in between columns in the gutter.',
+									'layout-grid'
+							)
+							: __(
+									'Toggle on the divider line in between columns in the gutter',
+									'layout-grid'
+							)
+					}
+					checked={ enableVerticalDivider }
+					onChange={ () =>
+						setAttributes( { enableVerticalDivider: !enableVerticalDivider } )
+					}
+				/>
+			</Fragment>
 		);
 
 		return (

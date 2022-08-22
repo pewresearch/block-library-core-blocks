@@ -1,11 +1,11 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "prc-core-block-library/layout-grid-column",
+  "name": "prc-block-library/layout-grid-column",
   "description": "A column used inside a Layout Grid block.",
   "title": "Column",
   "parent": [
-    "prc-core-block-library/layout-grid"
+    "prc-block-library/layout-grid"
   ],
   "category": "design",
   "supports": {

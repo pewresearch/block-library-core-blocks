@@ -19,7 +19,7 @@ function getColumnBlocks( currentBlocks, previous, columns ) {
 		return [
 			...currentBlocks,
 			...Array.from( { length: columns - previous }, () =>
-				createBlock( 'prc-core-block-library/layout-grid-column' )
+				createBlock( 'prc-block-library/layout-grid-column' )
 			),
 		];
 	}

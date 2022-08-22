@@ -12,19 +12,19 @@
 // These rules exist to support classic themes, and are unnecessary in block themes.
 
 // 1. Reset margins on block itself, so it doesn't inherit the baseline margin.
-[data-type="prc-core-block-library/layout-grid"] {
+[data-type="prc-block-library/layout-grid"] {
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
 // 2. Reset margins on immediate innerblocks container.
-[data-type="prc-core-block-library/layout-grid"] > .block-editor-block-list__block-edit > [data-block] {
+[data-type="prc-block-library/layout-grid"] > .block-editor-block-list__block-edit > [data-block] {
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
 // 3. Unset margins and paddings for column container.
-.wp-block-jetpack-layout-grid-editor [data-type="prc-core-block-library/layout-grid-column"].wp-block { // Selector needs specificity to override.
+.wp-block-jetpack-layout-grid-editor [data-type="prc-block-library/layout-grid-column"].wp-block { // Selector needs specificity to override.
 	margin: 0;
 	padding-left: 0;
 	padding-right: 0;
@@ -44,7 +44,7 @@
 
 // There are extra containers in the editing canvas. They need to be set to grid
 // same as the corresponding containers on the frontend, to match.
-[data-type="prc-core-block-library/layout-grid-column"] {
+[data-type="prc-block-library/layout-grid-column"] {
 	display: grid;
 	height: 100%;
 }
@@ -54,7 +54,7 @@
 // To make sure this is smooth, we add some animation.
 // For now this whole bit exists so the side UI, and resize handles, are available even on full-wide blocks.
 // Let's revisit if another solution presents itself.
-[data-type="prc-core-block-library/layout-grid"][data-align="full"] {
+[data-type="prc-block-library/layout-grid"][data-align="full"] {
 	// We use flex to center here, because the margins are already being used.
 	display: flex;
 	flex-direction: column;
@@ -168,7 +168,7 @@
  * Redesign resize handles to handle literal edge cases.
  */
 
-[data-type="prc-core-block-library/layout-grid"] {
+[data-type="prc-block-library/layout-grid"] {
 
 	// New vertical appearance.
 	.wpcom-overlay-resize__handle .components-resizable-box__side-handle,
@@ -236,27 +236,27 @@
 .wp-block-jetpack-layout-grid-editor {
 	position: relative;
 
-	&.are-vertically-aligned-top [data-type="prc-core-block-library/layout-grid-column"].wp-block {
+	&.are-vertically-aligned-top [data-type="prc-block-library/layout-grid-column"].wp-block {
 		align-self: flex-start;
 	}
 
-	&.are-vertically-aligned-center [data-type="prc-core-block-library/layout-grid-column"].wp-block {
+	&.are-vertically-aligned-center [data-type="prc-block-library/layout-grid-column"].wp-block {
 		align-self: center;
 	}
 
-	&.are-vertically-aligned-bottom [data-type="prc-core-block-library/layout-grid-column"].wp-block {
+	&.are-vertically-aligned-bottom [data-type="prc-block-library/layout-grid-column"].wp-block {
 		align-self: flex-end;
 	}
 
 	// Note we add the alignment on the parent block as the editor nesting means it's not possible to affect the grid
 	@for $x from 1 through 4 {
-		&.column#{ $x }-grid__valign-top [data-type="prc-core-block-library/layout-grid-column"].wp-block:nth-child(#{ $x }) {
+		&.column#{ $x }-grid__valign-top [data-type="prc-block-library/layout-grid-column"].wp-block:nth-child(#{ $x }) {
 			align-self: flex-start;
 		}
-		&.column#{ $x }-grid__valign-center [data-type="prc-core-block-library/layout-grid-column"].wp-block:nth-child(#{ $x }) {
+		&.column#{ $x }-grid__valign-center [data-type="prc-block-library/layout-grid-column"].wp-block:nth-child(#{ $x }) {
 			align-self: center;
 		}
-		&.column#{ $x }-grid__valign-bottom [data-type="prc-core-block-library/layout-grid-column"].wp-block:nth-child(#{ $x }) {
+		&.column#{ $x }-grid__valign-bottom [data-type="prc-block-library/layout-grid-column"].wp-block:nth-child(#{ $x }) {
 			align-self: flex-end;
 		}
 	}
