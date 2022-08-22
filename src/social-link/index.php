@@ -2,7 +2,7 @@
 // Modify the core/social-link block.
 // See: https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/social-link/index.php
 
-class Social_Link extends SR_Block_Library {
+class Social_Link extends PRC_Block_Library_Primitives {
 	public static $version = '1.0.1';
 
 	public function __construct( $init = false ) {

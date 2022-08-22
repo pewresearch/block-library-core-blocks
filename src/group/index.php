@@ -1,6 +1,6 @@
 <?php
 
-class Group extends PRC_Core_Block_Library {
+class Group extends PRC_Block_Library_Primitives {
 	public static $block_name = 'core/group';
 	public static $block_json = null;
 	public static $view_script_handle = null;
@@ -8,7 +8,7 @@ class Group extends PRC_Core_Block_Library {
 
 	public function __construct($init = false) {
 		if ( true === $init ) {
-			$block_json_file = PRC_CORE_BLOCK_LIBRARY_DIR . '/build/group/block.json';
+			$block_json_file = PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/group/block.json';
 			self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
 			self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
 

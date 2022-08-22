@@ -2,14 +2,14 @@
 /**
  * PRC Core Block Library
  *
- * @package           PRC_Core_Block_Library
+ * @package           PRC_Block_Library_Primitives
  * @author            Seth Rubenstein
  * @copyright         2022 Pew Research Center
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       Core Block Library by Pew Research Center
- * Plugin URI:        https://github.com/pewresearch/core-block-library/
+ * Plugin Name:       Block Library Primitives by Pew Research Center
+ * Plugin URI:        https://github.com/pewresearch/block-library-primitives/
  * Description:       A starting point for anyone looking to add functionality, extra control to and or create your own custom block library using core/blocks. Built with easier extensibility in mind.
  * Version:           1.0.0
  * Requires at least: 6.0
@@ -26,16 +26,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PRC_CORE_BLOCK_LIBRARY_FILE', __FILE__ );
-define( 'PRC_CORE_BLOCK_LIBRARY_DIR', __DIR__ );
+define( 'PRC_BLOCK_LIBRARY_PRIMITIVES_FILE', __FILE__ );
+define( 'PRC_BLOCK_LIBRARY_PRIMITIVES_DIR', __DIR__ );
 
-class PRC_Core_Block_Library {
+class PRC_Block_Library_Primitives {
 	/**
 	 * Easily accessible variable that points to the plugin filepath.
 	 *
 	 * @var string
 	 */
 	public static $plugin_file = __FILE__;
+
 	/**
 	 * Version, change whenever you push a change to production otherwise script concatenation will break Gutenberg.
 	 *
@@ -72,4 +73,4 @@ class PRC_Core_Block_Library {
 
 }
 
-new PRC_Core_Block_Library();
+new PRC_Block_Library_Primitives();

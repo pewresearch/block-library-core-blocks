@@ -1,12 +1,12 @@
 <?php
-class Navigation_Link extends PRC_Core_Block_Library {
+class Navigation_Link extends PRC_Block_Library_Primitives {
 	public static $block_name = 'core/navigation-link';
 	public static $block_json = null;
 	public static $script_handle = null;
 
 	public function __construct($init = false) {
 		if ( true === $init ) {
-			$block_json_file = PRC_CORE_BLOCK_LIBRARY_DIR . '/build/navigation-link/block.json';
+			$block_json_file = PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/navigation-link/block.json';
 			self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
 			self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
 

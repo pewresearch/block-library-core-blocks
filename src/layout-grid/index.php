@@ -1,7 +1,7 @@
 <?php
 
-class Layout_Grid extends PRC_Core_Block_Library {
-	public static $block_name = 'prc-core-block-library/layout-grid'; // -column
+class Layout_Grid extends PRC_Block_Library_Primitives {
+	public static $block_name = 'prc-block-library/layout-grid'; // -column
 	public static $grid_block_json = null;
 	public static $grid_script_handle = null;
 	public static $column_block_json = null;
@@ -9,7 +9,7 @@ class Layout_Grid extends PRC_Core_Block_Library {
 
 	public function __construct($init = false) {
 		if ( true === $init ) {
-			$path = PRC_CORE_BLOCK_LIBRARY_DIR . '/build/layout-grid';
+			$path = PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/layout-grid';
 			self::$grid_block_json = wp_json_file_decode( $path . '/grid/block.json', array( 'associative' => true ) );
 			self::$grid_block_json['file'] = wp_normalize_path( realpath( $path . '/grid/block.json' ) );
 
@@ -29,6 +29,7 @@ class Layout_Grid extends PRC_Core_Block_Library {
 
 	public function render_grid_block_callback( $attributes, $content, $block ) {
 		// $this->render_grid_column_block();
+		// $css_classes = apply_filters( 'prc_block_library_primitives_layout_grid_css_classes', array(), $attributes, $block );
 		return $content;
 	}
 
@@ -38,13 +39,13 @@ class Layout_Grid extends PRC_Core_Block_Library {
 
 	public function register() {
 		$grid_block = register_block_type_from_metadata(
-			PRC_CORE_BLOCK_LIBRARY_DIR . '/build/layout-grid/grid',
+			PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/layout-grid/grid',
 			array(
 				'render_callback' => array($this, 'render_grid_block_callback'),
 			)
 		);
 		$column_block = register_block_type_from_metadata(
-			PRC_CORE_BLOCK_LIBRARY_DIR . '/build/layout-grid/column',
+			PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/layout-grid/column',
 			array(
 				'render_callback' => array($this, 'render_column_block_callback'),
 			)
