@@ -27,7 +27,6 @@ class Group extends PRC_Core_Block_Library {
 	}
 
 	public function register_editor_assets() {
-		do_action('qm/debug', 'editor_script_handle' . self::$editor_script_handle);
 		wp_enqueue_script( self::$editor_script_handle );
 	}
 
@@ -75,7 +74,6 @@ class Group extends PRC_Core_Block_Library {
 					'core/group/responsiveThreshold' => 'responsiveThreshold',
 				)
 			);
-			do_action('qm/debug', 'Group Block Settings:: ' . print_r($settings, true));
 		}
 		return $settings;
 	}

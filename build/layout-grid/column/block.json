@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "prc-core-block-library/layout-grid-column",
+  "description": "A column used inside a Layout Grid block.",
+  "title": "Column",
+  "parent": [
+    "prc-core-block-library/layout-grid"
+  ],
+  "category": "design",
+  "supports": {
+    "inserter": false,
+    "reusable": false,
+    "html": false
+  },
+  "attributes": {
+    "backgroundColor": {
+      "type": "string"
+    },
+    "customBackgroundColor": {
+      "type": "string"
+    },
+    "padding": {
+      "type": "string",
+      "default": "none"
+    },
+    "verticalAlignment": {
+      "type": "string"
+    }
+  },
+  "editorScript": "file:./index.js"
+}

@@ -1,0 +1,29 @@
+$block-padding: 14px;
+$grid-desktop: repeat(12, 1fr); // Same as 12 instances of 1fr.
+$grid-tablet: repeat(8, 1fr);
+$grid-mobile: repeat(4, 1fr);
+
+$grid-gutter: 24px;
+$grid-gutter-none: 0px;
+$grid-gutter-small: 8px;
+$grid-gutter-medium: 16px;
+$grid-gutter-large: $grid-gutter;
+$grid-gutter-huge: 48px;
+$grid-gutter__background-offset: $grid-gutter / 2 + 1px;
+
+// These can be deprecated.
+$padding-none: $grid-gutter-none;
+$padding-small: $grid-gutter-small;
+$padding-medium: $grid-gutter-medium;
+$padding-large: $grid-gutter;
+$padding-huge: $grid-gutter-huge;
+
+// Standard Gutenberg Breakpoints
+$break-huge: 1440px;
+$break-wide: 1280px;
+$break-xlarge: 1080px;
+$break-large: 960px;	// admin sidebar auto folds
+$break-medium: 782px;	// adminbar goes big
+$break-small: 600px;
+$break-mobile: 480px;
+$break-zoomed-in: 280px;

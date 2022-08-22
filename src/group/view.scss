@@ -1,0 +1,13 @@
+body.admin-bar .prc-group-block--sticky.sticky {
+	top: 32px;
+}
+.prc-group-block--sticky.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	.wp-block-group.alignleft,
+	.wp-block-group.alignright {
+		background: rgb(255 255 255 / 50%);
+	}
+}

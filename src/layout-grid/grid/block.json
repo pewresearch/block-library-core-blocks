@@ -1,0 +1,59 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "prc-core-block-library/layout-grid",
+	"description": "Align blocks to a global grid, with support for responsive breakpoints, gutter gap, and server side filtering of content and classes.",
+	"title": "Layout Grid",
+	"category": "design",
+	"supports": {
+		"align": ["full"],
+		"html": false
+	},
+	"example": {
+		"attributes": {
+			"columns": 2
+		},
+		"innerBlocks": [
+			{
+				"name": "prc-core-block-library/layout-grid-column",
+				"innerBlocks": [
+					{
+						"name": "core/paragraph",
+						"attributes": {
+							"customFontSize": 32,
+							"content": "<strong>Snow Patrol</strong>",
+							"align": "center"
+						}
+					}
+				]
+			},
+			{
+				"name": "prc-core-block-library/layout-grid-column",
+				"innerBlocks": [
+					{
+						"name": "core/image",
+						"attributes": {
+							"url": "https://s.w.org/images/core/5.3/Windbuchencom.jpg"
+						}
+					}
+				]
+			}
+		]
+	},
+	"attributes": {
+		"gutterSize": {
+			"type": "string",
+			"default": "large"
+		},
+		"addGutterEnds": {
+			"type": "boolean",
+			"default": true
+		},
+		"verticalAlignment": {
+			"type": "string"
+		}
+	},
+    "editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

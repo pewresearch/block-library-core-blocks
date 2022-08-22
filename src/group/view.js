@@ -9,6 +9,11 @@ import enquire from 'enquire.js';
  */
 import domReady from '@wordpress/dom-ready';
 
+/**
+ * Internal Dependencies
+ */
+import './view.scss';
+
 if (!window.hasOwnProperty('prcBlocks')) {
 	window.prcBlocks = {};
 }
