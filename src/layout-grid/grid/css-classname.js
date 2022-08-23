@@ -186,7 +186,7 @@ export function getAsCSS(columns, attributes = {}) {
 	}
 
 	if (!attributes.addGutterEnds) {
-		classes['wp-block-jetpack-layout-gutter__nowrap'] = true;
+		classes['wp-block-prc-block-library-layout-gutter__nowrap'] = true;
 	}
 
 	if (attributes.verticalAlignment && 'top' !== attributes.verticalAlignment) {
@@ -205,7 +205,7 @@ export function removeGridClasses(classes) {
 		.replace(/column\d-\w*-grid__\w*-\d*/g, '')
 		.replace(/column\d-grid__\w*-\d*/g, '')
 		.replace(/\s{2,}/, '')
-		.replace(/wp-block-jetpack-layout-gutter__\w*/, '')
+		.replace(/wp-block-prc-block-library-layout-gutter__\w*/, '')
 		.replace(/is-vertically-aligned-\w*/, '')
 		.replace(/is-style-[A-Za-z-_]*/, '')
 		.replace(/are-vertically-aligned-\w*/);
@@ -214,10 +214,10 @@ export function removeGridClasses(classes) {
 export function getGutterClasses({ gutterSize, addGutterEnds }) {
 	// Note that 'large' is the default and doesn't output any CSS class
 	return {
-		'wp-block-jetpack-layout-gutter__nowrap': !addGutterEnds,
-		'wp-block-jetpack-layout-gutter__none': 'none' === gutterSize,
-		'wp-block-jetpack-layout-gutter__small': 'small' === gutterSize,
-		'wp-block-jetpack-layout-gutter__medium': 'medium' === gutterSize,
-		'wp-block-jetpack-layout-gutter__huge': 'huge' === gutterSize,
+		'wp-block-prc-block-library-layout-gutter__nowrap': !addGutterEnds,
+		'wp-block-prc-block-library-layout-gutter__none': 'none' === gutterSize,
+		'wp-block-prc-block-library-layout-gutter__small': 'small' === gutterSize,
+		'wp-block-prc-block-library-layout-gutter__medium': 'medium' === gutterSize,
+		'wp-block-prc-block-library-layout-gutter__huge': 'huge' === gutterSize,
 	};
 }

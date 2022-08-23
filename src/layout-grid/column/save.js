@@ -23,7 +23,7 @@ const save = ({ attributes = {} }) => {
 		backgroundColor,
 	);
 	const classes = classnames(className, {
-		[`wp-block-jetpack-layout-grid__padding-${padding}`]: true,
+		[`wp-block-prc-block-library-layout-grid__padding-${padding}`]: true,
 		'has-background': backgroundColor || customBackgroundColor,
 		[backgroundClass]: backgroundClass,
 		[`is-vertically-aligned-${verticalAlignment}`]: verticalAlignment,

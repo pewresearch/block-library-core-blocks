@@ -1,6 +1,5 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 2,
   "name": "prc-block-library/layout-grid",
   "description": "Align blocks to a global grid, with support for responsive breakpoints, gutter gap, and server side filtering of content and classes.",
   "title": "Layout Grid",
@@ -9,7 +8,11 @@
     "align": [
       "full"
     ],
-    "html": false
+    "html": false,
+    "color": {
+      "background": true,
+      "text": true
+    }
   },
   "example": {
     "attributes": {
@@ -23,7 +26,7 @@
             "name": "core/paragraph",
             "attributes": {
               "customFontSize": 32,
-              "content": "<strong>Snow Patrol</strong>",
+              "content": "<strong>Hello world!</strong>",
               "align": "center"
             }
           }

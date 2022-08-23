@@ -166,11 +166,11 @@ class Edit extends Component {
 			const offset = grid.getOffset( column ) || 0;
 
 			settings.push(
-				<div className="jetpack-layout-grid-settings" key={ column }>
+				<div className="prc-block-library-layout-grid-settings" key={ column }>
 					<strong>
 						{ __( 'Column', 'layout-grid' ) } { column + 1 }
 					</strong>
-					<div className="jetpack-layout-grid-settings__group">
+					<div className="prc-block-library-layout-grid-settings__group">
 						<TextControl
 							type="number"
 							label={ __( 'Offset', 'layout-grid' ) }
@@ -268,20 +268,17 @@ class Edit extends Component {
 			attributes,
 			columnAttributes
 		);
-		let gridClasses = removeGridClasses( className );
-		// gridClasses.replace(
-		// 	'layout-grid',
-		// 	'layout-grid-editor'
-		// );
 		const classes = classnames(
-			gridClasses,
-			'wp-block-jetpack-layout-grid-editor',
+			removeGridClasses( className ).replace(
+				'layout-grid',
+				'layout-grid-editor'
+			),
 			extra,
 			{
-				'wp-block-jetpack-layout-tablet': previewMode === 'Tablet',
-				'wp-block-jetpack-layout-desktop': previewMode === 'Desktop',
-				'wp-block-jetpack-layout-mobile': previewMode === 'Mobile',
-				'wp-block-jetpack-layout-resizable': this.canResizeBreakpoint(
+				'wp-block-prc-block-library-layout-tablet': previewMode === 'Tablet',
+				'wp-block-prc-block-library-layout-desktop': previewMode === 'Desktop',
+				'wp-block-prc-block-library-layout-mobile': previewMode === 'Mobile',
+				'wp-block-prc-block-library-layout-resizable': this.canResizeBreakpoint(
 					previewMode
 				),
 				[ `are-vertically-aligned-${ verticalAlignment }` ]: verticalAlignment,
@@ -403,7 +400,7 @@ class Edit extends Component {
 
 				<InspectorControls>
 					<PanelBody title={ __( 'Layout', 'layout-grid' ) }>
-						<div className="jetpack-layout-grid-columns block-editor-block-styles">
+						<div className="prc-block-library-layout-grid-columns block-editor-block-styles">
 							{ getColumns().map( ( column ) => (
 								<div
 									key={ column.value }
@@ -444,7 +441,7 @@ class Edit extends Component {
 							) ) }
 						</div>
 
-						<p className='jetpack-layout-grid-help'>
+						<p className='prc-block-library-layout-grid-help'>
 							{ __(
 								'Changing the number of columns will reset your layout and could remove content.',
 								'layout-grid'
@@ -458,7 +455,7 @@ class Edit extends Component {
 							'layout-grid'
 						) }
 					>
-						<p className='jetpack-layout-grid-help'>
+						<p className='prc-block-library-layout-grid-help'>
 							{ __(
 								"Previewing your post will show your browser's breakpoint, not the currently selected one.",
 								'layout-grid'

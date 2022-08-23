@@ -1,6 +1,5 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
-  "apiVersion": 2,
   "name": "prc-block-library/layout-grid-column",
   "description": "A column used inside a Layout Grid block.",
   "title": "Column",
@@ -11,15 +10,13 @@
   "supports": {
     "inserter": false,
     "reusable": false,
-    "html": false
+    "html": false,
+    "color": {
+      "background": true,
+      "text": true
+    }
   },
   "attributes": {
-    "backgroundColor": {
-      "type": "string"
-    },
-    "customBackgroundColor": {
-      "type": "string"
-    },
     "padding": {
       "type": "string",
       "default": "none"

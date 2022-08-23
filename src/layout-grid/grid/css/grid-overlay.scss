@@ -57,7 +57,7 @@
 		}
 
 		// No gutter.
-		.wp-block-jetpack-layout-gutter__none & {
+		.wp-block-prc-block-library-layout-gutter__none & {
 			.is-selected & {
 				box-shadow:
 				-1px 0 0 0 currentColor,
@@ -66,7 +66,7 @@
 		}
 
 		// Small gutter.
-		.wp-block-jetpack-layout-gutter__small & {
+		.wp-block-prc-block-library-layout-gutter__small & {
 			.is-selected & {
 				box-shadow:
 				-($grid-gutter-small / 2) 0 0 0 currentColor,
@@ -75,7 +75,7 @@
 		}
 
 		// Medium gutter.
-		.wp-block-jetpack-layout-gutter__medium & {
+		.wp-block-prc-block-library-layout-gutter__medium & {
 			.is-selected & {
 				box-shadow:
 				-($grid-gutter-medium / 2) 0 0 0 currentColor,
@@ -84,7 +84,7 @@
 		}
 
 		// Huge gutter.
-		.wp-block-jetpack-layout-gutter__huge & {
+		.wp-block-prc-block-library-layout-gutter__huge & {
 			.is-selected & {
 				box-shadow:
 				-($grid-gutter-huge / 2) 0 0 0 currentColor,
@@ -101,13 +101,13 @@
 	inset #{ $grid-gutter-large / 2 } 0 0 0 currentColor;
 }
 
-.wp-block-jetpack-layout-gutter__none .wpcom-overlay-grid {
+.wp-block-prc-block-library-layout-gutter__none .wpcom-overlay-grid {
 	grid-gap: $grid-gutter-none;
 	padding-left: $grid-gutter;
 	padding-right: $grid-gutter;
 }
 
-.wp-block-jetpack-layout-gutter__small .wpcom-overlay-grid {
+.wp-block-prc-block-library-layout-gutter__small .wpcom-overlay-grid {
 	grid-gap: $grid-gutter-small;
 	padding-left: $grid-gutter-small;
 	padding-right: $grid-gutter-small;
@@ -117,7 +117,7 @@
 	inset #{ $grid-gutter-small / 2 } 0 0 0 currentColor;
 }
 
-.wp-block-jetpack-layout-gutter__medium .wpcom-overlay-grid {
+.wp-block-prc-block-library-layout-gutter__medium .wpcom-overlay-grid {
 	grid-gap: $grid-gutter-medium;
 	padding-left: $grid-gutter-medium;
 	padding-right: $grid-gutter-medium;
@@ -127,7 +127,7 @@
 	inset #{ $grid-gutter-medium / 2 } 0 0 0 currentColor;
 }
 
-.wp-block-jetpack-layout-gutter__huge .wpcom-overlay-grid {
+.wp-block-prc-block-library-layout-gutter__huge .wpcom-overlay-grid {
 	grid-gap: $grid-gutter-huge;
 	padding-left: $grid-gutter-huge;
 	padding-right: $grid-gutter-huge;
@@ -137,7 +137,7 @@
 	inset #{ $grid-gutter-huge / 2 } 0 0 0 currentColor;
 }
 
-.wp-block-jetpack-layout-gutter__nowrap .wpcom-overlay-grid {
+.wp-block-prc-block-library-layout-gutter__nowrap .wpcom-overlay-grid {
 	padding-left: $grid-gutter-none;
 	padding-right: $grid-gutter-none;
 

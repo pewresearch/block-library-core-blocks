@@ -5,7 +5,7 @@
  */
 
 // Output editor specific styles.
-.wp-block-jetpack-layout-grid-editor > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-prc-block-library-layout-grid-editor > .block-editor-inner-blocks > .block-editor-block-list__layout {
 	display: grid;
 	grid-gap: 24px;
 	grid-template-columns: $grid-desktop;
@@ -32,24 +32,24 @@
 	overflow-wrap: break-word; // New standard.
 }
 
-.wp-block-jetpack-layout-grid-editor.wp-block-jetpack-layout-gutter__none > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-gutter__none > .block-editor-inner-blocks > .block-editor-block-list__layout {
 	grid-gap: $grid-gutter-none;
 }
 
-.wp-block-jetpack-layout-grid-editor.wp-block-jetpack-layout-gutter__small > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-gutter__small > .block-editor-inner-blocks > .block-editor-block-list__layout {
 	grid-gap: $grid-gutter-small;
 }
 
-.wp-block-jetpack-layout-grid-editor.wp-block-jetpack-layout-gutter__medium > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-gutter__medium > .block-editor-inner-blocks > .block-editor-block-list__layout {
 	grid-gap: $grid-gutter-medium;
 }
 
-.wp-block-jetpack-layout-grid-editor.wp-block-jetpack-layout-gutter__huge > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-gutter__huge > .block-editor-inner-blocks > .block-editor-block-list__layout {
 	grid-gap: $grid-gutter-huge;
 }
 
 // Editor grid styles
-.wp-block-jetpack-layout-grid-editor {
+.wp-block-prc-block-library-layout-grid-editor {
 	// These three rules are only necessary for Safari.
 	// Safari interprets percentages in CSS grid differently.
 	// Flex causes children to "stretch", fixing that interpretation.
@@ -92,7 +92,7 @@
  * Presets for tablet and mobile - switch the number of columns and layout
  */
 
-.wp-block-jetpack-layout-grid-editor.wp-block-jetpack-layout-tablet {
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-tablet {
 	.wpcom-overlay-grid,
 	.wpcom-resize-grid,
 	> .block-editor-inner-blocks > .block-editor-block-list__layout {
@@ -100,7 +100,7 @@
 	}
 }
 
-.wp-block-jetpack-layout-grid-editor.wp-block-jetpack-layout-mobile {
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-mobile {
 	.wpcom-overlay-grid,
 	.wpcom-resize-grid,
 	> .block-editor-inner-blocks > .block-editor-block-list__layout {
@@ -110,7 +110,7 @@
 
 // Resize handles.
 .wpcom-overlay-resize__handle,
-.wp-block-jetpack-layout-grid-column {
+.wp-block-prc-block-library-layout-grid-column {
 	.components-resizable-box__container {
 		position: relative;
 		user-select: auto;
@@ -133,14 +133,14 @@
 }
 
 // Ensure the drag handles in the innerblocks are visible when the Grid, or Grid Column blocks are selected.
-[data-type="prc-block-library/layout-grid"].is-selected .wp-blocks-jetpack-layout-grid__resize-handles .components-resizable-box__handle,
-[data-type="prc-block-library/layout-grid-column"].is-selected .wp-blocks-jetpack-layout-grid__resize-handles .components-resizable-box__handle {
+[data-type="prc-block-library/layout-grid"].is-selected .wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__handle,
+[data-type="prc-block-library/layout-grid-column"].is-selected .wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__handle {
 	display: none;
 	z-index: 10000;
 }
 
-[data-type="prc-block-library/layout-grid"].is-selected .wp-block-jetpack-layout-resizable .wp-blocks-jetpack-layout-grid__resize-handles .components-resizable-box__handle,
-[data-type="prc-block-library/layout-grid"] .wp-block-jetpack-layout-resizable [data-type="prc-block-library/layout-grid-column"].is-selected .wp-blocks-jetpack-layout-grid__resize-handles .components-resizable-box__handle {
+[data-type="prc-block-library/layout-grid"].is-selected .wp-block-prc-block-library-layout-resizable .wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__handle,
+[data-type="prc-block-library/layout-grid"] .wp-block-prc-block-library-layout-resizable [data-type="prc-block-library/layout-grid-column"].is-selected .wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__handle {
 	display: block;
 }
 
@@ -175,7 +175,7 @@ $light-opacity-light-800: rgba(#fff, 0.45);
 }
 
 // When clicked, hide the fake drag handles and show the real one.
-.wp-block-jetpack-layout-grid__resizing {
+.wp-block-prc-block-library-layout-grid__resizing {
 	user-select: none;
 	z-index: 10000;
 
@@ -188,7 +188,7 @@ $light-opacity-light-800: rgba(#fff, 0.45);
 	display: block !important;
 }
 
-.wp-blocks-jetpack-layout-grid__showright.components-resizable-box__container .components-resizable-box__handle-right,
-.wp-blocks-jetpack-layout-grid__showleft.components-resizable-box__container .components-resizable-box__handle-left {
+.wp-blocks-prc-block-library-layout-grid__showright.components-resizable-box__container .components-resizable-box__handle-right,
+.wp-blocks-prc-block-library-layout-grid__showleft.components-resizable-box__container .components-resizable-box__handle-left {
 	display: block !important;
 }

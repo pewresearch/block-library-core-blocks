@@ -24,7 +24,7 @@
 }
 
 // 3. Unset margins and paddings for column container.
-.wp-block-jetpack-layout-grid-editor [data-type="prc-block-library/layout-grid-column"].wp-block { // Selector needs specificity to override.
+.wp-block-prc-block-library-layout-grid-editor [data-type="prc-block-library/layout-grid-column"].wp-block { // Selector needs specificity to override.
 	margin: 0;
 	padding-left: 0;
 	padding-right: 0;
@@ -37,7 +37,7 @@
 
 // This prevents collapsing margins, which makes for a more stable experience.
 // It is definitely needed for background colors to work.
-.wp-block-jetpack-layout-grid-column {
+.wp-block-prc-block-library-layout-grid-column {
 	border-top: 0.05px solid transparent;
 	border-bottom: 0.05px solid transparent;
 }
@@ -72,7 +72,7 @@
  * Inspector Controls
  */
 
-.jetpack-layout-grid-columns {
+.prc-block-library-layout-grid-columns {
 	display: flex;
 	justify-content: space-between;
 	font-size: 12px;
@@ -102,11 +102,11 @@
 	}
 }
 
-.components-button-group + .jetpack-layout-grid-settings {
+.components-button-group + .prc-block-library-layout-grid-settings {
 	margin-top: 16px;
 }
 
-.components-panel__body .jetpack-layout-grid-settings__group {
+.components-panel__body .prc-block-library-layout-grid-settings__group {
 	display: flex;
 	padding: 8px 0;
 	margin-bottom: 8px;
@@ -121,7 +121,7 @@
 	}
 }
 
-.jetpack-layout-grid-help {
+.prc-block-library-layout-grid-help {
 	font-size: 12px;
 	font-style: normal;
 	color: #757575;
@@ -133,7 +133,7 @@
  * Placeholder options
  */
 
-.wp-block-jetpack-layout-grid-editor .block-editor-inner-blocks__template-picker-options {
+.wp-block-prc-block-library-layout-grid-editor .block-editor-inner-blocks__template-picker-options {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -172,7 +172,7 @@
 
 	// New vertical appearance.
 	.wpcom-overlay-resize__handle .components-resizable-box__side-handle,
-	.wp-blocks-jetpack-layout-grid__resize-handles .components-resizable-box__side-handle {
+	.wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__side-handle {
 		// Make the circle a pill shape instead.
 		&::after {
 			width: 8px;
@@ -197,10 +197,10 @@
 	}
 
 	// Provide special treatment for the drag handles when the end-gutters are enabled, as they will otherwise cause scrollbars.
-	.wp-block-jetpack-layout-gutter__nowrap {
+	.wp-block-prc-block-library-layout-gutter__nowrap {
 
 		.wpcom-overlay-resize__handle .components-resizable-box__side-handle.components-resizable-box__handle-right,
-		.wp-blocks-jetpack-layout-grid__resize-handles .components-resizable-box__side-handle.components-resizable-box__handle-right {
+		.wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__side-handle.components-resizable-box__handle-right {
 				right: 0;
 
 			&::before,
@@ -210,7 +210,7 @@
 		}
 
 		.wpcom-overlay-resize__handle .components-resizable-box__side-handle.components-resizable-box__handle-left,
-		.wp-blocks-jetpack-layout-grid__resize-handles .components-resizable-box__side-handle.components-resizable-box__handle-left {
+		.wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__side-handle.components-resizable-box__handle-left {
 			left: 0;
 
 			&::before,
@@ -233,7 +233,7 @@
  * Individual column alignment for the editor
  */
 
-.wp-block-jetpack-layout-grid-editor {
+.wp-block-prc-block-library-layout-grid-editor {
 	position: relative;
 
 	&.are-vertically-aligned-top [data-type="prc-block-library/layout-grid-column"].wp-block {

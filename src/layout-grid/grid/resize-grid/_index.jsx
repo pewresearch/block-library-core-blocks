@@ -1,30 +1,25 @@
 /**
  * External Dependencies
  */
-
 import classnames from 'classnames';
 
 /**
  * WordPress Dependencies
  */
-
-import { createRef, useState, useEffect } from '@wordpress/element';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useRef, useState, useEffect } from '@wordpress/element';
+// import { useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Internal Dependencies
  */
-
 import findNearest from './nearest';
 import ResizeHandle from './resize-handle';
 
 /*
- * The ResizeGrid is responsible for providing resizable grid column handles. It maps absolute mouse positions to grid columns, and then
- * validates that with the LayoutGrid.
+ * The ResizeGrid is responsible for providing resizable grid column handles. It maps absolute mouse positions to grid columns, and then validates that with the LayoutGrid.
  *
- * Due to the way the Gutenberg DOM is laid out, the ResizeGrid doesn't provide the resize handles that surround a column. Instead it
- * listens for mousedown events and when one happens it then displays a 'fake' resize handle that can be dragged. As the fake handle is
- * moved, the underlying grid is updated, giving the appearance it is being directly updated.
+ * Due to the way the Gutenberg DOM is laid out, the ResizeGrid doesn't provide the resize handles that surround a column, you can find those in column/edit.js.
+ * Instead it listens for mousedown events and when one happens it then displays a 'fake' resize handle that can be dragged. As the fake handle is moved, the underlying grid is updated, giving the appearance it is being directly updated.
  */
 
 function ResizeGrid({
@@ -35,9 +30,9 @@ function ResizeGrid({
 	isSelected,
 	children,
 }) {
-	const containerRef = createRef();
+	const containerRef = useRef();
 	const [blockElm, setBlockElm] = useState(null);
-	const [resizingColumn, setResizingColumn] = useState(-1);
+	const [isResizingColumn, setResizingColumn] = useState(-1);
 	const [max, setMax] = useState(0);
 	const [xPos, setXPos] = useState(0);
 	const [width, setWidth] = useState(0);
@@ -47,12 +42,12 @@ function ResizeGrid({
 
 	const classes = classnames(
 		className,
-		-1 !== resizingColumn ? 'wp-block-jetpack-layout-grid__resizing' : null,
+		-1 !== isResizingColumn ? 'wp-block-prc-block-library-layout-grid__resizing' : null,
 	);
 
 	const getNearestColumn = (direction, mouse) => {
-		const start = layoutGrid.getStart(resizingColumn);
-		const span = layoutGrid.getSpan(resizingColumn);
+		const start = layoutGrid.getStart(isResizingColumn);
+		const span = layoutGrid.getSpan(isResizingColumn);
 		const nearest = Math.min(
 			totalColumns,
 			Math.max(
@@ -106,7 +101,7 @@ function ResizeGrid({
 
 	const getAdjustedOffset = (offset, optionalWidth = 0) => {
 		const handleWidth = 0 < optionalWidth ? optionalWidth : width;
-
+		console.log('getAdjustedOffset',containerRef, offset, handleWidth);
 		return (
 			offset -
 			containerRef.current.getBoundingClientRect().left -
@@ -142,7 +137,7 @@ function ResizeGrid({
 	const onMouseDown = (ev) => {
 		const { target } = ev;
 
-		console.log('onMouseDown', target);
+		console.log('onMouseDown', target, ev);
 
 		// This is a bit of hardcoded DOM searching - we check if the current click is on a resize handle and then find the column associated with that
 		// There may be a better way.
@@ -151,6 +146,7 @@ function ResizeGrid({
 			(target.dataset.resizeRight || target.dataset.resizeLeft)
 		) {
 			const block = target.closest('.wp-block');
+			console.log("Closest  block", block);
 
 			const { height, right, left, top } = block.getBoundingClientRect();
 			const { width } = target.getBoundingClientRect();
@@ -181,6 +177,7 @@ function ResizeGrid({
 	};
 
 	const onMouseMove = (ev) => {
+		console.log('onMouseMove', ev);
 		ev.stopPropagation();
 
 		if (ev.touches === undefined) {
@@ -195,7 +192,7 @@ function ResizeGrid({
 		// Finally pass this up if a grid adjustment has been triggered
 		const adjustment = getNearestColumn(direction, ev);
 		if (adjustment) {
-			onResize(resizingColumn, adjustment);
+			onResize(isResizingColumn, adjustment);
 		}
 	};
 
@@ -208,20 +205,20 @@ function ResizeGrid({
 		document.removeEventListener('touchend', onMouseUp);
 	};
 
-	const blockProps = useBlockProps({
-		className: classes,
-		onMouseDown,
-		onTouchStart: onMouseDown,
-		ref: containerRef,
-	});
-
 	useEffect(()=>{
-		console.log("Resizing...", resizingColumn);
-	}, [resizingColumn]);
+		console.log("Resizing...", blockElm);
+	}, [blockElm]);
+
+	console.log("Container Ref", containerRef);
 
 	return (
-		<div {...blockProps}>
-			{-1 !== resizingColumn && (
+		<div
+			className={ classes }
+			onMouseDown={ onMouseDown }
+			onTouchStart={ onMouseDown }
+			ref={ containerRef }
+		>
+			{-1 !== isResizingColumn && (
 				<ResizeHandle
 					direction={direction}
 					height={height}

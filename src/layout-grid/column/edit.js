@@ -15,8 +15,8 @@ import {
 	withColors,
 	BlockControls,
 	BlockVerticalAlignmentToolbar,
-	useBlockProps,
-	useInnerBlocksProps,
+	// useBlockProps,
+	// useInnerBlocksProps,
 } from '@wordpress/block-editor';
 import { useState, Fragment } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
@@ -33,8 +33,6 @@ import withHasChildBlocks from './hooks/with-has-child-blocks';
 function Edit({
 	className,
 	hasChildBlocks,
-	backgroundColor,
-	setBackgroundColor,
 	attributes,
 	setAttributes,
 	updateAlignment,
@@ -42,34 +40,33 @@ function Edit({
 	const { padding, verticalAlignment } = attributes;
 	const [direction, setDirection] = useState(null);
 
-	const classes = classnames(className, backgroundColor.class, {
-		[`wp-block-jetpack-layout-grid__padding-${padding}`]: true,
-		'has-background': backgroundColor.color,
+	const classes = classnames(className, {
+		[`wp-block-prc-block-library-layout-grid__padding-${padding}`]: true,
+		// 'has-background': backgroundColor.color,
 		'components-resizable-box__container': true,
-		[backgroundColor.class]: backgroundColor.class,
-		'wp-blocks-jetpack-layout-grid__showleft': 'right' === direction,
-		'wp-blocks-jetpack-layout-grid__showright': 'left' === direction,
+		// [backgroundColor.class]: backgroundColor.class,
+		'wp-blocks-prc-block-library-layout-grid__showleft': 'right' === direction,
+		'wp-blocks-prc-block-library-layout-grid__showright': 'left' === direction,
 		[`is-vertically-aligned-${verticalAlignment}`]: verticalAlignment,
 	});
 
-	const style = {
-		backgroundColor: backgroundColor.color,
-	};
+	// const style = {
+	// 	backgroundColor: backgroundColor.color,
+	// };
 
-	const blockProps = useBlockProps({
-		className: classes,
-		style,
-	});
+	// const blockProps = useBlockProps({});
+	// blockProps.className = 'block-editor-block-list__block wp-block';
+	// console.log("Column Block Props", blockProps);
 
-	const innerBlocksProps = useInnerBlocksProps(
-		{},
-		{
-			templateLock: false,
-			renderAppender: hasChildBlocks
-				? undefined
-				: () => <InnerBlocks.ButtonBlockAppender />,
-		},
-	);
+	// const innerBlocksProps = useInnerBlocksProps(
+	// 	{},
+	// 	{
+	// 		templateLock: false,
+	// 		renderAppender: hasChildBlocks
+	// 			? undefined
+	// 			: () => <InnerBlocks.ButtonBlockAppender />,
+	// 	},
+	// );
 
 	const onLeftOut = () => {
 		setDirection(null);
@@ -97,7 +94,7 @@ function Edit({
 	return (
 		<Fragment>
 			<InspectorControls>
-				<PanelColorSettings
+				{/* <PanelColorSettings
 					title={__('Column Color', 'layout-grid')}
 					initialOpen
 					colorSettings={[
@@ -107,7 +104,7 @@ function Edit({
 							label: __('Background', 'layout-grid'),
 						},
 					]}
-				/>
+				/> */}
 
 				<PanelBody title={__('Column Padding', 'layout-grid')}>
 					<p>{__('Choose padding for this column:', 'layout-grid')}</p>
@@ -126,8 +123,8 @@ function Edit({
 				/>
 			</BlockControls>
 
-			<div {...blockProps}>
-				<span className="wp-blocks-jetpack-layout-grid__resize-handles">
+			<div className={classes}>
+				<span className="wp-blocks-prc-block-library-layout-grid__resize-handles">
 					<div
 						className="components-resizable-box__handle components-resizable-box__side-handle components-resizable-box__handle-right"
 						onMouseDown={onRightIn}
@@ -140,7 +137,13 @@ function Edit({
 					/>
 				</span>
 
-				<div {...innerBlocksProps} />
+				<InnerBlocks
+					templateLock={ false }
+					renderAppender={ hasChildBlocks
+						? undefined
+						: () => <InnerBlocks.ButtonBlockAppender />
+					}
+				/>
 			</div>
 		</Fragment>
 	);
