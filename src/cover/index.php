@@ -23,6 +23,9 @@ class Cover extends PRC_Block_Library_Primitives {
 	}
 
 	public function register_editor_assets() {
+		if ( !function_exists('jetpack_is_mobile') ) {
+			return;
+		}
 		wp_enqueue_script( self::$editor_script_handle );
 	}
 
