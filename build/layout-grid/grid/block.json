@@ -12,6 +12,16 @@
     "color": {
       "background": true,
       "text": true
+    },
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ]
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "width": true
     }
   },
   "example": {

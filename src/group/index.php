@@ -16,7 +16,7 @@ class Group extends PRC_Block_Library_Primitives {
 			add_action( 'enqueue_block_editor_assets', array($this, 'register_editor_assets') );
 			add_filter( 'block_type_metadata', array( $this, 'add_attributes' ), 100, 1 );
 			add_filter( 'block_type_metadata_settings', array( $this, 'add_settings' ), 100, 2 );
-			add_filter( 'render_block', array( $this, 'render_callback' ), 10, 2 );
+			add_filter( 'render_block', array( $this, 'render' ), 10, 2 );
 			add_action( 'wp_enqueue_scripts', array($this, 'enqueue_view_script') );
 		}
 	}
@@ -89,7 +89,7 @@ class Group extends PRC_Block_Library_Primitives {
 		}
 	}
 
-	public function render_callback( $block_content, $block ) {
+	public function render( $block_content, $block ) {
 		if ( self::$block_name !== $block['blockName'] || is_admin() ) {
 			return $block_content;
 		}

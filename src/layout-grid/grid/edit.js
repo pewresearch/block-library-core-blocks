@@ -13,6 +13,7 @@ import {
 	InspectorControls,
 	BlockControls,
 	BlockVerticalAlignmentToolbar,
+	JustifyContentControl,
 } from '@wordpress/block-editor';
 import { Component, createRef, Fragment } from '@wordpress/element';
 import {
@@ -515,6 +516,12 @@ class Edit extends Component {
 					<BlockVerticalAlignmentToolbar
 						onChange={ updateAlignment }
 						value={ verticalAlignment }
+					/>
+					<JustifyContentControl
+						value={ null }
+						onChange={ ( next ) => {
+							// setAttributes( { justification: next } );
+						} }
 					/>
 				</BlockControls>
 			</Fragment>

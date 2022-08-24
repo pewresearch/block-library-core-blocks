@@ -1,0 +1,8 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "prc-block-library/social-link",
+	"title": "Social Link",
+	"viewScript": "file:./view.js",
+    "editorScript": "file:./edit.js"
+}

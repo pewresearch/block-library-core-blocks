@@ -45,7 +45,7 @@ class PRC_Block_Library_Primitives {
 	public static $version = '1.0.1';
 
 	public function __construct() {
-
+		require_once plugin_dir_path( __FILE__ ) . '/src/cover/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/group/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/heading/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/home-link/index.php';
@@ -57,6 +57,7 @@ class PRC_Block_Library_Primitives {
 	}
 
 	public function init_blocks() {
+		new Cover(true);
 		new Group(true);
 		new Heading(true);
 		new Home_Link(true);
@@ -65,11 +66,11 @@ class PRC_Block_Library_Primitives {
 		new Navigation_Submenu(true);
 	}
 
-	public function dynamically_change_block_theme_style_variation($style_variation_name = false) {
-		// Something like this...
-		// $dark_mode = get_query_arg('style_variation') === 'dark';
-		// $this->dynamically_change_block_theme_style_variation('dark-mode');
-	}
+	// public function dynamically_change_block_theme_style_variation($style_variation_name = false) {
+	// 	// Something like this...
+	// 	// $dark_mode = get_query_arg('style_variation') === 'dark';
+	// 	// $this->dynamically_change_block_theme_style_variation('dark-mode');
+	// }
 
 }
 

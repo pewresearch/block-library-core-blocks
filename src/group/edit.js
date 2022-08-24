@@ -14,9 +14,9 @@ import {
 } from '@wordpress/components';
 
 const BLOCKNAME = 'core/group';
-const BLOCKIDENTIFIER = 'prc-core-block-library/group';
+const BLOCKIDENTIFIER = 'prc-block-library/group';
 
-console.log('Hello World -> src/group/index.js');
+console.log('Hello World -> src/group/edit.js');
 
 addFilter(
 	'editor.BlockEdit',

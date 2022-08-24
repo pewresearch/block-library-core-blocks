@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 2,
-    "name": "prc-block-library/group",
+    "name": "prc-block/group",
 	"title": "Group",
     "editorScript": "file:./edit.js",
 	"viewScript": "file:./view.js"
