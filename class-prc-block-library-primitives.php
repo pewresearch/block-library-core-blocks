@@ -46,10 +46,11 @@ class PRC_Block_Library_Primitives {
 
 	public function __construct() {
 		require_once plugin_dir_path( __FILE__ ) . '/src/cover/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/grid/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/grid-column/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/group/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/heading/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/home-link/index.php';
-		require_once plugin_dir_path( __FILE__ ) . '/src/layout-grid/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-link/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-submenu/index.php';
 
@@ -58,10 +59,11 @@ class PRC_Block_Library_Primitives {
 
 	public function init_blocks() {
 		new Cover(true);
+		new Layout_Grid(true);
+		new Layout_Grid_Column(true);
 		new Group(true);
 		new Heading(true);
 		new Home_Link(true);
-		new Layout_Grid(true);
 		new Navigation_Link(true);
 		new Navigation_Submenu(true);
 	}

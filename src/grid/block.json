@@ -1,11 +1,12 @@
 {
+	"apiVersion": 2,
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "name": "prc-block/layout-grid",
 	"description": "Align blocks to a global grid, with support for responsive breakpoints, gutter gap (block-spacing), and server side filtering of content.",
 	"title": "Grid",
 	"category": "design",
 	"supports": {
-		"align": ["full"],
+		"align": ["full", "wide"],
 		"html": false,
 		"color": {
 			"background": true,
@@ -42,13 +43,13 @@
 		}
 	},
 	"usesContext": ["queryId", "query", "postId", "postType"],
+	"providesContext": {
+		"prc-block/layout-grid/presetLayout": "presetLayout"
+	},
 	"example": {
-		"attributes": {
-			"columns": 2
-		},
 		"innerBlocks": [
 			{
-				"name": "prc-block-library/layout-grid-column",
+				"name": "prc-block/layout-grid-column",
 				"innerBlocks": [
 					{
 						"name": "core/paragraph",
@@ -61,7 +62,7 @@
 				]
 			},
 			{
-				"name": "prc-block-library/layout-grid-column",
+				"name": "prc-block/layout-grid-column",
 				"innerBlocks": [
 					{
 						"name": "core/image",
@@ -75,5 +76,6 @@
 	},
     "editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"viewScript": "file:./view.js",
+	"style": "file:./view.css"
 }

@@ -1,0 +1,273 @@
+@import './constants.scss';
+@import './grid-overlay.scss';
+// @import './grid-resize.scss';
+@import './grid.scss';
+
+/**
+ * Margins & Paddings
+ */
+
+// Unset many of the paddings and margins the block editor sets.
+// This is to make sure resizing the column containers works as expected.
+// These rules exist to support classic themes, and are unnecessary in block themes.
+
+// 1. Reset margins on block itself, so it doesn't inherit the baseline margin.
+[data-type="prc-block-library/layout-grid"] {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+// 2. Reset margins on immediate innerblocks container.
+[data-type="prc-block-library/layout-grid"] > .block-editor-block-list__block-edit > [data-block] {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+// 3. Unset margins and paddings for column container.
+.wp-block-prc-block-library-layout-grid-editor [data-type="prc-block-library/layout-grid-column"].wp-block { // Selector needs specificity to override.
+	margin: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+
+/**
+ * Visual Glitches
+ */
+
+// This prevents collapsing margins, which makes for a more stable experience.
+// It is definitely needed for background colors to work.
+.wp-block-prc-block-library-layout-grid-column {
+	border-top: 0.05px solid transparent;
+	border-bottom: 0.05px solid transparent;
+}
+
+// There are extra containers in the editing canvas. They need to be set to grid
+// same as the corresponding containers on the frontend, to match.
+[data-type="prc-block-library/layout-grid-column"] {
+	display: grid;
+	height: 100%;
+}
+
+
+// When grid is full-wide, pad the inner blocks so the side UI is available, including resize handles.
+// To make sure this is smooth, we add some animation.
+// For now this whole bit exists so the side UI, and resize handles, are available even on full-wide blocks.
+// Let's revisit if another solution presents itself.
+[data-type="prc-block-library/layout-grid"][data-align="full"] {
+	// We use flex to center here, because the margins are already being used.
+	display: flex;
+	flex-direction: column;
+
+	// Fit available space.
+	// @todo: keep an eye on this element. It appears to be commonly refactored.
+	> div,
+	.is-block-content {
+		width: 100%;
+	}
+}
+
+
+/**
+ * Inspector Controls
+ */
+
+.prc-block-library-layout-grid-columns {
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+	margin-bottom: 12px;
+
+	.block-editor-block-styles__item-preview {
+		background: none;
+		display: flex;
+		justify-content: center;
+		min-height: auto;
+
+		svg {
+			fill: currentColor;
+		}
+	}
+
+	.block-editor-block-styles__item {
+		border-radius: 2px;
+		flex: 1;
+		cursor: pointer;
+		text-align: center;
+
+		&.is-active {
+			background-color: #1e1e1e;
+			color: #fff;
+		}
+	}
+}
+
+.components-button-group + .prc-block-library-layout-grid-settings {
+	margin-top: 16px;
+}
+
+.components-panel__body .prc-block-library-layout-grid-settings__group {
+	display: flex;
+	padding: 8px 0;
+	margin-bottom: 8px;
+
+	.components-base-control,
+	.components-base-control__field {
+		margin-bottom: 0;
+	}
+
+	.components-base-control:first-child {
+		margin-right: 16px;
+	}
+}
+
+.prc-block-library-layout-grid-help {
+	font-size: 12px;
+	font-style: normal;
+	color: #757575;
+}
+
+
+
+/**
+ * Placeholder options
+ */
+
+.wp-block-prc-block-library-layout-grid-editor .block-editor-inner-blocks__template-picker-options {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	width: 100%;
+	list-style: none;
+	margin-left: 0;
+	margin-bottom: 0;
+	padding-left: 0;
+
+	li {
+		margin-left: 0;
+		padding-left: 0;
+		list-style: none;
+	}
+
+	> li .components-button {
+		list-style: none;
+		flex-shrink: 1;
+		max-width: 72px;
+		margin-right: 8px;
+		flex-basis: 100%;
+	}
+
+	.block-editor-inner-blocks__template-picker-option {
+		height: auto;
+		line-height: inherit;
+		background: #fff;
+	}
+}
+
+/**
+ * Redesign resize handles to handle literal edge cases.
+ */
+
+[data-type="prc-block-library/layout-grid"] {
+
+	// New vertical appearance.
+	.wpcom-overlay-resize__handle .components-resizable-box__side-handle,
+	.wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__side-handle {
+		// Make the circle a pill shape instead.
+		&::after {
+			width: 8px;
+			border: none;
+			border-radius: 0;
+			height: 24px;
+			top: 50%;
+			transform: translateY(-50%);
+			right: calc(50% - 4px);
+
+			// Explicitly set the background color.
+			background: #007cba;
+			background: var(--wp-admin-theme-color);
+		}
+
+		// Adjust the vertical separator.
+		&::before {
+			width: 2px;
+			right: calc(50% - 1px);
+			border: none;
+		}
+	}
+
+	// Provide special treatment for the drag handles when the end-gutters are enabled, as they will otherwise cause scrollbars.
+	.wp-block-prc-block-library-layout-gutter__nowrap {
+
+		.wpcom-overlay-resize__handle .components-resizable-box__side-handle.components-resizable-box__handle-right,
+		.wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__side-handle.components-resizable-box__handle-right {
+				right: 0;
+
+			&::before,
+			&::after {
+				right: 0;
+			}
+		}
+
+		.wpcom-overlay-resize__handle .components-resizable-box__side-handle.components-resizable-box__handle-left,
+		.wp-blocks-prc-block-library-layout-grid__resize-handles .components-resizable-box__side-handle.components-resizable-box__handle-left {
+			left: 0;
+
+			&::before,
+			&::after {
+				left: 0;
+			}
+		}
+
+		// On 5.4, when end-gutters are untoggled, collapse the left and right borders.
+		// This avoids a horizontal scrollbar that would otherwise appear.
+		// @todo: Can be removed when the G2 UI is merged, likely 5.5.
+		.wp-block::before {
+			right: 0;
+			left: 0;
+		}
+	}
+}
+
+/**
+ * Individual column alignment for the editor
+ */
+
+.wp-block-prc-block-library-layout-grid-editor {
+	position: relative;
+
+	&.are-vertically-aligned-top [data-type="prc-block-library/layout-grid-column"].wp-block {
+		align-self: flex-start;
+	}
+
+	&.are-vertically-aligned-center [data-type="prc-block-library/layout-grid-column"].wp-block {
+		align-self: center;
+	}
+
+	&.are-vertically-aligned-bottom [data-type="prc-block-library/layout-grid-column"].wp-block {
+		align-self: flex-end;
+	}
+
+	// Note we add the alignment on the parent block as the editor nesting means it's not possible to affect the grid
+	@for $x from 1 through 4 {
+		&.column#{ $x }-grid__valign-top [data-type="prc-block-library/layout-grid-column"].wp-block:nth-child(#{ $x }) {
+			align-self: flex-start;
+		}
+		&.column#{ $x }-grid__valign-center [data-type="prc-block-library/layout-grid-column"].wp-block:nth-child(#{ $x }) {
+			align-self: center;
+		}
+		&.column#{ $x }-grid__valign-bottom [data-type="prc-block-library/layout-grid-column"].wp-block:nth-child(#{ $x }) {
+			align-self: flex-end;
+		}
+	}
+}
+
+/**
+ * Image alignment for the editor
+ */
+
+.wp-block[data-align=right] {
+    > .wp-block-image {
+        float: right;
+    }
+}

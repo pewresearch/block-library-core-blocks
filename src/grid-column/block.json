@@ -1,0 +1,48 @@
+{
+	"apiVersion": 2,
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "prc-block/layout-grid-column",
+	"description": "Column block for layout-grid-column.",
+	"title": "Column",
+	"category": "design",
+	"supports": {
+		"align": ["full"],
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"margin": [ "top", "bottom" ],
+			"padding": true,
+			"blockGap": true
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"width": true
+		}
+	},
+	"parent": [ "prc-block/layout-grid" ],
+	"attributes": {
+		"columnStart": {
+			"type": "integer"
+		},
+		"columnSpan": {
+			"type": "integer"
+		},
+		"tabletColumnStart": {
+			"type": "integer"
+		},
+		"tabletColumnSpan": {
+			"type": "integer"
+		},
+		"mobileColumnStart": {
+			"type": "integer"
+		},
+		"mobileColumnSpan": {
+			"type": "integer"
+		}
+	},
+	"usesContext": ["queryId", "query", "postId", "postType"],
+    "editorScript": "file:./index.js"
+}

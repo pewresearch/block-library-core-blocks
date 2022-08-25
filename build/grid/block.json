@@ -1,0 +1,92 @@
+{
+  "apiVersion": 2,
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "name": "prc-block/layout-grid",
+  "description": "Align blocks to a global grid, with support for responsive breakpoints, gutter gap (block-spacing), and server side filtering of content.",
+  "title": "Grid",
+  "category": "design",
+  "supports": {
+    "align": [
+      "full",
+      "wide"
+    ],
+    "html": false,
+    "color": {
+      "background": true,
+      "text": true
+    },
+    "spacing": {
+      "margin": [
+        "top",
+        "bottom"
+      ],
+      "padding": true,
+      "blockGap": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "width": true
+    }
+  },
+  "attributes": {
+    "presetLayout": {
+      "type": "string"
+    },
+    "gutterSize": {
+      "type": "string",
+      "default": "large"
+    },
+    "addGutterEnds": {
+      "type": "boolean",
+      "default": true
+    },
+    "enableVerticalDivider": {
+      "type": "boolean",
+      "default": false
+    },
+    "verticalAlignment": {
+      "type": "string"
+    }
+  },
+  "usesContext": [
+    "queryId",
+    "query",
+    "postId",
+    "postType"
+  ],
+  "providesContext": {
+    "prc-block/layout-grid/presetLayout": "presetLayout"
+  },
+  "example": {
+    "innerBlocks": [
+      {
+        "name": "prc-block/layout-grid-column",
+        "innerBlocks": [
+          {
+            "name": "core/paragraph",
+            "attributes": {
+              "customFontSize": 32,
+              "content": "<strong>Hello world!</strong>",
+              "align": "center"
+            }
+          }
+        ]
+      },
+      {
+        "name": "prc-block/layout-grid-column",
+        "innerBlocks": [
+          {
+            "name": "core/image",
+            "attributes": {
+              "url": "https://s.w.org/images/core/5.3/Windbuchencom.jpg"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "viewScript": "file:./view.js",
+  "style": "file:./view.css"
+}

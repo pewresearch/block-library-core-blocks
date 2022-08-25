@@ -26,6 +26,7 @@
   "prettier": "@pewresearch/prettier-config",
   "scripts": {
     "build": "wp-scripts build",
+		"start": "wp-scripts start",
     "format": "wp-scripts format",
     "lint:css": "wp-scripts lint-style",
     "lint:js": "wp-scripts lint-js",

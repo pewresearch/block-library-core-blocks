@@ -1,0 +1,55 @@
+@import './constants.scss';
+
+/**
+ * Resize grid overlay
+ */
+
+.wp-block-prc-block-library-layout-grid-editor .wpcom-resize-grid {
+	user-select: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	touch-action: none;
+
+	// Likely necessary to override bleed from themes.
+	.wp-block {
+		max-width: none;
+	}
+}
+
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-gutter__none .wpcom-resize-grid:not(.wpcom-resize-grid__resizing) {
+	grid-gap: $grid-gutter-none;
+}
+
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-gutter__small .wpcom-resize-grid:not(.wpcom-resize-grid__resizing) {
+	grid-gap: $grid-gutter-small;
+}
+
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-gutter__medium .wpcom-resize-grid:not(.wpcom-resize-grid__resizing) {
+	grid-gap: $grid-gutter-medium;
+}
+
+.wp-block-prc-block-library-layout-grid-editor.wp-block-prc-block-library-layout-gutter__huge .wpcom-resize-grid:not(.wpcom-resize-grid__resizing) {
+	grid-gap: $grid-gutter-huge;
+}
+
+.wpcom-resize-grid__column-hidden {
+	display: none;
+}
+
+.wpcom-resize-grid__resizing {
+	user-select: none;
+	z-index: 10000;
+	touch-action: none;
+}
+
+// Elevate resize handle to be above column block hover & select layer.
+.wpcom-resize-grid__column .components-resizable-box__side-handle {
+	z-index: 121;
+}
+
+body.is-resizing [data-type="prc-block-library/layout-grid"] {
+	overflow: inherit;
+}

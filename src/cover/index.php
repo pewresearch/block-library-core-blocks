@@ -30,7 +30,7 @@ class Cover extends PRC_Block_Library_Primitives {
 	}
 
 	/**
-	 * Register additional attributes for group block.
+	 * Register additional attributes for cover block.
 	 * @param mixed $metadata
 	 * @return mixed
 	 */

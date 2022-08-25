@@ -1,6 +1,6 @@
 <?php
 
-class Layout_Grid extends PRC_Block_Library_Primitives {
+class Layout_Grid_Legacy extends PRC_Block_Library_Primitives {
 	public static $block_name = 'prc-block-library/layout-grid'; // -column
 	public static $grid_block_json = null;
 	public static $grid_script_handle = null;
@@ -50,11 +50,6 @@ class Layout_Grid extends PRC_Block_Library_Primitives {
 				'render_callback' => array($this, 'render_column_block_callback'),
 			)
 		);
-
-		do_action('qm/debug', print_r(array(
-			'grid_block' => $grid_block,
-			'column_block' => $column_block,
-		), true));
 	}
 }
 

@@ -1,0 +1,331 @@
+/**
+ * Grid Block styles.
+ * These styles are loaded into both the editor, and the frontend.
+ */
+
+@import './constants.scss';
+
+/**
+ * Padding Options
+ */
+
+/* autoprefixer grid: no-autoplace */
+.wp-block-prc-block-library-layout-grid-editor,
+.wp-block-prc-block-library-layout-grid {
+	// This padding adds end gutters.
+	padding-left: $grid-gutter;
+	padding-right: $grid-gutter;
+
+	// This ensures those paddings work on the frontend.
+	box-sizing: border-box;
+
+	&.wp-block-prc-block-library-layout-gutter__none {
+		padding-left: $padding-none;
+		padding-right: $padding-none;
+	}
+
+	&.wp-block-prc-block-library-layout-gutter__small {
+		padding-left: $padding-small;
+		padding-right: $padding-small;
+	}
+
+	&.wp-block-prc-block-library-layout-gutter__medium {
+		padding-left: $padding-medium;
+		padding-right: $padding-medium;
+	}
+
+	&.wp-block-prc-block-library-layout-gutter__huge {
+		padding-left: $padding-huge;
+		padding-right: $padding-huge;
+	}
+
+	&.wp-block-prc-block-library-layout-gutter__nowrap {
+		padding-left: $padding-none;
+		padding-right: $padding-none;
+	}
+
+	// Additional, user-set paddings.
+	// Apply both gutter padding and user-set padding, when a background is also set.
+	&.wp-block-prc-block-library-layout-grid__padding-none {
+		padding: $padding-none;
+
+		&.has-background {
+			padding: $padding-none ($padding-none + $grid-gutter__background-offset);
+		}
+	}
+
+	&.wp-block-prc-block-library-layout-grid__padding-small .wp-block-prc-block-library-layout-grid-column {
+		padding: $padding-small;
+
+		&.has-background {
+			padding: $padding-small ($padding-small + $grid-gutter__background-offset);
+		}
+	}
+
+	&.wp-block-prc-block-library-layout-grid__padding-medium .wp-block-prc-block-library-layout-grid-column {
+		padding: $padding-medium;
+
+		&.has-background {
+			padding: $padding-medium ($padding-medium + $grid-gutter__background-offset);
+		}
+	}
+
+	&.wp-block-prc-block-library-layout-grid__padding-large .wp-block-prc-block-library-layout-grid-column {
+		padding: $padding-large;
+
+		&.has-background {
+			padding: $padding-large ($padding-large + $grid-gutter__background-offset);
+		}
+	}
+
+	&.wp-block-prc-block-library-layout-grid__padding-huge .wp-block-prc-block-library-layout-grid-column {
+		padding: $padding-huge;
+
+		&.has-background {
+			padding: $padding-huge ($padding-huge + $grid-gutter__background-offset);
+		}
+	}
+}
+
+
+/**
+ * Individual Column Options
+ */
+
+.wp-block-prc-block-library-layout-grid-editor .wp-block-prc-block-library-layout-grid-column,
+.wp-block-prc-block-library-layout-grid .wp-block-prc-block-library-layout-grid-column {
+	// When a column has a background color, we add negative margins to enable
+	// some of the gutter to work as default padding.
+	&.has-background {
+		margin-left: -$grid-gutter__background-offset;
+		margin-right: -$grid-gutter__background-offset;
+		padding-left: $grid-gutter__background-offset;
+		padding-right: $grid-gutter__background-offset;
+
+		// This hack uncollapses the margins, which is important for the background color.
+		padding-top: .05px;
+		padding-bottom: .05px;
+	}
+
+	// Additional, user-set paddings.
+	// Apply both gutter padding and user-set padding, when a background is also set.
+	&.wp-block-prc-block-library-layout-grid__padding-none {
+		padding: $padding-none;
+
+		&.has-background {
+			padding: $padding-none ($padding-none + $grid-gutter__background-offset);
+
+			// Needs a max-width in order to constrain contents.
+			max-width: calc( 100% + #{ ($padding-none + $grid-gutter__background-offset) * 2 } );
+		}
+	}
+
+	&.wp-block-prc-block-library-layout-grid__padding-small {
+		padding: $padding-small;
+
+		&.has-background {
+			padding: $padding-small ($padding-small + $grid-gutter__background-offset);
+
+			// Needs a max-width in order to constrain contents.
+			max-width: calc( 100% + #{ ($padding-small + $grid-gutter__background-offset) * 2 } );
+		}
+	}
+
+	&.wp-block-prc-block-library-layout-grid__padding-medium {
+		padding: $padding-medium;
+
+		&.has-background {
+			padding: $padding-medium ($padding-medium + $grid-gutter__background-offset);
+
+			// Needs a max-width in order to constrain contents.
+			max-width: calc( 100% + #{ ($padding-medium + $grid-gutter__background-offset) * 2 } );
+		}
+	}
+
+	&.wp-block-prc-block-library-layout-grid__padding-large {
+		padding: $padding-large;
+
+		&.has-background {
+			padding: $padding-large ($padding-large + $grid-gutter__background-offset);
+
+			// Needs a max-width in order to constrain contents.
+			max-width: calc( 100% + #{ ($padding-large + $grid-gutter__background-offset) * 2 } );
+		}
+	}
+
+	&.wp-block-prc-block-library-layout-grid__padding-huge {
+		padding: $padding-huge;
+
+		&.has-background {
+			padding: $padding-huge ($padding-huge + $grid-gutter__background-offset);
+
+			// Needs a max-width in order to constrain contents.
+			max-width: calc( 100% + #{ ($padding-huge + $grid-gutter__background-offset) * 2 } );
+		}
+	}
+}
+
+
+/**
+ * Parent column alignment
+ */
+
+.wp-block-prc-block-library-layout-grid {
+	&.are-vertically-aligned-top {
+		align-items: flex-start;
+	}
+
+	&.are-vertically-aligned-center {
+		align-items: center;
+	}
+
+	&.are-vertically-aligned-bottom {
+		align-items: flex-end;
+	}
+}
+
+
+/**
+ * Individual column alignment
+ */
+
+.wp-block-prc-block-library-layout-grid-column {
+	// Allow top-aligned columns to span the full height.
+	&.is-vertically-aligned-top {
+		align-self: flex-start;
+		height: 100%;
+	}
+
+	&.is-vertically-aligned-center {
+		align-self: center;
+	}
+
+	&.is-vertically-aligned-bottom {
+		align-self: flex-end;
+	}
+}
+
+
+/**
+ * Responsive Grid Options. Exclude these from the editor.
+ */
+
+/* autoprefixer grid: no-autoplace */
+.wp-block-prc-block-library-layout-grid {
+	display: grid;
+	grid-gap: $grid-gutter;
+	grid-template-columns: $grid-mobile;
+
+	// Grid rules.
+	// Mobile first.
+	@for $i from 1 through 12 {
+		@for $x from 1 through 4 {
+			&.column#{ $x }-mobile-grid__start-#{ $i } > .wp-block-prc-block-library-layout-grid-column:nth-child(#{ $x }) {
+				grid-column-start: $i;
+			}
+		}
+	}
+
+	@for $i from 1 through 12 {
+		@for $x from 1 through 4 {
+			&.column#{ $x }-mobile-grid__span-#{ $i } > .wp-block-prc-block-library-layout-grid-column:nth-child(#{ $x }) {
+				grid-column-end: span $i; // Set it to span $i columns, regardless of starting position.
+			}
+		}
+	}
+
+	@for $i from 1 through 4 {
+		@for $x from 1 through 4 {
+			&.column#{ $x }-mobile-grid__row-#{ $i } > .wp-block-prc-block-library-layout-grid-column:nth-child(#{ $x }) {
+				grid-row-start: $i;
+			}
+		}
+	}
+
+	// Tablet grid rules.
+	@media (min-width: #{ ($break-small) }) {
+
+		grid-template-columns: $grid-tablet;
+
+		@for $i from 1 through 12 {
+			@for $x from 1 through 4 {
+				&.column#{ $x }-tablet-grid__start-#{ $i } > .wp-block-prc-block-library-layout-grid-column:nth-child(#{ $x }) {
+					grid-column-start: $i;
+				}
+			}
+		}
+
+		@for $i from 1 through 12 {
+			@for $x from 1 through 4 {
+				&.column#{ $x }-tablet-grid__span-#{ $i } > .wp-block-prc-block-library-layout-grid-column:nth-child(#{ $x }) {
+					grid-column-end: span $i; // Set it to span $i columns, regardless of starting position.
+				}
+			}
+		}
+
+		@for $i from 1 through 4 {
+			@for $x from 1 through 4 {
+				&.column#{ $x }-tablet-grid__row-#{ $i } > .wp-block-prc-block-library-layout-grid-column:nth-child(#{ $x }) {
+					grid-row-start: $i;
+				}
+			}
+		}
+	}
+
+
+	// Desktop grid rules.
+	@media (min-width: #{ ($break-xlarge) }) {
+		grid-template-columns: $grid-desktop;
+
+		@for $i from 1 through 12 {
+			@for $x from 1 through 4 {
+				&.column#{ $x }-desktop-grid__start-#{ $i } > .wp-block-prc-block-library-layout-grid-column:nth-child(#{ $x }) {
+					grid-column-start: $i;
+				}
+			}
+		}
+
+		@for $i from 1 through 12 {
+			@for $x from 1 through 4 {
+				&.column#{ $x }-desktop-grid__span-#{ $i } > .wp-block-prc-block-library-layout-grid-column:nth-child(#{ $x }) {
+					grid-column-end: span $i; // Set it to span $i columns, regardless of starting position.
+				}
+			}
+		}
+
+		@for $i from 1 through 4 {
+			@for $x from 1 through 4 {
+				&.column#{ $x }-desktop-grid__row-#{ $i } > .wp-block-prc-block-library-layout-grid-column:nth-child(#{ $x }) {
+					grid-row-start: $i;
+				}
+			}
+		}
+	}
+
+	// Ensure long lines wrap in themes that don't already enforce this
+	.wp-block-prc-block-library-layout-grid-column * {
+		word-break: break-word;
+		word-wrap: break-word;
+	}
+
+	&.wp-block-prc-block-library-layout-gutter__none {
+		grid-gap: $grid-gutter-none;
+	}
+
+	&.wp-block-prc-block-library-layout-gutter__small {
+		grid-gap: $grid-gutter-small;
+	}
+
+	&.wp-block-prc-block-library-layout-gutter__medium {
+		grid-gap: $grid-gutter-medium;
+	}
+
+	&.wp-block-prc-block-library-layout-gutter__huge {
+		grid-gap: $grid-gutter-huge;
+	}
+}
+
+// Ensure inner blocks with deliberate overflows are still constrained to column.
+.wp-block-prc-block-library-layout-grid-column {
+	max-width: 100%;
+}
