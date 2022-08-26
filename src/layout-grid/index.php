@@ -1,55 +1,58 @@
 <?php
 
-class Layout_Grid_Legacy extends PRC_Block_Library_Primitives {
-	public static $block_name = 'prc-block-library/layout-grid'; // -column
-	public static $grid_block_json = null;
-	public static $grid_script_handle = null;
-	public static $column_block_json = null;
-	public static $column_script_handle = null;
+class Layout_Grid extends PRC_Block_Library_Primitives {
+	public static $path = null;
+	public static $block_name = 'prc-block/layout-grid';
+	public static $block_json = null;
+	public static $script_handle = null;
 
 	public function __construct($init = false) {
 		if ( true === $init ) {
-			$path = PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/layout-grid';
-			self::$grid_block_json = wp_json_file_decode( $path . '/grid/block.json', array( 'associative' => true ) );
-			self::$grid_block_json['file'] = wp_normalize_path( realpath( $path . '/grid/block.json' ) );
+			self::$path = PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/layout-grid';
+			self::$block_json = wp_json_file_decode(
+				self::$path . '/block.json',
+				array( 'associative' => true )
+			);
+			self::$block_json['file'] = wp_normalize_path( realpath( self::$path . '/block.json' ) );
 
-			self::$column_block_json = wp_json_file_decode( $path . '/column/block.json', array( 'associative' => true ) );
-			self::$column_block_json['file'] = wp_normalize_path( realpath( $path . '/column/block.json' ) );
+			add_action( 'init', array($this, 'register') );
 
-			add_action('init', array($this, 'register'));
-
+			// Ensures this block can be used in site editor so that templates can offer up content inside as an excerpt.
 			add_filter(
 				'excerpt_allowed_wrapper_blocks',
 				function( $allowed_wrapper_blocks ) {
-					return array_merge( $allowed_wrapper_blocks, array( 'prc-block-library/layout-grid', 'prc-block-library/layout-grid-column' ) );
+					return array_merge( $allowed_wrapper_blocks, array( 'prc-block/layout-grid', 'prc-block/layout-grid-column' ) );
 				}
 			);
 		}
 	}
 
-	public function render_grid_block_callback( $attributes, $content, $block ) {
-		// $this->render_grid_column_block();
-		// $css_classes = apply_filters( 'prc_block_library_layout_grid_css_classes', array(), $attributes, $block );
-		return $content;
-	}
+	public function render_grid_callback( $attributes, $content, $block ) {
+		if ( is_admin() ) {
+			return $content;
+		}
 
-	public function render_column_block_callback( $attributes, $content, $block ) {
-		return $content;
+		$css_classes = apply_filters( 'prc_block_library_primitive_grid_classnames', array(), $attributes, $block );
+
+		$attrs = array(
+			'class' => $css_classes,
+		);
+
+		return wp_sprintf(
+			'<div %1$s>%2$s</div>',
+			get_block_wrapper_attributes($attrs),
+			$content,
+		);
 	}
 
 	public function register() {
-		$grid_block = register_block_type_from_metadata(
-			PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/layout-grid/grid',
+		$block = register_block_type_from_metadata(
+			self::$path,
 			array(
-				'render_callback' => array($this, 'render_grid_block_callback'),
+				'render_callback' => array($this, 'render_grid_callback'),
 			)
 		);
-		$column_block = register_block_type_from_metadata(
-			PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/layout-grid/column',
-			array(
-				'render_callback' => array($this, 'render_column_block_callback'),
-			)
-		);
+		do_action('qm/debug', 'grid ' . print_r($block, true));
 	}
 }
 

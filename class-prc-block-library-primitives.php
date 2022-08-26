@@ -46,11 +46,11 @@ class PRC_Block_Library_Primitives {
 
 	public function __construct() {
 		require_once plugin_dir_path( __FILE__ ) . '/src/cover/index.php';
-		require_once plugin_dir_path( __FILE__ ) . '/src/grid/index.php';
-		require_once plugin_dir_path( __FILE__ ) . '/src/grid-column/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/group/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/heading/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/home-link/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/layout-grid/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/layout-grid-column/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-link/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-submenu/index.php';
 
