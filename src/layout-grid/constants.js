@@ -24,24 +24,29 @@ export const getGutterValues = () =>
 		getSpacingValues(),
 	);
 
-export const getColumns = () => [
-	{
-		label: __('1 cols', 'prc-block-library-layout-grid'),
-		value: 1,
-	},
-	{
-		label: __('2 cols', 'prc-block-library-layout-grid'),
-		value: 2,
-	},
-	{
-		label: __('3 cols', 'prc-block-library-layout-grid'),
-		value: 3,
-	},
-	{
-		label: __('4 cols', 'prc-block-library-layout-grid'),
-		value: 4,
-	},
-];
+export const getColumns = (allowSingleColumn = false) => {
+	const toReturn = [
+		{
+			label: __('2 cols', 'prc-block-library-layout-grid'),
+			value: 2,
+		},
+		{
+			label: __('3 cols', 'prc-block-library-layout-grid'),
+			value: 3,
+		},
+		{
+			label: __('4 cols', 'prc-block-library-layout-grid'),
+			value: 4,
+		},
+	];
+	if ( allowSingleColumn ) {
+		toReturn.unshift({
+			label: __('1 col', 'prc-block-library-layout-grid'),
+			value: 1,
+		});
+	}
+	return toReturn;
+};
 
 export const DEVICE_DESKTOP = 'Desktop';
 export const DEVICE_TABLET = 'Tablet';

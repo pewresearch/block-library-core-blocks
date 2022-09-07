@@ -20,7 +20,7 @@ class Heading extends PRC_Block_Library_Primitives {
 	}
 
 	/**
-	 * Register additional attributes for home-link block.
+	 * Register additional attributes for heading block.
 	 * @param mixed $metadata
 	 * @return mixed
 	 */
@@ -41,8 +41,6 @@ class Heading extends PRC_Block_Library_Primitives {
 				'default' => '',
 			);
 		}
-		return $metadata;
-
 		return $metadata;
 	}
 

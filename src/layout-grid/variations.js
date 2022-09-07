@@ -8,7 +8,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal Dependencies
  */
-import ColumnIcon from '../_shared/layout-grid/icons';
+import ColumnIcon from './icons';
 
 /**
  * Template option choices for predefined columns layouts.

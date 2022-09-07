@@ -11,12 +11,6 @@ import { Path, SVG } from '@wordpress/components';
 import metadata from './block.json';
 import edit from './edit';
 import save from './save';
-import {
-	getSpanForDevice,
-	getOffsetForDevice,
-	DEVICE_BREAKPOINTS,
-	MAX_COLUMNS,
-} from '../_shared/layout-grid/constants';
 
 const { name, attributes } = metadata;
 

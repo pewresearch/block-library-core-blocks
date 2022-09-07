@@ -16,14 +16,15 @@ import {
  * Internal Dependencies
  */
 import { DevicePreviewToolbar } from './device-preview';
-import { LayoutPanel } from './layout';
+import { LayoutPanel, LayoutPlaceholder } from './layout';
 
-export default function Controls({ previewDeviceType, columns, clientId }) {
+export default function Controls({ attributes, clientId, columns, previewDeviceType }) {
 	const [viewPort, setViewPort] = useState( null );
+
 	return(
 		<Fragment>
 			<InspectorControls>
-				<LayoutPanel columns={ columns } />
+				<LayoutPanel {...{attributes, clientId, columns}} />
 			</InspectorControls>
 			<BlockControls>
 				<DevicePreviewToolbar {...{
@@ -34,4 +35,9 @@ export default function Controls({ previewDeviceType, columns, clientId }) {
 			</BlockControls>
 		</Fragment>
 	);
+}
+
+export {
+	LayoutPlaceholder,
+	Controls,
 }

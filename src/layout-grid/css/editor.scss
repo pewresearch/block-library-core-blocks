@@ -86,6 +86,18 @@
 		color: rgba(255,255,255,0.15);
 	}
 
+	.is-previewing-device-Tablet & {
+		& > .prc-block-layout-grid__overlay__inner {
+			grid-template-columns: $grid-tablet;
+		}
+	}
+
+	.is-previewing-device-Mobile & {
+		& > .prc-block-layout-grid__overlay__inner {
+			grid-template-columns: $grid-mobile;
+		}
+	}
+
 	> .prc-block-layout-grid__overlay__inner {
 		top: 0;
 		left: 0;

@@ -8,20 +8,57 @@ import classnames from 'classnames';
  */
 import { __ } from '@wordpress/i18n';
 import { Fragment, useEffect, useState } from '@wordpress/element';
-import { PanelBody, IconButton } from '@wordpress/components';
+import { IconButton, PanelBody, Placeholder } from '@wordpress/components';
 
 /**
  * Internal Dependencies
  */
-import { getColumns } from '../../_shared/layout-grid/constants';
-import ColumnIcon from '../../_shared/layout-grid/icons';
+import { updateColumns } from '../higher-order';
+import {
+	getColumns,
+	getSpanForDevice,
+	getOffsetForDevice,
+	DEVICE_BREAKPOINTS
+} from '../constants';
+import { getDefaultSpan } from '../defaults';
+import ColumnIcon from '../icons';
 
-export function LayoutPanel({columns}) {
-	console.log('<LayoutPanel />', columns);
+/*
+* Change the layout (number of columns), resetting everything to the default
+*/
+const onChangeLayout = ( attributes, clientId, previous, columns ) => {
+	const columnValues = {};
+
+	for ( let pos = 0; pos < columns; pos++ ) {
+		for (
+			let device = 0;
+			device < DEVICE_BREAKPOINTS.length;
+			device++
+		) {
+			const defaultSpan = getDefaultSpan(
+				DEVICE_BREAKPOINTS[ device ],
+				columns,
+				pos
+			);
+
+			columnValues[
+				getSpanForDevice( pos, DEVICE_BREAKPOINTS[ device ] )
+			] = defaultSpan;
+			columnValues[
+				getOffsetForDevice( pos, DEVICE_BREAKPOINTS[ device ] )
+			] = 0;
+		}
+	}
+
+	updateColumns( attributes, clientId, previous, columns, columnValues );
+};
+
+export function LayoutPanel({attributes, clientId, columns}) {
+	console.log('<LayoutPanel />', attributes, clientId, columns);
 	return(
 		<PanelBody title={ __( 'Layout', 'layout-grid' ) }>
 			<div className="prc-block-layout-grid__controls__layout block-editor-block-styles">
-				{ getColumns().map( ( column ) => (
+				{ getColumns(true).map( ( column ) => (
 					<div
 						key={ column.value }
 						className={ classnames(
@@ -31,9 +68,10 @@ export function LayoutPanel({columns}) {
 									columns === column.value,
 							}
 						) }
-						onClick={ () =>
-							console.log( 'columns', column.value )
-						}
+						onClick={ () => {
+							console.log( 'columns', columns, column.value );
+							onChangeLayout( attributes, clientId, columns, column.value );
+						}}
 						onKeyDown={ ( event ) => {
 							if (
 								ENTER === event.keyCode ||
@@ -69,7 +107,7 @@ export function LayoutPanel({columns}) {
 	);
 }
 
-export function LayoutPlaceholder(){
+export function LayoutPlaceholder({attributes, clientId}){
 	console.log('<LayoutPlaceholder />');
 	return(
 		<Placeholder
@@ -79,7 +117,6 @@ export function LayoutPlaceholder(){
 				'Select a layout to start with:',
 				'layout-grid'
 			) }
-			className={ classes }
 		>
 			<ul className="block-editor-inner-blocks__template-picker-options">
 				{ getColumns().map( ( column ) => (
@@ -89,9 +126,10 @@ export function LayoutPlaceholder(){
 							icon={
 								<ColumnIcon columns={ column.value } />
 							}
-							onClick={ () =>
-								console.log("Placeholder", column.value)
-							}
+							onClick={() => {
+								console.log("Placeholder", column.value);
+								onChangeLayout( attributes, clientId, 0, column.value );
+							}}
 							className="block-editor-inner-blocks__template-picker-option"
 							label={ column.label }
 						/>

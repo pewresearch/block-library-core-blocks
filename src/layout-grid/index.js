@@ -11,13 +11,7 @@ import metadata from './block.json';
 import edit from './edit';
 import save from './save';
 import variations from './variations';
-// import {
-// 	getSpanForDevice,
-// 	getOffsetForDevice,
-// 	DEVICE_BREAKPOINTS,
-// 	MAX_COLUMNS,
-// } from '../constants';
-import { GridIcon } from '../_shared/layout-grid/icons';
+import { GridIcon } from './icons';
 import './css/editor.scss';
 
 const { name, attributes } = metadata;

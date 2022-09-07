@@ -6,7 +6,7 @@ import { times } from 'lodash';
 /**
  * Internal Dependencies
  */
-import { getGridWidth, getDefaultSpan } from '../../_shared/layout-grid/defaults';
+import { getGridWidth, getDefaultSpan } from '../defaults';
 
 function GridOverlay({peviewDeviceType, ref}) {
 	return(

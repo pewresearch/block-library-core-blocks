@@ -18,10 +18,10 @@ import { BlockControls } from '@wordpress/block-editor';
  * Internal Dependencies
  */
 
-import { getLayouts } from '../../_shared/layout-grid/constants';
+import { getLayouts } from '../constants';
 
 function isSiteEditor() {
-	const siteEditorWrapper = document.querySelector( '#edit-site-editor' );
+	const siteEditorWrapper = document.querySelector( '.edit-site-visual-editor__editor-canvas' );
 	return !! siteEditorWrapper;
 }
 
@@ -38,7 +38,7 @@ function getCurrentViewport(isMobile, isTablet) {
 }
 
 export function DevicePreviewToolbar({previewDeviceType, viewPort, updateViewport}) {
-	console.log('<DevicePreviewToolbar />', previewDeviceType, viewPort);
+	console.log('<DevicePreviewToolbar />', previewDeviceType, viewPort, isSiteEditor());
 	const { __experimentalSetPreviewDeviceType: setPreviewDevice } =
 		useDispatch(isSiteEditor() ? 'core/edit-site' : 'core/edit-post');
 

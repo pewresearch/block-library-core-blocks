@@ -1,11 +1,7 @@
 /**
  * WordPress Dependencies
  */
-import { withSelect, withDispatch } from '@wordpress/data';
-
-/**
- * WordPress Dependencies
- */
+import { select, dispatch } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
 
 /**
@@ -49,123 +45,96 @@ function getColumnBlocks( currentBlocks, previous, columns ) {
 		.reverse();
 }
 
-function isSiteEditor() {
-	const siteEditorWrapper = document.querySelector( '#edit-site-editor' );
-	return !! siteEditorWrapper;
-}
-
-export function withUpdateAlignment() {
-	return withDispatch( ( dispatch, ownProps, registry ) => {
-		return {
-			/**
-			 * Update all child Column blocks with a new vertical alignment setting
-			 * based on whatever alignment is passed in. This allows change to parent
-			 * to overide anything set on a individual column basis.
-			 *
-			 * @param {string} verticalAlignment the vertical alignment setting
-			 */
-			updateAlignment( verticalAlignment ) {
-				const { clientId, setAttributes } = ownProps;
-				const { updateBlockAttributes } = dispatch(
-					'core/block-editor'
-				);
-				const { getBlockOrder } = registry.select(
-					'core/block-editor'
-				);
-
-				// Update own alignment.
-				setAttributes( { verticalAlignment } );
-
-				// Update all child Column Blocks to match
-				const innerBlockClientIds = getBlockOrder( clientId );
-				innerBlockClientIds.forEach( ( innerBlockClientId ) => {
-					updateBlockAttributes( innerBlockClientId, {
-						verticalAlignment,
-					} );
-				} );
+export function initGrid(initialCount = 2) {
+	if ( 2 === initialCount ) {
+		return [
+			{
+				columnStart: 0,
+				columnSpan: 6,
 			},
-		};
-	} );
-}
-
-export function withUpdateColumns() {
-	return withDispatch( ( dispatch, ownProps, registry ) => {
-		return {
-			updateColumns( previous, columns, columnValues ) {
-				const { clientId } = ownProps;
-				const { replaceBlock } = dispatch( 'core/block-editor' );
-				const { getBlocks } = registry.select( 'core/block-editor' );
-				const innerBlocks = getColumnBlocks(
-					getBlocks( clientId ),
-					previous,
-					columns
-				);
-
-				// Replace the whole block with a new one so that our changes to both the attributes and innerBlocks are atomic
-				// This ensures that the undo history has a single entry, preventing traversing to a 'half way' point where innerBlocks are changed
-				// but the column attributes arent
-				const blockCopy = createBlock(
-					ownProps.name,
-					{
-						...ownProps.attributes,
-						...columnValues
-					},
-					innerBlocks
-				);
-
-				replaceBlock( clientId, blockCopy );
+			{
+				columnStart: 7,
+				columnSpan: 6,
 			},
-		};
-	} );
+		]
+	}
+
+	if ( 3 === initialCount ) {
+		return [
+			{
+				columnStart: 0,
+				columnSpan: 4,
+			},
+			{
+				columnStart: 5,
+				columnSpan: 4,
+			},
+			{
+				columnStart: 9,
+				columnSpan: 4,
+			},
+		]
+	}
+
+	if ( 4 === initialCount ) {
+		return [
+			{
+				columnStart: 0,
+				columnSpan: 3,
+			},
+			{
+				columnStart: 4,
+				columnSpan: 3,
+			},
+			{
+				columnStart: 7,
+				columnSpan: 3,
+			},
+			{
+				columnStart: 10,
+				columnSpan: 3,
+			},
+		]
+	}
+
+	return [
+		null
+	];
 }
 
-export function withSetPreviewDeviceType() {
-	return withDispatch( ( dispatch ) => {
-		return {
-			,
+export function updateColumns( attributes, clientId, previous, columns, columnValues ) {
+	const { replaceBlock } = dispatch( 'core/block-editor' );
+	const { getBlocks } =  select( 'core/block-editor' );
+	const innerBlocks = getColumnBlocks(
+		getBlocks( clientId ),
+		previous,
+		columns
+	);
+
+	// Go through each innerBlocks object and set attributes equal to initGrid();
+	innerBlocks.forEach( ( block, index ) => {
+		const grid = initGrid(columns);
+		block.attributes = {
+			...block.attributes,
+			...grid[index],
 		};
+		console.log(block);
 	} );
-}
 
-export function withColumns() {
-	return withSelect( ( select, { clientId } ) => {
-		const { getBlockCount } = select( 'core/block-editor' );
+	console.log("updateColumns...", innerBlocks, attributes, columnValues);
 
-		return {
-			columns: getBlockCount( clientId ),
-		};
-	} );
-}
+	// Replace the whole block with a new one so that our changes to both the attributes and innerBlocks are atomic
+	// This ensures that the undo history has a single entry, preventing traversing to a 'half way' point where innerBlocks are changed
+	// but the column attributes arent
+	const blockCopy = createBlock(
+		'prc-block/layout-grid',
+		{
+			...attributes,
+		},
+		innerBlocks
+	);
 
-export function withColumnAttributes() {
-	return withSelect( ( select, { clientId } ) => {
-		const { getBlockOrder, getBlocksByClientId } = select(
-			'core/block-editor'
-		);
+	console.log("... updateColumns...", blockCopy);
 
-		return {
-			columnAttributes: getBlockOrder( clientId ).map(
-				( innerBlockClientId ) =>
-					getBlocksByClientId( innerBlockClientId )[ 0 ].attributes
-			),
-		};
-	} );
-}
-
-export function withPreviewDeviceType() {
-	return withSelect( ( select ) => {
-		if ( isSiteEditor() ) {
-			return {
-				previewDeviceType: select(
-					'core/edit-site'
-				)?.__experimentalGetPreviewDeviceType(),
-			};
-		}
-
-		return {
-			previewDeviceType: select(
-				'core/edit-post'
-			)?.__experimentalGetPreviewDeviceType(),
-		};
-	} );
+	replaceBlock( clientId, blockCopy );
 }

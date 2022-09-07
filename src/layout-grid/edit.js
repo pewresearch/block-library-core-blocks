@@ -18,17 +18,8 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal Dependencies
  */
-// import {
-// 	withUpdateAlignment,
-// 	withUpdateColumns,
-// 	withSetPreviewDeviceType,
-// 	withColumns,
-// 	withColumnAttributes,
-// 	withPreviewDeviceType,
-// } from './higher-order';
 import GridOverlay from './grid-overlay';
-import LayoutGrid from '../_shared/layout-grid/class';
-import Controls from './controls';
+import {Controls, LayoutPlaceholder} from './controls';
 
 const ALLOWED_BLOCKS = ['prc-block/layout-grid-column'];
 
@@ -63,6 +54,7 @@ function edit({
 	const blockProps = useBlockProps({
 		className: classnames(
 			className,
+			`is-previewing-device-${previewDeviceType}`,
 			// 'wp-block-prc-block-layout-grid__gutter__medium',
 		),
 	});
@@ -73,18 +65,16 @@ function edit({
 		template: [
 			[ 'prc-block/layout-grid-column', {} ],
 		],
+		templateLock: 'insert',
 	});
 
-	useEffect(()=>{
-		console.log("previewDeviceType", previewDeviceType);
-		console.log("COLUMNS", columns);
-		const grid = new LayoutGrid(
-			attributes,
-			previewDeviceType,
-			columns
+	if ( 0 === columns ) {
+		return (
+			<div {...blockProps}>
+				<LayoutPlaceholder {...{attributes, clientId}}/>
+			</div>
 		);
-		console.log("GRID ", grid);
-	}, [previewDeviceType]);
+	}
 
 	return (
 		<div {...blockProps}>

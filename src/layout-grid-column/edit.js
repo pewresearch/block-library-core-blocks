@@ -24,6 +24,11 @@ import {
 import { useSelect } from '@wordpress/data';
 import classNames from 'classnames';
 
+/**
+ * Internal Dependencies
+ */
+import Controls from './controls';
+
 function edit({
 	className,
 	attributes,
@@ -61,11 +66,14 @@ function edit({
 		className: classNames(
 			className,
 			`column${columnInt}`,
+			`column${columnInt}-grid__start-${columnStart}`,
+			`column${columnInt}-grid__span-${columnSpan}`,
 		)
 	});
 
 	const innerBlocksProps = useInnerBlocksProps({}, {
 		orientation: 'vertical',
+		templateLock: false,
 		renderAppender: hasChildBlocks
 			? undefined
 			: () => <InnerBlocks.ButtonBlockAppender />
@@ -73,6 +81,7 @@ function edit({
 
 	return (
 		<Fragment>
+			<Controls {... {attributes, clientId, setAttributes}}/>
 			<div {...blockProps}>
 				<ResizableBox
 					// size={}
