@@ -137,22 +137,22 @@ class Social_Link extends PRC_Block_Library_Primitives {
 	 * @throws LogicException
 	 */
 	public function register_admin_assets() {
-		$enqueue = new WPackio( 'prcBlocksLibrary', 'dist', self::$version, 'plugin', parent::$plugin_file );
+		// $enqueue = new WPackio( 'prcBlocksLibrary', 'dist', self::$version, 'plugin', parent::$plugin_file );
 
-		$registered = $enqueue->register(
-			'blocks',
-			'social-link',
-			array(
-				'js'        => true,
-				'css'       => false,
-				'js_dep'    => array(),
-				'css_dep'   => array(),
-				'in_footer' => true,
-				'media'     => 'all',
-			)
-		);
+		// $registered = $enqueue->register(
+		// 	'blocks',
+		// 	'social-link',
+		// 	array(
+		// 		'js'        => true,
+		// 		'css'       => false,
+		// 		'js_dep'    => array(),
+		// 		'css_dep'   => array(),
+		// 		'in_footer' => true,
+		// 		'media'     => 'all',
+		// 	)
+		// );
 
-		wp_enqueue_script( array_pop($registered['js'])['handle'] );
+		// wp_enqueue_script( array_pop($registered['js'])['handle'] );
 	}
 
 	/**
@@ -160,25 +160,23 @@ class Social_Link extends PRC_Block_Library_Primitives {
 	 * @throws LogicException
 	 */
 	public function enqueue_frontend_assets() {
-		$enqueue = new WPackio( 'prcBlocksLibrary', 'dist', parent::$version, 'plugin', parent::$plugin_file );
+		// $enqueue = new WPackio( 'prcBlocksLibrary', 'dist', parent::$version, 'plugin', parent::$plugin_file );
 
-		//@TODO We need to check for the old social link and dequeue its assets before enqueing these.
+		// //@TODO We need to check for the old social link and dequeue its assets before enqueing these.
 
-		$registered = $enqueue->register(
-			'frontend',
-			'social-link',
-			array(
-				'js'        => true,
-				'css'       => true,
-				'js_dep'    => array(),
-				'css_dep'   => array(),
-				'in_footer' => true,
-				'media'     => 'all',
-			)
-		);
+		// $registered = $enqueue->register(
+		// 	'frontend',
+		// 	'social-link',
+		// 	array(
+		// 		'js'        => true,
+		// 		'css'       => true,
+		// 		'js_dep'    => array(),
+		// 		'css_dep'   => array(),
+		// 		'in_footer' => true,
+		// 		'media'     => 'all',
+		// 	)
+		// );
 
-		wp_enqueue_script( array_pop($registered['js'])['handle'] );
+		// wp_enqueue_script( array_pop($registered['js'])['handle'] );
 	}
 }
-
-new Social_Link( true );
