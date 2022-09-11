@@ -9,7 +9,7 @@ $grid-gutter-small: 8px;
 $grid-gutter-medium: 16px;
 $grid-gutter-large: $grid-gutter;
 $grid-gutter-huge: 48px;
-$grid-gutter__background-offset: $grid-gutter / 2 + 1px;
+$grid-gutter__background-offset: calc( $grid-gutter / 2 ) + 1px;
 
 // These can be deprecated.
 $padding-none: $grid-gutter-none;

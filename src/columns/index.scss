@@ -6,10 +6,7 @@
 .wp-block-columns.is-css-grid,
 .wp-block-columns.block-editor-block-list__block.wp-block.is-css-grid {
 	display: grid;
-	// grid-gap: $grid-gutter;
 	grid-template-columns: $grid-desktop;
-	// padding-left: $grid-gutter;
-	// padding-right: $grid-gutter;
 
 	// // Reset inherited negative margins.
 	// // These margins are in the block editor to compensate for the 14px block padding on all blocks.
@@ -30,6 +27,18 @@
 	// 		width: 100%;
 	// 	}
 	// }
+
+	// Vertical Divider Lines
+	& > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered) {
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: -15px;
+			height: auto;
+			border-left: 1px solid #eaeaea;
+		}
+	}
 
 	// Prevent long unbroken words from overflowing.
 	word-break: break-word; // For back-compat.

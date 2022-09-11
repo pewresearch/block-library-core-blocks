@@ -47,6 +47,13 @@ class Columns extends PRC_Block_Library_Primitives {
 			);
 		}
 
+		if ( ! array_key_exists( 'enableVerticalDivider', $metadata['attributes'] ) ) {
+			$metadata['attributes']['enableVerticalDivider'] = array(
+				'type'    => 'boolean',
+				'default' => false,
+			);
+		}
+
 		return $metadata;
 	}
 

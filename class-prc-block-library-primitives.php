@@ -46,12 +46,11 @@ class PRC_Block_Library_Primitives {
 
 	public function __construct() {
 		require_once plugin_dir_path( __FILE__ ) . '/src/cover/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/column/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/columns/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/group/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/heading/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/home-link/index.php';
-		require_once plugin_dir_path( __FILE__ ) . '/src/layout-grid/index.php';
-		require_once plugin_dir_path( __FILE__ ) . '/src/layout-grid-column/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-link/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-submenu/index.php';
 
@@ -60,21 +59,14 @@ class PRC_Block_Library_Primitives {
 
 	public function init_blocks() {
 		new Cover(true);
+		new Column(true);
 		new Columns(true);
-		new Layout_Grid(true);
-		new Layout_Grid_Column(true);
 		new Group(true);
 		new Heading(true);
 		new Home_Link(true);
 		new Navigation_Link(true);
 		new Navigation_Submenu(true);
 	}
-
-	// public function dynamically_change_block_theme_style_variation($style_variation_name = false) {
-	// 	// Something like this...
-	// 	// $dark_mode = get_query_arg('style_variation') === 'dark';
-	// 	// $this->dynamically_change_block_theme_style_variation('dark-mode');
-	// }
 
 }
 
