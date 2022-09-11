@@ -114,42 +114,41 @@ addFilter(
 
 				const classes = className ? className.split(' ') : [];
 
-				const handleGridSpanChange = (gridSpanChange) => {
+				const handleGridSpanChange = (newGridSpan) => {
 					classes.forEach((item, index) => {
-						console.log("inspect class item", item, index, item.includes('grid__span-'));
 						if (item.includes('grid__span-')) {
 							classes.splice(index, 1);
 						}
 					});
 
-					const newGridSpanClassName = `column${index}-grid__span-${gridSpan}`;
+					const newGridSpanClassName = `column${index}-grid__span-${newGridSpan}`;
 					if ( ! classes.includes( newGridSpanClassName ) ) {
 						classes.push(newGridSpanClassName);
 					}
+
 					setAttributes({
 						gridSpan: newGridSpan,
 						className: classes.join(' ')
 					});
 				}
 
-				// Handle gridStart changes:
-				// useEffect( () => {
-				// 	if ( gridStart ) {
-				// 		classes.forEach((item, index) => {
-				// 			console.log("inspect class item", item, index, item.includes('grid__span-'));
-				// 			if (item.includes('grid__span-')) {
-				// 				classes.splice(index, 1);
-				// 			}
-				// 		});
+				const handleGridStartChange = (newGridStart) => {
+					classes.forEach((item, index) => {
+						if (item.includes('grid__start-')) {
+							classes.splice(index, 1);
+						}
+					});
 
-				// 		const newgridStartClassName = `column${index}-grid__start-${gridStart}`;
-				// 		if ( ! classes.includes( newgridStartClassName ) ) {
-				// 			classes.push(newgridStartClassName);
-				// 		}
-				// 		setAttributes({ className: classes.join(' ') });
-				// 	}
-				// 	console.log('gridStart respond to class changes', classes);
-				// }, [gridStart]);
+					const newGridStartClassName = `column${index}-grid__start-${newGridStart}`;
+					if ( ! classes.includes( newGridStartClassName ) ) {
+						classes.push(newGridStartClassName);
+					}
+
+					setAttributes({
+						gridStart: newGridStart,
+						className: classes.join(' ')
+					});
+				}
 
 				return (
 					<Fragment>
@@ -160,8 +159,8 @@ addFilter(
 										<RangeControl
 											label="Start"
 											value={ gridStart }
-											onChange={ ( startPosition ) => {
-												setAttributes({gridStart: startPosition});
+											onChange={ ( newStart ) => {
+												handleGridStartChange(newStart);
 											} }
 											withInputField={false}
 											min={ 1 }
@@ -175,9 +174,7 @@ addFilter(
 											label="Span"
 											value={ gridSpan }
 											onChange={ ( newSpan ) => {
-												console.log("NEWSPAN:", newSpan);
-												setAttributes({gridSpan: newSpan});
-												// handleGridSpanChange(newSpan + 1);
+												handleGridSpanChange(newSpan);
 											} }
 											withInputField={false}
 											min={ 1 }
