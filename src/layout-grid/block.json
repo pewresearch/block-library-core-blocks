@@ -14,8 +14,7 @@
 		},
 		"spacing": {
 			"margin": [ "top", "bottom" ],
-			"padding": true,
-			"blockGap": true
+			"padding": true
 		},
 		"__experimentalBorder": {
 			"color": true,

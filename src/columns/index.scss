@@ -1,0 +1,61 @@
+@import './constants.scss';
+
+/**
+ * Grid Columns
+ */
+.wp-block-columns.is-css-grid,
+.wp-block-columns.block-editor-block-list__block.wp-block.is-css-grid {
+	display: grid;
+	// grid-gap: $grid-gutter;
+	grid-template-columns: $grid-desktop;
+	// padding-left: $grid-gutter;
+	// padding-right: $grid-gutter;
+
+	// // Reset inherited negative margins.
+	// // These margins are in the block editor to compensate for the 14px block padding on all blocks.
+	// // They don't play well with CSS Grid, so we reset them, and re-apply them later.
+	// margin-left: 0;
+	// margin-right: 0;
+
+	// // Every block, including nested blocks, are born with an intrinsic minimum margin.
+	// // This resets that for the containers, which aren't meant to have that intrinsically.
+	// > .wp-block > .block-editor-block-list__block-edit > [data-block] {
+	// 	margin-top: 0;
+	// 	margin-bottom: 0;
+	// }
+
+	// .wp-block {
+	// 	max-width: 100%;
+	// 	&[data-type="prc-block/layout-grid-column"] {
+	// 		width: 100%;
+	// 	}
+	// }
+
+	// Prevent long unbroken words from overflowing.
+	word-break: break-word; // For back-compat.
+	overflow-wrap: break-word; // New standard.
+
+	@for $i from 1 through 12 {
+		@for $x from 1 through 4 {
+			& > .wp-block-column.column#{ $x }-grid__start-#{ $i } {
+				grid-column-start: $i;
+			}
+		}
+	}
+
+	@for $i from 1 through 12 {
+		@for $x from 1 through 4 {
+			& > .wp-block-column.column#{ $x }-grid__span-#{ $i }  {
+				grid-column-end: span $i; // Set it to span $i columns, regardless of starting position.
+			}
+		}
+	}
+
+	@for $i from 1 through 4 {
+		@for $x from 1 through 4 {
+			& > .wp-block-column.column#{ $x }-grid__row-#{ $i } {
+				grid-row-start: $i;
+			}
+		}
+	}
+}

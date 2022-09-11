@@ -28,6 +28,7 @@ import classNames from 'classnames';
  * Internal Dependencies
  */
 import Controls from './controls';
+import { use } from '@wordpress/data';
 
 function edit({
 	className,
@@ -37,25 +38,34 @@ function edit({
 	clientId,
 	toggleSelection,
 }) {
-	const { hasChildBlocks, columnInt, gridBlockClientId } = useSelect((select) => {
-		const { getBlockOrder, getBlockIndex, getBlockRootClientId } = select('core/block-editor');
+	const { hasChildBlocks, columnInt, gridBlockClientId, columns } = useSelect((select) => {
+		const { getBlockOrder, getBlockIndex, getBlockRootClientId, getBlockCount } = select('core/block-editor');
+		const rootClientId = getBlockRootClientId(clientId);
 		return {
 			hasChildBlocks: 0 < getBlockOrder(clientId).length,
 			columnInt: getBlockIndex(clientId) + 1,
-			gridBlockClientId: getBlockRootClientId(clientId)
+			gridBlockClientId: rootClientId,
+			columns: getBlockCount(rootClientId)
 		}
 	});
 	const gridBlockEditor = document.querySelector(`.wp-block-prc-block-layout-grid[data-block="${gridBlockClientId}"] > .block-editor-block-list__layout`);
 	const [columnWidth, setColumnWidth] = useState(null);
 	const [maxColumnWidth, setMaxColumnWidth] = useState(null);
+	const [dragStart, setDragStart] = useState(null);
+	const [dragStop, setDragStop] = useState(null);
 
 	useEffect(()=>{
 		console.log('gridBlockEditor...', gridBlockEditor);
 		if (null !== gridBlockEditor) {
-			setColumnWidth((gridBlockEditor.clientWidth / 12) - 24);
+			setColumnWidth((gridBlockEditor.clientWidth / (12/columns)) - 24);
 			setMaxColumnWidth((gridBlockEditor.clientWidth - ((gridBlockEditor.clientWidth / 12) * 2)));
 		}
 	}, [gridBlockEditor]);
+
+	useEffect(() => {
+		console.log("Drag Start:", dragStart);
+		console.log("Drag Stop:", dragStop);
+	}, [dragStart, dragStop]);
 
 	const {
 		columnStart,
