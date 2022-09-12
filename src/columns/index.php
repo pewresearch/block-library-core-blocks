@@ -69,21 +69,12 @@ class Columns extends PRC_Block_Library_Primitives {
 		return $settings;
 	}
 
-	// public function enqueue_view_script() {
-	// 	if ( has_block(self::$block_name) && !is_admin() ) {
-	// 		// $is_sticky = is_array($block['attrs']) && array_key_exists('isSticky', $block['attrs']) ? $block['attrs']['isSticky'] : false;
-	// 		// $responsive_attach_id = is_array($block['attrs']) && array_key_exists('responsiveAttachId', $block['attrs']) ? $block['attrs']['responsiveAttachId'] : false;
-	// 		// $responsive_threshold = is_array($block['attrs']) && array_key_exists('responsiveThreshold', $block['attrs']) ? $block['attrs']['responsiveThreshold'] : false;
-	// 		// if ( $is_sticky || $responsive_attach_id || $responsive_threshold ) {
-	// 			wp_enqueue_script( self::$view_script_handle );
-	// 		// }
-	// 	}
-	// }
-
 	public function render( $block_content, $block ) {
 		if ( self::$block_name !== $block['blockName'] || is_admin() ) {
 			return $block_content;
 		}
+
+		wp_enqueue_style( self::$style_handle );
 
 		return $block_content;
 	}

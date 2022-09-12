@@ -45,7 +45,7 @@
 	overflow-wrap: break-word; // New standard.
 
 	@for $i from 1 through 12 {
-		@for $x from 1 through 4 {
+		@for $x from 1 through 6 {
 			& > .wp-block-column.column#{ $x }-grid__start-#{ $i } {
 				grid-column-start: $i;
 			}
@@ -53,7 +53,7 @@
 	}
 
 	@for $i from 1 through 12 {
-		@for $x from 1 through 4 {
+		@for $x from 1 through 6 {
 			& > .wp-block-column.column#{ $x }-grid__span-#{ $i }  {
 				grid-column-end: span $i; // Set it to span $i columns, regardless of starting position.
 			}

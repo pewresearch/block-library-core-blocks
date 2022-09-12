@@ -99,9 +99,9 @@ registerBlockVariation('core/columns', {
 		useCSSGrid: true,
 	},
 	innerBlocks: [
-		[ 'core/column', { gridStart: 0, gridSpan: 3 } ],
-		[ 'core/column', { gridStart: 4, gridSpan: 6 } ],
-		[ 'core/column', { gridStart: 9, gridSpan: 3 } ],
+		[ 'core/column', { className: 'column1-grid__start-0 column1-grid__span-3', gridStart: 0, gridSpan: 3 } ],
+		[ 'core/column', { className: 'column2-grid__start-4 column2-grid__span-6', gridStart: 4, gridSpan: 6 } ],
+		[ 'core/column', { className: 'column3-grid__start-10 column3-grid__span-3', gridStart: 10, gridSpan: 3 } ],
 	],
 	isActive: (blockAttributes, variationAttributes) =>
 		blockAttributes.useCSSGrid === variationAttributes.useCSSGrid,

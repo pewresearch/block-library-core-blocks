@@ -94,6 +94,8 @@ class Column extends PRC_Block_Library_Primitives {
 			return $block_content;
 		}
 
+		do_action('qm/debug', "Column Block:" . print_r($block, true));
+
 		return $block_content;
 	}
 }
