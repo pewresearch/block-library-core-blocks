@@ -167,7 +167,6 @@ addFilter(
 											max={ 12 }
 											marks={MARKS}
 											initialPosition={0}
-											allowReset={true}
 										/>
 										<CardDivider/>
 										<RangeControl
