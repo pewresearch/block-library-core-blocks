@@ -2166,6 +2166,8 @@ __metadata:
     "@wordpress/scripts": ^24.0.0
     classnames: ^2.3.1
     enquire.js: ^2.1.6
+    react: ^17.0.0
+    react-dom: ^17.0.0
     underscore: ^1.13.4
   languageName: unknown
   linkType: soft
@@ -12011,7 +12013,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^17.0.2":
+"react-dom@npm:^17.0.0, react-dom@npm:^17.0.2":
   version: 17.0.2
   resolution: "react-dom@npm:17.0.2"
   dependencies:
@@ -12091,7 +12093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.2":
+"react@npm:^17.0.0, react@npm:^17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:

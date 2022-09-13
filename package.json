@@ -21,6 +21,8 @@
     "@wordpress/hooks": "^3.16.0",
     "@wordpress/i18n": "^4.16.0",
     "classnames": "^2.3.1",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "underscore": "^1.13.4"
   },
   "prettier": "@pewresearch/prettier-config",

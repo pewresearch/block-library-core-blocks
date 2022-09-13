@@ -2,10 +2,18 @@
 ### `(prc-block-library-primitives)`
 ## Work in Progress, not for production use
 
-A starting point for anyone looking to add functionality, extra control to and or create your own custom block library using core/blocks. Built with easier extensibility in mind
+A starting point for anyone looking to add functionality and extra control to core blocks, and or create your own custom block library using core blocks. These blocks add much needed functionality to full site editing and is intended to enhance your block theme.
 
 ### Blocks Included:
 - Cover
+- Columns
+  - Adds support for CSS grid and grid/column based layout. 
+	- Adds a filter for adding a class to the columns element based on innerblocks.
+- Column
+  - Adds support for CSS grid.
+	- Adds a filter for wrapping column contents in an element with a class based on the blocks present in innerblocks.
+- Group
+- Column
 - Group
 - Heading
   - Adds `isChapter`.

@@ -95,6 +95,17 @@ class Column extends PRC_Block_Library_Primitives {
 		}
 
 		do_action('qm/debug', "Column Block:" . print_r($block, true));
+		// Defaults to false.
+		$wrap_column_contents_classname = apply_filters('prc_block_library_primitives_column_wrap', false, $block);
+		if ( false !== $wrap_column_contents_classname ) {
+			$classname = 'wp-block-column__inner-container' . ' ' . $wrap_column_contents_classname;
+			$inner_blocks = $block['innerBlocks'];
+			$inner_blocks_content = null;
+			foreach ( $inner_blocks as $inner_block ) {
+				$inner_blocks_content .= render_block( $inner_block );
+			}
+			$block_content = sprintf('<div class="%s">%s</div>', $classname, $inner_blocks_content);
+		}
 
 		return $block_content;
 	}
