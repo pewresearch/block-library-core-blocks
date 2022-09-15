@@ -96,7 +96,6 @@ addFilter(
 	createHigherOrderComponent(
 		(BlockEdit) =>
 			function ColumnBlockCSSGridControls(props) {
-				console.log("Column Edit", props);
 				const { name, attributes, setAttributes, clientId, context } = props;
 				if (BLOCKNAME !== name) {
 					return <BlockEdit {...props} />;

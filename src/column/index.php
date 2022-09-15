@@ -40,6 +40,7 @@ class Column extends PRC_Block_Library_Primitives {
 			return $metadata;
 		}
 
+		// Grid Start:
 		if ( ! array_key_exists( 'gridStart', $metadata['attributes'] ) ) {
 			$metadata['attributes']['gridStart'] = array(
 				'type'    => 'integer'
@@ -57,7 +58,7 @@ class Column extends PRC_Block_Library_Primitives {
 				'type'    => 'integer'
 			);
 		}
-
+		// Grid Span:
 		if ( ! array_key_exists( 'gridSpan', $metadata['attributes'] ) ) {
 			$metadata['attributes']['gridSpan'] = array(
 				'type'    => 'integer'
@@ -84,6 +85,17 @@ class Column extends PRC_Block_Library_Primitives {
 			$settings['uses_context'] = array_merge(
 				array_key_exists('uses_context', $settings) ? $settings['uses_context'] : array(),
 				array('core/columns/useCSSGrid'),
+			);
+			$settings['provides_context'] = array_merge(
+				array_key_exists('provides_context', $settings) ? $settings['provides_context'] : array(),
+				array(
+					'core/column/gridStart' => 'gridStart',
+					'core/column/gridSpan' => 'gridSpan',
+					'core/column/tabletGridStart' => 'tabletGridStart',
+					'core/column/tabletGridSpan' => 'tabletGridSpan',
+					'core/column/mobileGridStart' => 'mobileGridStart',
+					'core/column/mobileGridSpan' => 'mobileGridSpan',
+				)
 			);
 		}
 		return $settings;
