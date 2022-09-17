@@ -29,7 +29,7 @@
 	// }
 
 	// Vertical Divider Lines
-	& > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered) {
+	&.has-vertical-divider > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered) {
 		&:after {
 			content: "";
 			position: absolute;
