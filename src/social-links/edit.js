@@ -8,36 +8,41 @@ import { addFilter } from '@wordpress/hooks';
 import { InspectorControls } from '@wordpress/block-editor';
 import { TextControl, PanelBody } from '@wordpress/components';
 
+
+const BLOCKNAME = 'core/social-links';
+const BLOCKIDENTIFIER = 'prc-block-library/social-links';
+
 /**
  * Provide centralized info for social links innerblocks.
  */
 const SocialLinksControls = createHigherOrderComponent(
 	(BlockEdit) =>
 		function OverrideEdit(props) {
-			const { name, attributes, setAttributes } = props;
-			if ('core/social-links' !== name) {
+			const { name, attributes, setAttributes, context } = props;
+			if (BLOCKNAME !== name) {
 				return <BlockEdit {...props} />;
 			}
 			const { title, description, url } = attributes;
+			console.log('social-links props = ', props);
 			return (
 				<Fragment>
 					<InspectorControls>
-						<PanelBody title={__('Social Meta Info')}>
+						<PanelBody title={__('Social Meta Info', 'prc-block-library')}>
 							<TextControl
-								label={__('Title')}
+								label={__('Title', 'prc-block-library')}
 								value={title}
 								onChange={(value) => setAttributes({ title: value })}
 							/>
 							<TextControl
-								label={__('Description')}
+								label={__('Description', 'prc-block-library')}
 								value={description}
 								onChange={(value) => setAttributes({ description: value })}
 							/>
 							<TextControl
-								label={__('URL')}
+								label={__('URL', 'prc-block-library')}
 								help={__(
 									'Setting a url here will override any selections on the individual social links.',
-									'SR_block_library'
+									'prc-block-library'
 								)}
 								value={url}
 								onChange={(value) => setAttributes({ url: value })}
@@ -53,7 +58,7 @@ const SocialLinksControls = createHigherOrderComponent(
 
 addFilter(
 	'editor.BlockEdit',
-	'prc-block/social-links',
+	BLOCKIDENTIFIER,
 	SocialLinksControls,
 	21,
 );

@@ -2,25 +2,43 @@
 // Modify the core/social-link block.
 // See: https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/social-link/index.php
 
-class Social_Link extends PRC_Block_Library_Primitives {
-	public static $version = '1.0.1';
+class Social_Links extends PRC_Block_Library_Primitives {
+	public static $block_name = 'core/social-links';
+	public static $child_block_name = 'core/social-link';
+	public static $block_json = null;
+	public static $view_script_handle = null;
+	public static $editor_script_handle = null;
 
 	public function __construct( $init = false ) {
 		if ( true === $init ) {
+			$block_json_file = PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/social-links/block.json';
+			self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
+			self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
+
+			add_action( 'init', array($this, 'init_assets') );
+			add_action( 'enqueue_block_editor_assets', array($this, 'register_editor_assets') );
 			add_filter( 'block_type_metadata', array( $this, 'add_attributes' ), 100, 1 );
 			add_filter( 'block_type_metadata_settings', array( $this, 'add_settings' ), 100, 2 );
-			add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_assets' ), 0 );
 			add_filter( 'render_block', array( $this, 'social_link_render_callback' ), 10, 3 );
 		}
 	}
 
+	public function init_assets() {
+		self::$view_script_handle = register_block_script_handle( self::$block_json, 'viewScript' );
+		self::$editor_script_handle = register_block_script_handle( self::$block_json, 'editorScript' );
+	}
+
+	public function register_editor_assets() {
+		wp_enqueue_script( self::$editor_script_handle );
+	}
+
 	/**
-	 * Register additional attributes for social links block.
+	 * Register additional attributes for social links block and register context for the child block.
 	 * @param mixed $metadata
 	 * @return mixed
 	 */
 	public function add_attributes( $metadata ) {
-		if ( 'core/social-links' !== $metadata['name'] ) {
+		if ( self::$block_name !== $metadata['name'] ) {
 			return $metadata;
 		}
 
@@ -46,7 +64,8 @@ class Social_Link extends PRC_Block_Library_Primitives {
 	}
 
 	public function add_settings(array $settings, array $metadata) {
-		if ( 'core/social-links' === $metadata['name'] ) {
+		// Add context on root block
+		if ( self::$block_name === $metadata['name'] ) {
 			$settings['provides_context'] = array_merge(
 				array_key_exists('provides_context', $settings) ? $settings['provides_context'] : array(),
 				array(
@@ -56,13 +75,17 @@ class Social_Link extends PRC_Block_Library_Primitives {
 				)
 			);
 		}
-		if ( 'core/social-link' === $metadata['name'] ) {
+
+		// Ingest context on child block
+		if ( self::$child_block_name === $metadata['name'] ) {
 			$settings['uses_context'] = array_merge(
 				array_key_exists('uses_context', $settings) ? $settings['uses_context'] : array(),
 				array(
 					'core/social-links/title',
 					'core/social-links/description',
-					'core/social-links/url'
+					'core/social-links/url',
+					'postId',
+					'queryId',
 				)
 			);
 		}
@@ -70,7 +93,7 @@ class Social_Link extends PRC_Block_Library_Primitives {
 	}
 
 	/**
-	 * Renders the `core/social-link` block on server.
+	 * Renders the `core/social-link` child block on server.
 	 *
 	 * @param String   $block_content The block content about to be appended.
 	 * @param WP_Block $block      Block array.
@@ -78,11 +101,11 @@ class Social_Link extends PRC_Block_Library_Primitives {
 	 * @return string Rendered HTML of the referenced block.
 	 */
 	public function social_link_render_callback( $block_content, $block_args, $block ) {
-		if ( 'core/social-link' !== $block_args['blockName'] ) {
+		if ( self::$child_block_name !== $block_args['blockName'] ) {
 			return $block_content;
 		}
 
-		$this->enqueue_frontend_assets();
+		wp_enqueue_script( self::$view_script_handle );
 
 		$attributes = $block_args['attrs'];
 		$open_in_new_tab = isset( $block->context['openInNewTab'] ) ? $block->context['openInNewTab'] : false;
@@ -91,14 +114,21 @@ class Social_Link extends PRC_Block_Library_Primitives {
 		$url     = isset( $block->context['core/social-links/url'] ) ? $block->context['core/social-links/url'] : false;
 		$url     = ( false === $url && isset( $attributes['url'] ) ) ? $attributes['url'] : $url;
 		// If after all that there is no url then try to fetch the short link.
-		if ( ! $url ) {
-			$url = wp_get_shortlink();
+		if ( ! $url && isset($block->context['postId']) ) {
+			$url = wp_get_shortlink($block->context['postId']);
 		}
+		$title = isset( $block->context['core/social-links/title'] ) ? $block->context['core/social-links/title'] : null;
+		if ( ! $title && isset($block->context['postId']) ) {
+			$title = get_the_title($block->context['postId']);
+		}
+		$description = isset( $block->context['core/social-links/description'] ) ? $block->context['core/social-links/description'] : null;
+		if ( ! $description && isset($block->context['postId']) ) {
+			$description = get_the_excerpt($block->context['postId']);
+		}
+
 		$label       = ( isset( $attributes['label'] ) ) ? $attributes['label'] : block_core_social_link_get_name( $service );
 		$show_labels = array_key_exists( 'showLabels', $block->context ) ? $block->context['showLabels'] : false;
 		$class_name  = isset( $attributes['className'] ) ? ' ' . $attributes['className'] : false;
-		$title = isset( $block->context['core/social-links/title'] ) ? $block->context['core/social-links/title'] : null;
-		$description = isset( $block->context['core/social-links/description'] ) ? $block->context['core/social-links/description'] : null;
 
 		// Don't render a link if there is no URL set.
 		if ( ! $url ) {
@@ -130,53 +160,5 @@ class Social_Link extends PRC_Block_Library_Primitives {
 		$link .= '</span></a></li>';
 
 		return $link;
-	}
-
-	/**
-	 * @return void
-	 * @throws LogicException
-	 */
-	public function register_admin_assets() {
-		// $enqueue = new WPackio( 'prcBlocksLibrary', 'dist', self::$version, 'plugin', parent::$plugin_file );
-
-		// $registered = $enqueue->register(
-		// 	'blocks',
-		// 	'social-link',
-		// 	array(
-		// 		'js'        => true,
-		// 		'css'       => false,
-		// 		'js_dep'    => array(),
-		// 		'css_dep'   => array(),
-		// 		'in_footer' => true,
-		// 		'media'     => 'all',
-		// 	)
-		// );
-
-		// wp_enqueue_script( array_pop($registered['js'])['handle'] );
-	}
-
-	/**
-	 * @return void
-	 * @throws LogicException
-	 */
-	public function enqueue_frontend_assets() {
-		// $enqueue = new WPackio( 'prcBlocksLibrary', 'dist', parent::$version, 'plugin', parent::$plugin_file );
-
-		// //@TODO We need to check for the old social link and dequeue its assets before enqueing these.
-
-		// $registered = $enqueue->register(
-		// 	'frontend',
-		// 	'social-link',
-		// 	array(
-		// 		'js'        => true,
-		// 		'css'       => true,
-		// 		'js_dep'    => array(),
-		// 		'css_dep'   => array(),
-		// 		'in_footer' => true,
-		// 		'media'     => 'all',
-		// 	)
-		// );
-
-		// wp_enqueue_script( array_pop($registered['js'])['handle'] );
 	}
 }
