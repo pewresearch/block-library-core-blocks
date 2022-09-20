@@ -1,4 +1,21 @@
-@import './constants.scss';
+$grid-max-columns: 6;
+
+$grid-desktop: repeat(12, 1fr); // Same as 12 instances of 1fr.
+$grid-tablet: repeat(8, 1fr);
+$grid-mobile: repeat(4, 1fr);
+
+// Standard Gutenberg Breakpoints
+$break-huge: 1440px;
+$break-wide: 1280px;
+$break-xlarge: 1080px;
+$break-large: 960px;	// admin sidebar auto folds
+$break-medium: 782px;	// adminbar goes big
+$break-small: 600px;
+$break-mobile: 480px;
+$break-zoomed-in: 280px;
+
+$grid-gutter: 24px;
+
 
 /**
  * Grid Columns
@@ -14,14 +31,26 @@
 	grid-gap: $grid-gutter;
 	grid-template-columns: $grid-mobile;
 
-	// Vertical Divider Lines
-	&.has-divider > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered) {
-		&:after {
+
+	// Horizontal divider line for mobile columns that take up the entire grid of 4 column spans.
+	&.has-divider {
+		& > .wp-block-column[class*="-mobile-grid__span-4"] {
+			&:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):before {
+				content: "";
+				border-top: 1px solid #eaeaea;
+				display: block;
+				padding-bottom: $grid-gutter;
+			}
+			&:after {
+				display: none!important;
+			}
+		}
+		& > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {
 			content: "";
 			position: absolute;
 			height: 100%;
 			top: 0;
-			left: -15px;
+			left: calc( -1 * ( $grid-gutter / 2 ) );
 			border-left: 1px solid #eaeaea;
 		}
 	}
@@ -95,6 +124,16 @@
 	// Desktop grid rules.
 	@media (min-width: #{ ($break-large) }) {
 		grid-template-columns: $grid-desktop;
+
+		// Setup vertical divider lines
+		&.has-divider {
+			& > .wp-block-column[class*="-mobile-grid__span-4"]:before {
+				display: none!important;
+			}
+			& > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after  {
+				display: block!important;
+			}
+		}
 
 		@for $i from 1 through 12 {
 			@for $x from 1 through 6 {

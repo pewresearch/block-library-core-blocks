@@ -100,7 +100,7 @@ addFilter(
 			},
 		'withColumnsCSSGridControls',
 	),
-	21,
+	100,
 );
 
 /**

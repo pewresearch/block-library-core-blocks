@@ -16,7 +16,7 @@ class Columns extends PRC_Block_Library_Primitives {
 			add_action( 'enqueue_block_editor_assets', array($this, 'register_editor_assets') );
 			add_filter( 'block_type_metadata', array( $this, 'add_attributes' ), 100, 1 );
 			add_filter( 'block_type_metadata_settings', array( $this, 'add_settings' ), 100, 2 );
-			add_filter( 'render_block', array( $this, 'render' ), 10, 2 );
+			add_filter( 'render_block', array( $this, 'render' ), 101, 2 );
 		}
 	}
 
@@ -71,10 +71,10 @@ class Columns extends PRC_Block_Library_Primitives {
 
 	public function get_vertical_divider_style($block) {
 		$style = '';
-		if ( array_key_exists('enableDivider', $block['attrs']) && $block['attrs']['enableDivider'] ) {
-			if ( array_key_exists('style', $block['attrs']) && array_key_exists('spacing', $block['attrs']['style']) && array_key_exists('blockGap', $block['attrs']['style']['spacing']) ) {
-				$style = '.wp-block-columns.is-css-grid > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {left: -' . ($block['attrs']['style']['spacing']['blockGap']  / 2). '!important;}';
-			}
+		// I would like to do a check for if this columns block has divider enabled but the attr is not passing through for some reason, this more verbose option works for now.
+		if ( array_key_exists('style', $block['attrs']) && array_key_exists('spacing', $block['attrs']['style']) && array_key_exists('blockGap', $block['attrs']['style']['spacing']) ) {
+			$block_gap = $block['attrs']['style']['spacing']['blockGap'];
+			$style = '.wp-block-columns.is-css-grid.has-divider > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {left: -' . ($block_gap  / 2). 'px!important;}';
 		}
 		return $style;
 
