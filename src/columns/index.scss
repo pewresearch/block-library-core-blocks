@@ -34,6 +34,7 @@ $grid-gutter: 24px;
 
 	// Horizontal divider line for mobile columns that take up the entire grid of 4 column spans.
 	&.has-divider {
+		// Enable horizontal divider line for mobile columns that take up the entire grid of 4 column spans.
 		& > .wp-block-column[class*="-mobile-grid__span-4"] {
 			&:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):before {
 				content: "";
@@ -41,10 +42,11 @@ $grid-gutter: 24px;
 				display: block;
 				padding-bottom: $grid-gutter;
 			}
-			&:after {
-				display: none!important;
+			&:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {
+				display: none;
 			}
 		}
+		// Enable vertical divider line for all columns.
 		& > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {
 			content: "";
 			position: absolute;
@@ -95,6 +97,29 @@ $grid-gutter: 24px;
 	@media (min-width: #{ ($break-small) }) {
 		grid-template-columns: $grid-tablet;
 
+		// Divider Lines
+		&.has-divider {
+			// Enable tablet horizontal divider
+			& > .wp-block-column[class*="-tablet-grid__span-8"] {
+				&:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):before {
+					content: "";
+					border-top: 1px solid #eaeaea;
+					display: block;
+					padding-bottom: $grid-gutter;
+				}
+				&:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {
+					display: none!important;
+				}
+			}
+			// Disable mobile horizontal divider
+			& > .wp-block-column[class*="-mobile-grid__span-4"]:not([class*="-tablet-grid__span-8"]):not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):before {
+				display: none!important;
+			}
+			& > .wp-block-column[class*="-mobile-grid__span-4"]:not([class*="-tablet-grid__span-8"]):not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {
+				display: block!important;
+			}
+		}
+
 		@for $i from 1 through 12 {
 			@for $x from 1 through 4 {
 				& > .wp-block-column.column#{ $x }-tablet-grid__start-#{ $i } {
@@ -127,10 +152,10 @@ $grid-gutter: 24px;
 
 		// Setup vertical divider lines
 		&.has-divider {
-			& > .wp-block-column[class*="-mobile-grid__span-4"]:before {
+			& > .wp-block-column[class*="-tablet-grid__span-8"]:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):before {
 				display: none!important;
 			}
-			& > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after  {
+			& > .wp-block-column[class*="-tablet-grid__span-8"]:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {
 				display: block!important;
 			}
 		}

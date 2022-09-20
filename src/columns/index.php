@@ -50,7 +50,7 @@ class Columns extends PRC_Block_Library_Primitives {
 		if ( ! array_key_exists( 'enableDivider', $metadata['attributes'] ) ) {
 			$metadata['attributes']['enableDivider'] = array(
 				'type'    => 'boolean',
-				'default' => true,
+				'default' => false,
 			);
 		}
 

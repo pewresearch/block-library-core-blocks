@@ -23,8 +23,6 @@ import './index.scss';
 const BLOCKNAME = 'core/columns';
 const BLOCKIDENTIFIER = 'prc-block-library/columns';
 
-console.log('Hello World -> src/columns/edit.js');
-
 const icon = (
 	<SVG
 		xmlns="http://www.w3.org/2000/svg"
@@ -83,9 +81,11 @@ addFilter(
 											useCSSGrid: !useCSSGrid,
 										});
 									}}
+									help={__('When this is enabled, the columns will be displayed using css grid, other options like "stack on mobile" will be ignored.')}
 								/>
 								<ToggleControl
 									label={__('Enable Divider')}
+									disabled={!useCSSGrid}
 									checked={enableDivider}
 									onChange={() => {
 										setAttributes({
@@ -106,22 +106,50 @@ addFilter(
 /**
  * Grid Block
  */
+const gridBlockAttrs = {
+	className: 'is-css-grid',
+	useCSSGrid: true,
+	enableDivider: true,
+};
+const gridBlockTemplate =  [
+	[ 'core/column', { className: 'column1-grid__span-3 column1-tablet-grid__span-2 column1-mobile-grid__span-4', gridSpan: 3, tabletGridSpan: 2, mobileGridSpan: 4, } ],
+	[ 'core/column', { className: 'column2-grid__span-6 column2-tablet-grid__span-4 column2-mobile-grid__span-4', gridSpan: 6, tabletGridSpan: 4, mobileGridSpan: 4 } ],
+	[ 'core/column', { className: 'column3-grid__span-3 column3-tablet-grid__span-2 column3-mobile-grid__span-4', gridSpan: 3, tabletGridSpan: 2, mobileGridSpan: 4 } ],
+];
+const gridBlockExample = gridBlockTemplate.map((block) => {
+	return {
+		name: block[0],
+		attributes: {
+			...block[1],
+		},
+		innerBlocks: [
+			{
+				name: 'core/paragraph',
+				attributes: {
+					/* translators: example text. */
+					content: __(
+						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et eros eu felis.'
+					),
+				},
+			},
+		]
+	};
+});
 registerBlockVariation('core/columns', {
 	name: 'css-grid',
-	title: __('CSS Grid'),
+	title: __('CSS Grid', 'prc-block-library'),
 	icon,
 	description: __(
 		'A columns block set to use CSS Grid. This block is experimental and may change in the future.',
+		'prc-block-library',
 	),
-	attributes: {
-		className: 'is-css-grid',
-		useCSSGrid: true,
+	attributes: gridBlockAttrs,
+	innerBlocks: [...gridBlockTemplate],
+	example: {
+		attributes: gridBlockAttrs,
+		innerBlocks: gridBlockExample,
+		viewportWidth: 1200,
 	},
-	innerBlocks: [
-		[ 'core/column', { className: 'column1-grid__start-0 column1-grid__span-3', gridStart: 0, gridSpan: 3 } ],
-		[ 'core/column', { className: 'column2-grid__start-4 column2-grid__span-6', gridStart: 4, gridSpan: 6 } ],
-		[ 'core/column', { className: 'column3-grid__start-10 column3-grid__span-3', gridStart: 10, gridSpan: 3 } ],
-	],
 	isActive: (blockAttributes, variationAttributes) =>
 		blockAttributes.useCSSGrid === variationAttributes.useCSSGrid,
 });

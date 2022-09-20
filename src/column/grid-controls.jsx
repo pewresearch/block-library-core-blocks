@@ -4,6 +4,7 @@
 import { __ } from '@wordpress/i18n';
 import { Fragment, useEffect } from '@wordpress/element';
 import {
+	BaseControl,
 	CardDivider,
 	PanelBody,
 	RangeControl,
@@ -133,93 +134,98 @@ export default function GridControls({ attributes, setAttributes, clientId }) {
 	}
 
 	return (
-		<InspectorControls>
-			<PanelBody title="Grid">
-				<div className="css-grid-column-controls">
-					<RangeControl
-						label="Desktop Span"
-						value={ gridSpan }
-						onChange={ ( newSpan ) => {
-							handleGridSpanChange(newSpan, 'desktop');
-						} }
-						withInputField={false}
-						min={ 1 }
-						max={ 12 }
-						marks={MARKS}
-					/>
-					<CardDivider/>
-					<RangeControl
-						label="Start"
-						value={ gridStart }
-						onChange={ ( newStart ) => {
-							handleGridStartChange(newStart, 'desktop');
-						} }
-						withInputField={false}
-						min={ 1 }
-						max={ 12 }
-						marks={MARKS}
-						initialPosition={0}
-					/>
-				</div>
-			</PanelBody>
+		<Fragment>
+			<InspectorControls>
+				<PanelBody title="Grid Span">
+					<div className="css-grid-column-controls">
+						<RangeControl
+							label="Desktop Span"
+							value={ gridSpan }
+							onChange={ ( newSpan ) => {
+								handleGridSpanChange(newSpan, 'desktop');
+							} }
+							withInputField={false}
+							min={ 1 }
+							max={ 12 }
+							marks={MARKS}
+						/>
+						<CardDivider/>
+						<RangeControl
+							label="Tablet Span"
+							value={ tabletGridSpan }
+							onChange={ ( newSpan ) => {
+								handleGridSpanChange(newSpan, 'tablet');
+							} }
+							withInputField={false}
+							min={ 1 }
+							max={ 8 }
+							marks={MARKS.filter((item) => item.value <= 8)}
+						/>
+						<CardDivider/>
+						<RangeControl
+							label="Mobile Span"
+							value={ mobileGridSpan }
+							onChange={ ( newSpan ) => {
+								handleGridSpanChange(newSpan, 'mobile');
+							} }
+							withInputField={false}
+							min={ 1 }
+							max={ 4 }
+							marks={MARKS.filter((item) => item.value <= 4)}
+						/>
+					</div>
+				</PanelBody>
 
-			<PanelBody title="Tablet Grid">
-				<div className="css-grid-column-controls">
-					<RangeControl
-						label="Tablet Span"
-						value={ tabletGridSpan }
-						onChange={ ( newSpan ) => {
-							handleGridSpanChange(newSpan, 'tablet');
-						} }
-						withInputField={false}
-						min={ 1 }
-						max={ 8 }
-						marks={MARKS.filter((item) => item.value <= 8)}
-					/>
-					<CardDivider/>
-					<RangeControl
-						label="Tablet Start"
-						value={ tabletGridStart }
-						onChange={ ( newStart ) => {
-							handleGridStartChange(newStart, 'tablet');
-						} }
-						withInputField={false}
-						min={ 1 }
-						max={ 8 }
-						marks={MARKS.filter((item) => item.value <= 8)}
-						initialPosition={0}
-					/>
-				</div>
-			</PanelBody>
-
-			<PanelBody title="Mobile Grid">
-				<div className="css-grid-column-controls">
-					<RangeControl
-						label="Mobile Span"
-						value={ mobileGridSpan }
-						onChange={ ( newSpan ) => {
-							handleGridSpanChange(newSpan, 'mobile');
-						} }
-						withInputField={false}
-						min={ 1 }
-						max={ 4 }
-						marks={MARKS.filter((item) => item.value <= 4)}
-					/>
-					<CardDivider/>
-					<RangeControl
-						label="Mobile Start"
-						value={ mobileGridStart }
-						onChange={ ( newStart ) => {
-							handleGridStartChange(newStart, 'mobile');
-						} }
-						withInputField={false}
-						min={ 1 }
-						max={ 4 }
-						marks={MARKS.filter((item) => item.value <= 4)}
-						initialPosition={0}
-					/>
-				</div>
-			</PanelBody>
-		</InspectorControls>
+				<PanelBody
+					title="Grid (Experimental)"
+					initialOpen={false}
+				>
+					<div className="css-grid-column-controls">
+						<BaseControl
+							help="These controls are experimental and currently a work-in-progress. Use them at your own risk, no support will be provided."
+						>
+							<RangeControl
+								label="Desktop Start"
+								value={ gridStart }
+								onChange={ ( newStart ) => {
+									handleGridStartChange(newStart, 'desktop');
+								} }
+								withInputField={false}
+								min={ 1 }
+								max={ 12 }
+								marks={MARKS}
+								initialPosition={0}
+							/>
+							<CardDivider/>
+							<RangeControl
+								label="Tablet Start"
+								value={ tabletGridStart }
+								onChange={ ( newStart ) => {
+									handleGridStartChange(newStart, 'tablet');
+								} }
+								withInputField={false}
+								min={ 1 }
+								max={ 8 }
+								marks={MARKS.filter((item) => item.value <= 8)}
+								initialPosition={0}
+							/>
+							<CardDivider/>
+							<RangeControl
+								label="Mobile Start"
+								value={ mobileGridStart }
+								onChange={ ( newStart ) => {
+									handleGridStartChange(newStart, 'mobile');
+								} }
+								withInputField={false}
+								min={ 1 }
+								max={ 4 }
+								marks={MARKS.filter((item) => item.value <= 4)}
+								initialPosition={0}
+							/>
+						</BaseControl>
+					</div>
+				</PanelBody>
+			</InspectorControls>
+		</Fragment>
 	);
 };
