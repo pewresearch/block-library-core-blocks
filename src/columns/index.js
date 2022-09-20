@@ -47,7 +47,7 @@ addFilter(
 					return <BlockEdit {...props} />;
 				}
 
-				const { useCSSGrid, verticalDivider, className } = attributes;
+				const { useCSSGrid, enableDivider, className } = attributes;
 
 				const classes = className ? className.split(' ') : [];
 
@@ -60,15 +60,15 @@ addFilter(
 						classes.splice(classes.indexOf('is-css-grid'), 1);
 					}
 
-					if (verticalDivider) {
-						if (!classes.includes('has-vertical-divider')) {
-							classes.push('has-vertical-divider');
+					if (enableDivider) {
+						if (!classes.includes('has-divider')) {
+							classes.push('has-divider');
 						}
 					} else {
-						classes.splice(classes.indexOf('has-vertical-divider'), 1);
+						classes.splice(classes.indexOf('has-divider'), 1);
 					}
 					setAttributes({ className: classes.join(' ') });
-				}, [useCSSGrid, verticalDivider]);
+				}, [useCSSGrid, enableDivider]);
 
 				return (
 					<Fragment>
@@ -85,11 +85,11 @@ addFilter(
 									}}
 								/>
 								<ToggleControl
-									label={__('Enable Vertical Divider')}
-									checked={verticalDivider}
+									label={__('Enable Divider')}
+									checked={enableDivider}
 									onChange={() => {
 										setAttributes({
-											verticalDivider: !verticalDivider,
+											enableDivider: !enableDivider,
 										});
 									}}
 								/>

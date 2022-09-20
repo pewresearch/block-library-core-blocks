@@ -47,8 +47,8 @@ class Columns extends PRC_Block_Library_Primitives {
 			);
 		}
 
-		if ( ! array_key_exists( 'verticalDivider', $metadata['attributes'] ) ) {
-			$metadata['attributes']['verticalDivider'] = array(
+		if ( ! array_key_exists( 'enableDivider', $metadata['attributes'] ) ) {
+			$metadata['attributes']['enableDivider'] = array(
 				'type'    => 'boolean',
 				'default' => true,
 			);
@@ -71,7 +71,7 @@ class Columns extends PRC_Block_Library_Primitives {
 
 	public function get_vertical_divider_style($block) {
 		$style = '';
-		if ( array_key_exists('verticalDivider', $block['attrs']) && $block['attrs']['verticalDivider'] ) {
+		if ( array_key_exists('enableDivider', $block['attrs']) && $block['attrs']['enableDivider'] ) {
 			if ( array_key_exists('style', $block['attrs']) && array_key_exists('spacing', $block['attrs']['style']) && array_key_exists('blockGap', $block['attrs']['style']['spacing']) ) {
 				$style = '.wp-block-columns.is-css-grid > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {left: -' . ($block['attrs']['style']['spacing']['blockGap']  / 2). '!important;}';
 			}

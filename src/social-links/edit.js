@@ -23,7 +23,6 @@ const SocialLinksControls = createHigherOrderComponent(
 				return <BlockEdit {...props} />;
 			}
 			const { title, description, url } = attributes;
-			console.log('social-links props = ', props);
 			return (
 				<Fragment>
 					<InspectorControls>
