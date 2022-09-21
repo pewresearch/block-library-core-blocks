@@ -47,8 +47,6 @@ addFilter(
 
 				const { useCSSGrid, enableDivider, className } = attributes;
 
-				const classes = className ? className.split(' ') : [];
-
 				return (
 					<Fragment>
 						<BlockEdit {...props} />
@@ -58,6 +56,8 @@ addFilter(
 									label={__('Enable CSS Grid')}
 									checked={useCSSGrid}
 									onChange={val => {
+										const classes = className ? className.split(' ') : [];
+										console.log("Classes...", classes);
 										if (val) {
 											if (!classes.includes('is-css-grid')) {
 												classes.push('is-css-grid');
@@ -77,6 +77,8 @@ addFilter(
 									disabled={!useCSSGrid}
 									checked={enableDivider}
 									onChange={val => {
+										const classes = className ? className.split(' ') : [];
+										console.log("Classes...", classes);
 										if (val) {
 											if (!classes.includes('has-divider')) {
 												classes.push('has-divider');
