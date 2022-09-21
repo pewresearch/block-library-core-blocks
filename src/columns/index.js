@@ -49,25 +49,6 @@ addFilter(
 
 				const classes = className ? className.split(' ') : [];
 
-				useEffect(() => {
-					if (useCSSGrid) {
-						if (!classes.includes('is-css-grid')) {
-							classes.push('is-css-grid');
-						}
-					} else {
-						classes.splice(classes.indexOf('is-css-grid'), 1);
-					}
-
-					if (enableDivider) {
-						if (!classes.includes('has-divider')) {
-							classes.push('has-divider');
-						}
-					} else {
-						classes.splice(classes.indexOf('has-divider'), 1);
-					}
-					setAttributes({ className: classes.join(' ') });
-				}, [useCSSGrid, enableDivider]);
-
 				return (
 					<Fragment>
 						<BlockEdit {...props} />
@@ -76,19 +57,35 @@ addFilter(
 								<ToggleControl
 									label={__('Enable CSS Grid')}
 									checked={useCSSGrid}
-									onChange={() => {
+									onChange={val => {
+										if (val) {
+											if (!classes.includes('is-css-grid')) {
+												classes.push('is-css-grid');
+											}
+										} else {
+											classes.splice(classes.indexOf('is-css-grid'), 1);
+										}
 										setAttributes({
+											className: classes.join(' '),
 											useCSSGrid: !useCSSGrid,
 										});
 									}}
-									help={__('When this is enabled, the columns will be displayed using css grid, other options like "stack on mobile" will be ignored.')}
+									help={__('When this is enabled, columns will be displayed using CSS grid as a result options like "stack on mobile" will be ignored.')}
 								/>
 								<ToggleControl
 									label={__('Enable Divider')}
 									disabled={!useCSSGrid}
 									checked={enableDivider}
-									onChange={() => {
+									onChange={val => {
+										if (val) {
+											if (!classes.includes('has-divider')) {
+												classes.push('has-divider');
+											}
+										} else {
+											classes.splice(classes.indexOf('has-divider'), 1);
+										}
 										setAttributes({
+											className: classes.join(' '),
 											enableDivider: !enableDivider,
 										});
 									}}
