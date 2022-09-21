@@ -73,7 +73,7 @@ class Columns extends PRC_Block_Library_Primitives {
 		$style = '';
 		// I would like to do a check for if this columns block has divider enabled but the attr is not passing through for some reason, this more verbose option works for now.
 		if ( array_key_exists('style', $block['attrs']) && array_key_exists('spacing', $block['attrs']['style']) && array_key_exists('blockGap', $block['attrs']['style']['spacing']) ) {
-			$block_gap = $block['attrs']['style']['spacing']['blockGap'];
+			$block_gap = (int) str_replace('px', '', $block['attrs']['style']['spacing']['blockGap']);
 			$style = '.wp-block-columns.is-css-grid.has-divider > .wp-block-column:not(:first-of-type):not(.is-selected):not(.is-highlighted):not(.is-hovered):after {left: -' . ($block_gap  / 2). 'px!important;}';
 		}
 		return $style;
