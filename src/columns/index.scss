@@ -30,7 +30,7 @@ $grid-gutter: 24px;
 	overflow-wrap: break-word; // New standard.
 
 	display: grid;
-	grid-gap: $grid-gutter;
+	// gap: $grid-gutter;
 	grid-template-columns: $grid-mobile;
 
 
