@@ -67,7 +67,7 @@ class PRC_Block_Library_Primitives {
 		new Home_Link(true);
 		new Navigation_Link(true);
 		new Navigation_Submenu(true);
-		new Social_Links(true);
+		new Core_Social_Links(true);
 	}
 
 }

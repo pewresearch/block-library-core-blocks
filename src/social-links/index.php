@@ -2,7 +2,7 @@
 // Modify the core/social-link block.
 // See: https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/social-link/index.php
 
-class Social_Links extends PRC_Block_Library_Primitives {
+class Core_Social_Links extends PRC_Block_Library_Primitives {
 	public static $block_name = 'core/social-links';
 	public static $child_block_name = 'core/social-link';
 	public static $block_json = null;
