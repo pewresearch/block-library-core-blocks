@@ -21,6 +21,8 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
+namespace PRC;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -67,7 +69,7 @@ class PRC_Block_Library_Primitives {
 		new Home_Link(true);
 		new Navigation_Link(true);
 		new Navigation_Submenu(true);
-		new Core_Social_Links(true);
+		new Social_Links(true);
 	}
 
 }

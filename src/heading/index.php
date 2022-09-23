@@ -1,4 +1,6 @@
 <?php
+namespace PRC;
+
 class Heading extends PRC_Block_Library_Primitives {
 	public static $block_name = 'core/heading';
 	public static $block_json = null;

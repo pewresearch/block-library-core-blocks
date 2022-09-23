@@ -1,4 +1,5 @@
 <?php
+namespace PRC;
 
 class Column extends PRC_Block_Library_Primitives {
 	public static $block_name = 'core/column';

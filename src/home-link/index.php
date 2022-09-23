@@ -1,4 +1,6 @@
 <?php
+namespace PRC;
+
 class Home_Link extends PRC_Block_Library_Primitives {
 	public static $block_name = 'core/home-link';
 	public static $block_json = null;

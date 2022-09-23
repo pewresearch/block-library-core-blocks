@@ -5,6 +5,7 @@
 // attribute toggle to allow for changing the url to a hashed url when you open a sub menu so a visitor can share that pre-opened.
 //// ability to set a icon which would hide the label and show the icon instead.
 // A new sub  block or ability for navigation links to also have an expand button, i guess this is similair to sub tree view but styled slightly different.
+namespace PRC;
 
 class Navigation_Submenu extends PRC_Block_Library_Primitives {
 	public static $block_name = 'core/navigation-submenu';
