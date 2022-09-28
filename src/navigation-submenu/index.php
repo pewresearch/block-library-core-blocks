@@ -6,6 +6,7 @@
 //// ability to set a icon which would hide the label and show the icon instead.
 // A new sub  block or ability for navigation links to also have an expand button, i guess this is similair to sub tree view but styled slightly different.
 namespace PRC;
+use wp_json_file_decode;
 
 class Navigation_Submenu extends PRC_Block_Library_Primitives {
 	public static $block_name = 'core/navigation-submenu';
@@ -23,7 +24,8 @@ class Navigation_Submenu extends PRC_Block_Library_Primitives {
 			add_action( 'enqueue_block_editor_assets', array($this, 'register_editor_assets') );
 			add_action( 'init', array($this, 'register_stylesheets'), 10 );
 			add_action( 'init', array($this, 'register_block_styles'), 11 );
-			add_filter( 'render_block', array($this, 'render_callback'), 10, 2 );
+			add_filter( 'block_type_metadata', array( $this, 'add_attributes' ), 10, 1 );
+			add_filter( 'render_block', array($this, 'render_callback'), 10, 3 );
 		}
 	}
 
@@ -72,15 +74,14 @@ class Navigation_Submenu extends PRC_Block_Library_Primitives {
 		// You can direct the icon to be a specific one off file.
 		if ( ! array_key_exists( 'subExpandOpenedLabel', $metadata['attributes'] ) ) {
 			$metadata['attributes']['subExpandOpenedLabel'] = array(
-				'type'    => 'string',
-				'default' => __( 'Less', 'prc-core-block-library' ),
+				'type'    => 'string'
 			);
 		}
 
 		return $metadata;
 	}
 
-	public function modify_button_label_open_close($block_content, $block) {
+	public function modify_button_label_open_close($block_content, $block, $context) {
 		$label_closed = is_array($block['attrs']) && array_key_exists('label', $block['attrs']) ? $block['attrs']['label'] : false;
 		$label_opened = is_array($block['attrs']) && array_key_exists('subExpandOpenedLabel', $block['attrs']) ? $block['attrs']['subExpandOpenedLabel'] : false;
 
@@ -88,13 +89,19 @@ class Navigation_Submenu extends PRC_Block_Library_Primitives {
 			return $block_content;
 		}
 
-		$pattern = '/<button aria-label="(.*)" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label">'.$label_closed.'<\/span><\/button>/';
-		$replacement = '<button aria-label="Expandable submenu" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label"><span class="wp-block-navigation-submenu__label__closed">'.$label_closed.'</span><span class="wp-block-navigation-submenu__label__opened">'.$label_opened.'</span></span></button>';
+		if ( array_key_exists('openSubmenusOnClick', $context) && true !== $context['openSubmenusOnClick'] ) {
+			$pattern = '/<a class="wp-block-navigation-item__content" href="([^"]+)">'.$label_closed.'<\/a>/';
+			$replacement = '<a class="wp-block-navigation-item__content" href="$1"><span class="wp-block-navigation-submenu__label__closed">'.$label_closed.'</span><span class="wp-block-navigation-submenu__label__opened">'.$label_opened.'</span></a>';
+		} else {
+			$pattern = '/<button aria-label="(.*)" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label">'.$label_closed.'<\/span><\/button>/';
+			$replacement = '<button aria-label="Expandable submenu" class="wp-block-navigation-item__content wp-block-navigation-submenu__toggle" aria-expanded="false"><span class="wp-block-navigation-item__label"><span class="wp-block-navigation-submenu__label__closed">'.$label_closed.'</span><span class="wp-block-navigation-submenu__label__opened">'.$label_opened.'</span></span></button>';
+		}
+
 		$replaced = preg_replace($pattern, $replacement, $block_content);
 		return $replaced;
 	}
 
-	public function render_callback( $block_content, $block ) {
+	public function render_callback( $block_content, $block, $block_instance ) {
 		if ( self::$block_name !== $block['blockName'] || is_admin() ) {
 			return $block_content;
 		}
@@ -102,7 +109,7 @@ class Navigation_Submenu extends PRC_Block_Library_Primitives {
 
 		// The sub-expand style should modify its button to have an open and close state.
 		if ( false !== $classname && false !== strpos($classname, 'is-style-sub-expand') ) {
-			$block_content = $this->modify_button_label_open_close($block_content, $block);
+			$block_content = $this->modify_button_label_open_close($block_content, $block, $block_instance->context);
 		}
 
 		return $block_content;

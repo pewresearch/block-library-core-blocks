@@ -12,6 +12,7 @@ import { TextControl, PanelBody } from '@wordpress/components';
  * Internal Dependencies
  */
 import './edit.scss';
+import { use } from '@wordpress/data';
 
 const BLOCKNAME = 'core/navigation-submenu';
 const BLOCKIDENTIFIER = 'prc-core-block-library/navigation-submenu';
@@ -30,7 +31,7 @@ addFilter('blocks.registerBlockType', BLOCKIDENTIFIER, (settings, name) => {
 	}
 	const s = settings;
 	// if settings object has attributes and attributes has a label property, then add a new property to the label property
-	if (settings.attributes && !settings.attributes.subExpandOpenedLabel) {
+	if (settings.attributes && (!settings.attributes.subExpandOpenedLabel && !settings.attributes.subExpandIsOpenedOnClick)) {
 		s.attributes.subExpandOpenedLabel = {
 			type: 'string',
 		};
@@ -47,12 +48,16 @@ addFilter(
 	createHigherOrderComponent(
 		(BlockEdit) =>
 			function NavigationSubmenublockAdvancedControls(props) {
-				const { name, attributes, setAttributes } = props;
+				const { name, attributes, setAttributes, clientId } = props;
 				if (BLOCKNAME !== name) {
 					return <BlockEdit {...props} />;
 				}
 
-				const { subExpandOpenedLabel, label, className } = attributes;
+				const {
+					subExpandOpenedLabel,
+					label,
+					className,
+				} = attributes;
 
 				if ('is-style-sub-expand' !== className) {
 					return <BlockEdit {...props} />;
