@@ -38,7 +38,7 @@ const HeadingBlockFilter = createHigherOrderComponent(
 								isActive={isChapter}
 								onClick={() => {
 									const attrs = {
-										isChapter: !isChapter,
+										isChapter: !isChapter
 									};
 									setAttributes({ ...attrs });
 								}}

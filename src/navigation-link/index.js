@@ -5,7 +5,6 @@ import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
 import { InspectorAdvancedControls } from '@wordpress/block-editor';
-import { CardDivider } from '@wordpress/components';
 
 /**
  * Internal Dependencies
@@ -33,7 +32,6 @@ addFilter(
 								attributes={attributes}
 								setAttributes={setAttributes}
 							/>
-							<CardDivider />
 						</InspectorAdvancedControls>
 						<BlockEdit {...props} />
 					</Fragment>

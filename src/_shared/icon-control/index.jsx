@@ -10,7 +10,7 @@ import { SelectControl, CardDivider } from '@wordpress/components';
  */
 import MediaDropZone from '../media-dropzone';
 
-const { prcCBLIconLibrary } = window;
+// @TODO: Slot fill to allow for a icon slug to be rendered by some icon library...
 
 function IconControl({ attributes, setAttributes }) {
 	const { iconId, iconSlug } = attributes;
@@ -27,28 +27,13 @@ function IconControl({ attributes, setAttributes }) {
 					setAttributes({ iconId: attachment.id });
 				}}
 				onClear={() => {
-					const tmp = { ...attributes };
-					delete tmp.iconId;
-					setAttributes({ ...tmp });
+					setAttributes({iconId: null});
 				}}
 				mediaType={['image']}
 				mediaSize="thumbnail"
 				singularLabel="Icon File"
 			/>
-			{undefined !== prcCBLIconLibrary && (
-				<Fragment>
-					<CardDivider />
-					<SelectControl
-						label="Icon Slug"
-						help="Select an icon from the list above."
-						value={iconSlug}
-						options={prcCBLIconLibrary}
-						onChange={(value) => {
-							setAttributes({ iconSlug: value });
-						}}
-					/>
-				</Fragment>
-			)}
+			<CardDivider />
 		</Fragment>
 	);
 }
