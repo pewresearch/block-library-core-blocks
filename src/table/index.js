@@ -15,6 +15,7 @@ import handleCSV from './csv-parser';
 
 const BLOCKNAME = 'core/table';
 const BLOCKIDENTIFIER = 'prc-block-library/table';
+const SUPPORTED_BLOCKS = [BLOCKNAME, 'flexible-table-block/table'];
 
 function CSVImportDropZone(props) {
 	const { attributes, setAttributes } = props;
@@ -60,7 +61,7 @@ addFilter(
 		(BlockEdit) =>
 			function TableUtilities(props) {
 				const { name } = props;
-				if (BLOCKNAME !== name) {
+				if (!SUPPORTED_BLOCKS.includes(name)) {
 					return <BlockEdit {...props} />;
 				}
 				return (
