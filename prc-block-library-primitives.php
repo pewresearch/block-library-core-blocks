@@ -56,6 +56,7 @@ class PRC_Block_Library_Primitives {
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-link/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/navigation-submenu/index.php';
 		require_once plugin_dir_path( __FILE__ ) . '/src/social-links/index.php';
+		require_once plugin_dir_path( __FILE__ ) . '/src/table/index.php';
 
 		$this->init_blocks();
 	}
@@ -70,6 +71,7 @@ class PRC_Block_Library_Primitives {
 		new Navigation_Link(true);
 		new Navigation_Submenu(true);
 		new Social_Links(true);
+		new Table(true);
 	}
 
 }

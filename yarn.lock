@@ -2165,6 +2165,7 @@ __metadata:
     "@wordpress/i18n": ^4.16.0
     "@wordpress/scripts": ^24.0.0
     classnames: ^2.3.1
+    comma-separated-values: ^3.6.4
     enquire.js: ^2.1.6
     react: ^17.0.0
     react-dom: ^17.0.0
@@ -5714,6 +5715,13 @@ __metadata:
   dependencies:
     delayed-stream: ~1.0.0
   checksum: 49fa4aeb4916567e33ea81d088f6584749fc90c7abec76fd516bf1c5aa5c79f3584b5ba3de6b86d26ddd64bae5329c4c7479343250cfe71c75bb366eae53bb7c
+  languageName: node
+  linkType: hard
+
+"comma-separated-values@npm:^3.6.4":
+  version: 3.6.4
+  resolution: "comma-separated-values@npm:3.6.4"
+  checksum: c73ab9282fa8992839e49137a226a3625f7464c93ecccb4104b42da623c5cc85312ed1fe46e0e43f3be7f7528a0a6bcbba78ae7b1b376b2c18779da43d5b8323
   languageName: node
   linkType: hard
 
