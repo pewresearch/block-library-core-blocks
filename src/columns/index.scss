@@ -163,7 +163,7 @@ $grid-gutter: 24px;
 
 		@for $i from 1 through 12 {
 			@for $x from 1 through 6 {
-				& > .wp-block-column.column#{ $x }-grid__start-#{ $i } {
+				& > .wp-block-column.column#{ $x }-desktop-grid__start-#{ $i } {
 					grid-column-start: $i;
 				}
 			}
@@ -171,7 +171,7 @@ $grid-gutter: 24px;
 
 		@for $i from 1 through 12 {
 			@for $x from 1 through 6 {
-				& > .wp-block-column.column#{ $x }-grid__span-#{ $i }  {
+				& > .wp-block-column.column#{ $x }-desktop-grid__span-#{ $i }  {
 					grid-column-end: span $i; // Set it to span $i columns, regardless of starting position.
 				}
 			}
@@ -179,7 +179,7 @@ $grid-gutter: 24px;
 
 		@for $i from 1 through 4 {
 			@for $x from 1 through 4 {
-				& > .wp-block-column.column#{ $x }-grid__row-#{ $i } {
+				& > .wp-block-column.column#{ $x }-desktop-grid__row-#{ $i } {
 					grid-row-start: $i;
 				}
 			}

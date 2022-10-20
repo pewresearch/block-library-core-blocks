@@ -62,19 +62,22 @@ class Column extends PRC_Block_Library_Primitives {
 		// Grid Span:
 		if ( ! array_key_exists( 'gridSpan', $metadata['attributes'] ) ) {
 			$metadata['attributes']['gridSpan'] = array(
-				'type'    => 'integer'
+				'type'    => 'integer',
+				'default' => 4
 			);
 		}
 
 		if ( ! array_key_exists( 'tabletGridSpan', $metadata['attributes'] ) ) {
 			$metadata['attributes']['tabletGridSpan'] = array(
-				'type'    => 'integer'
+				'type'    => 'integer',
+				'default' => 4
 			);
 		}
 
 		if ( ! array_key_exists( 'mobileGridSpan', $metadata['attributes'] ) ) {
 			$metadata['attributes']['mobileGridSpan'] = array(
-				'type'    => 'integer'
+				'type'    => 'integer',
+				'default' => 4
 			);
 		}
 

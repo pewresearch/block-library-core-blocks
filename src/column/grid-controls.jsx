@@ -84,26 +84,20 @@ export default function GridControls({ attributes, setAttributes, clientId }) {
 
 	const classes = className ? className.split(' ') : [];
 
-	const calculateRatio = (start, span) => (start + span - 1) / 12;
-
 	const handleGridSpanChange = (newGridSpan, device = 'desktop') => {
-		classes.forEach((item, index) => {
-			if (
-				item.includes(
-					'desktop' !== device ? `${device}-grid__span-` : 'grid__span-',
-				)
-			) {
-				classes.splice(index, 1);
+		classes.forEach((item, i) => {
+			if (item.includes(`${device}-grid__span-`)) {
+				classes.splice(i, 1);
 			}
 		});
 
-		const newGridSpanClassName =
-			'desktop' !== device
-				? `column${index}-${device}-grid__span-${newGridSpan}`
-				: `column${index}-grid__span-${newGridSpan}`;
+		console.log('handleGridSpanChange -> classes', classes);
+
+		const newGridSpanClassName = `column${index}-${device}-grid__span-${newGridSpan}`;
 		if (!classes.includes(newGridSpanClassName)) {
 			classes.push(newGridSpanClassName);
 		}
+		console.log('->', classes);
 
 		const obj = {
 			className: classes.join(' '),
@@ -121,20 +115,13 @@ export default function GridControls({ attributes, setAttributes, clientId }) {
 	};
 
 	const handleGridStartChange = (newGridStart, device = 'desktop') => {
-		classes.forEach((item, index) => {
-			if (
-				item.includes(
-					'desktop' !== device ? `${device}-grid__start-` : 'grid__start-',
-				)
-			) {
-				classes.splice(index, 1);
+		classes.forEach((item, i) => {
+			if (item.includes(`${device}-grid__start-`)) {
+				classes.splice(i, 1);
 			}
 		});
 
-		const newGridStartClassName =
-			'desktop' !== device
-				? `column${index}-${device}-grid__start-${newGridStart}`
-				: `column${index}-grid__start-${newGridStart}`;
+		const newGridStartClassName = `column${index}-${device}-grid__start-${newGridStart}`;
 		if (!classes.includes(newGridStartClassName)) {
 			classes.push(newGridStartClassName);
 		}

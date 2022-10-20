@@ -11,7 +11,7 @@ import {
 	ToggleControl,
 	CardDivider,
 	Path,
-	SVG
+	SVG,
 } from '@wordpress/components';
 import { registerBlockVariation } from '@wordpress/blocks';
 
@@ -55,9 +55,9 @@ addFilter(
 								<ToggleControl
 									label={__('Enable CSS Grid')}
 									checked={useCSSGrid}
-									onChange={val => {
+									onChange={(val) => {
 										const classes = className ? className.split(' ') : [];
-										console.log("Classes...", classes);
+										console.log('Classes...', classes);
 										if (val) {
 											if (!classes.includes('is-css-grid')) {
 												classes.push('is-css-grid');
@@ -70,15 +70,17 @@ addFilter(
 											useCSSGrid: !useCSSGrid,
 										});
 									}}
-									help={__('When this is enabled, columns will be displayed using CSS grid as a result options like "stack on mobile" will be ignored.')}
+									help={__(
+										'When this is enabled, columns will be displayed using CSS grid as a result options like "stack on mobile" will be ignored.',
+									)}
 								/>
 								<ToggleControl
 									label={__('Enable Divider')}
 									disabled={!useCSSGrid}
 									checked={enableDivider}
-									onChange={val => {
+									onChange={(val) => {
 										const classes = className ? className.split(' ') : [];
-										console.log("Classes...", classes);
+										console.log('Classes...', classes);
 										if (val) {
 											if (!classes.includes('has-divider')) {
 												classes.push('has-divider');
@@ -110,30 +112,55 @@ const gridBlockAttrs = {
 	useCSSGrid: true,
 	enableDivider: true,
 };
-const gridBlockTemplate =  [
-	[ 'core/column', { className: 'column1-grid__span-3 column1-tablet-grid__span-2 column1-mobile-grid__span-4', gridSpan: 3, tabletGridSpan: 2, mobileGridSpan: 4, } ],
-	[ 'core/column', { className: 'column2-grid__span-6 column2-tablet-grid__span-4 column2-mobile-grid__span-4', gridSpan: 6, tabletGridSpan: 4, mobileGridSpan: 4 } ],
-	[ 'core/column', { className: 'column3-grid__span-3 column3-tablet-grid__span-2 column3-mobile-grid__span-4', gridSpan: 3, tabletGridSpan: 2, mobileGridSpan: 4 } ],
-];
-const gridBlockExample = gridBlockTemplate.map((block) => {
-	return {
-		name: block[0],
-		attributes: {
-			...block[1],
+const gridBlockTemplate = [
+	[
+		'core/column',
+		{
+			className:
+				'column1-desktop-grid__span-3 column1-tablet-grid__span-2 column1-mobile-grid__span-4',
+			gridSpan: 3,
+			tabletGridSpan: 2,
+			mobileGridSpan: 4,
 		},
-		innerBlocks: [
-			{
-				name: 'core/paragraph',
-				attributes: {
-					/* translators: example text. */
-					content: __(
-						'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et eros eu felis.'
-					),
-				},
+	],
+	[
+		'core/column',
+		{
+			className:
+				'column2-desktop-grid__span-6 column2-tablet-grid__span-4 column2-mobile-grid__span-4',
+			gridSpan: 6,
+			tabletGridSpan: 4,
+			mobileGridSpan: 4,
+		},
+	],
+	[
+		'core/column',
+		{
+			className:
+				'column3-desktop-grid__span-3 column3-tablet-grid__span-2 column3-mobile-grid__span-4',
+			gridSpan: 3,
+			tabletGridSpan: 2,
+			mobileGridSpan: 4,
+		},
+	],
+];
+const gridBlockExample = gridBlockTemplate.map((block) => ({
+	name: block[0],
+	attributes: {
+		...block[1],
+	},
+	innerBlocks: [
+		{
+			name: 'core/paragraph',
+			attributes: {
+				/* translators: example text. */
+				content: __(
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et eros eu felis.',
+				),
 			},
-		]
-	};
-});
+		},
+	],
+}));
 registerBlockVariation('core/columns', {
 	name: 'css-grid',
 	title: __('CSS Grid', 'prc-block-library'),
