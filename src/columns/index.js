@@ -47,6 +47,35 @@ addFilter(
 
 				const { useCSSGrid, enableDivider, className } = attributes;
 
+				// Enforce the use of the CSS Grid classes.
+				useEffect(()=>{
+					const classes = className ? className.split(' ') : [];
+					console.log('Change Detected', attributes, classes);
+
+					if (useCSSGrid) {
+						if (!classes.includes('is-css-grid')) {
+							classes.push('is-css-grid');
+						}
+					} else {
+						if (classes.includes('is-css-grid')) {
+							classes.splice(classes.indexOf('is-css-grid'), 1);
+						}
+					}
+
+					if (enableDivider) {
+						if (!classes.includes('has-divider')) {
+							classes.push('has-divider');
+						}
+					} else {
+						if (classes.includes('has-divider')) {
+							classes.splice(classes.indexOf('has-divider'), 1);
+						}
+					}
+
+					setAttributes({ className: classes.join(' ') });
+
+				}, [useCSSGrid, enableDivider]);
+
 				return (
 					<Fragment>
 						<BlockEdit {...props} />
@@ -55,21 +84,7 @@ addFilter(
 								<ToggleControl
 									label={__('Enable CSS Grid')}
 									checked={useCSSGrid}
-									onChange={(val) => {
-										const classes = className ? className.split(' ') : [];
-										console.log('Classes...', classes);
-										if (val) {
-											if (!classes.includes('is-css-grid')) {
-												classes.push('is-css-grid');
-											}
-										} else {
-											classes.splice(classes.indexOf('is-css-grid'), 1);
-										}
-										setAttributes({
-											className: classes.join(' '),
-											useCSSGrid: !useCSSGrid,
-										});
-									}}
+									onChange={(val) => setAttributes({ useCSSGrid: !useCSSGrid })}
 									help={__(
 										'When this is enabled, columns will be displayed using CSS grid as a result options like "stack on mobile" will be ignored.',
 									)}
@@ -78,21 +93,7 @@ addFilter(
 									label={__('Enable Divider')}
 									disabled={!useCSSGrid}
 									checked={enableDivider}
-									onChange={(val) => {
-										const classes = className ? className.split(' ') : [];
-										console.log('Classes...', classes);
-										if (val) {
-											if (!classes.includes('has-divider')) {
-												classes.push('has-divider');
-											}
-										} else {
-											classes.splice(classes.indexOf('has-divider'), 1);
-										}
-										setAttributes({
-											className: classes.join(' '),
-											enableDivider: !enableDivider,
-										});
-									}}
+									onChange={(val) => setAttributes({ enableDivider: !enableDivider })}
 								/>
 							</PanelBody>
 						</InspectorControls>
