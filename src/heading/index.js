@@ -91,4 +91,5 @@ registerBlockVariation(BLOCKNAME, {
 		isChapter: true,
 		level: 3,
 	},
+	isActive: ({ isChapter }) => isChapter,
 });
