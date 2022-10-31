@@ -1,14 +1,14 @@
 <?php
 namespace PRC;
 
-class Heading extends PRC_Block_Library_Primitives {
+class Heading extends PRC_Block_Library_Core_Blocks {
 	public static $block_name = 'core/heading';
 	public static $block_json = null;
 	public static $script_handle = null;
 
 	public function __construct($init = false) {
 		if ( true === $init ) {
-			$block_json_file = PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/heading/block.json';
+			$block_json_file = PRC_BLOCK_LIBRARY_CORE_BLOCKS_DIR . '/build/heading/block.json';
 			self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
 			self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
 

@@ -15,7 +15,7 @@ import './edit.scss';
 import { use } from '@wordpress/data';
 
 const BLOCKNAME = 'core/navigation-submenu';
-const BLOCKIDENTIFIER = 'prc-core-block-library/navigation-submenu';
+const BLOCKIDENTIFIER = 'prc-block-library-core-blocks/navigation-submenu';
 
 /**
  * @NOTE: Modify default settings on core/navigation-submenu block. Sometimes defining attributes via PHP is not enough and this is one of those times.
@@ -76,13 +76,13 @@ addFilter(
 					<Fragment>
 						<InspectorControls>
 							<PanelBody
-								title={__('Sub Expand settings', 'prc-core-block-library')}
+								title={__('Sub Expand settings', 'prc-block-library-core-blocks')}
 							>
 								<TextControl
-									label={__('Expanded Label', 'prc-core-block-library')}
+									label={__('Expanded Label', 'prc-block-library-core-blocks')}
 									help={__(
 										'Label for expanded submenu',
-										'prc-core-block-library',
+										'prc-block-library-core-blocks',
 									)}
 									value={subExpandOpenedLabel}
 									onChange={(value) =>

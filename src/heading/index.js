@@ -17,7 +17,7 @@ import {
 import { addFilter } from '@wordpress/hooks';
 
 const BLOCKNAME = 'core/heading';
-const BLOCKIDENTIFIER = 'prc-core-block-library/heading';
+const BLOCKIDENTIFIER = 'prc-block-library-core-blocks/heading';
 
 // Add toolbar to core/heading block with toggle for isChapter attribute.
 const HeadingBlockFilter = createHigherOrderComponent(

@@ -2,21 +2,21 @@
 /**
  * PRC Core Block Library
  *
- * @package           PRC_Block_Library_Primitives
+ * @package           PRC_Block_Library_Core_Blocks
  * @author            Seth Rubenstein
  * @copyright         2022 Pew Research Center
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
- * Plugin Name:       Block Library Primitives by Pew Research Center
- * Plugin URI:        https://github.com/pewresearch/block-library-primitives/
+ * Plugin Name:       Core Block Library by Pew Research Center
+ * Plugin URI:        https://github.com/pewresearch/block-library-core-blocks
  * Description:       A starting point for anyone looking to add functionality, extra control to and or create your own custom block library using core/blocks. Built with easier extensibility in mind.
  * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
- * Author:            Seth Rubenstein and Ben Wormald
- * Author URI:        https://github.com/sethrubenstein, https://github.com/benwormald
- * Text Domain:       prc-core-block-library
+ * Author:            Pew Research Center
+ * Author URI:        https://github.com/pewresearch
+ * Text Domain:       prc-block-library-core-blocks
  * License:           GPL v2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
@@ -28,10 +28,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PRC_BLOCK_LIBRARY_PRIMITIVES_FILE', __FILE__ );
-define( 'PRC_BLOCK_LIBRARY_PRIMITIVES_DIR', __DIR__ );
+define( 'PRC_BLOCK_LIBRARY_CORE_BLOCKS_DIR', __DIR__ );
 
-class PRC_Block_Library_Primitives {
+class PRC_Block_Library_Core_Blocks {
 	/**
 	 * Easily accessible variable that points to the plugin filepath.
 	 *
@@ -44,7 +43,7 @@ class PRC_Block_Library_Primitives {
 	 *
 	 * @var string
 	 */
-	public static $version = '1.0.1';
+	public static $version = '1.0.5';
 
 	public function __construct() {
 		require_once plugin_dir_path( __FILE__ ) . '/src/cover/index.php';
@@ -72,4 +71,4 @@ class PRC_Block_Library_Primitives {
 
 }
 
-new PRC_Block_Library_Primitives();
+new PRC_Block_Library_Core_Blocks();

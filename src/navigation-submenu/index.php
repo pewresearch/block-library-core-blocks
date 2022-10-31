@@ -8,7 +8,7 @@
 namespace PRC;
 use wp_json_file_decode;
 
-class Navigation_Submenu extends PRC_Block_Library_Primitives {
+class Navigation_Submenu extends PRC_Block_Library_Core_Blocks {
 	public static $block_name = 'core/navigation-submenu';
 	public static $block_json = null;
 	public static $view_handle = null;
@@ -17,7 +17,7 @@ class Navigation_Submenu extends PRC_Block_Library_Primitives {
 
 	public function __construct($init = false) {
 		if ( true === $init ) {
-			$block_json_file = PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/navigation-submenu/block.json';
+			$block_json_file = PRC_BLOCK_LIBRARY_CORE_BLOCKS_DIR . '/build/navigation-submenu/block.json';
 			self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
 			self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
 
@@ -46,7 +46,7 @@ class Navigation_Submenu extends PRC_Block_Library_Primitives {
 			self::$block_name,
 			array(
 				'name'  => 'sub-tree',
-				'label' => __( 'Sub Tree', 'prc-core-block-library' ),
+				'label' => __( 'Sub Tree', 'prc-block-library-core-blocks' ),
 				'style' => self::$view_handle,
 			)
 		);
@@ -55,7 +55,7 @@ class Navigation_Submenu extends PRC_Block_Library_Primitives {
 			self::$block_name,
 			array(
 				'name'  => 'sub-expand',
-				'label' => __( 'Sub Expand', 'prc-core-block-library' ),
+				'label' => __( 'Sub Expand', 'prc-block-library-core-blocks' ),
 				'style' => self::$view_handle,
 			)
 		);

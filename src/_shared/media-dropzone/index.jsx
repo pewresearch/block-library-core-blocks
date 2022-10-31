@@ -27,7 +27,7 @@ function MediaDropZone({
 }) {
 	const fallbackInstructions = __(
 		`Drop an ${singularLabel} here, or click to replace.`,
-		'prc-core-block-library',
+		'prc-block-library-core-blocks',
 	);
 	const l = null !== label ? label : `Set ${singularLabel}`;
 
@@ -121,7 +121,7 @@ function MediaDropZone({
 	return (
 		<MediaUploadCheck fallback={fallbackInstructions}>
 			<MediaUpload
-				title={__(`${singularLabel} Upload`, 'prc-core-block-library')}
+				title={__(`${singularLabel} Upload`, 'prc-block-library-core-blocks')}
 				onSelect={onMediaUpdate}
 				allowedTypes={mediaType}
 				value={id}

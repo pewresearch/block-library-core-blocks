@@ -3,7 +3,7 @@
 // See: https://github.com/WordPress/gutenberg/blob/trunk/packages/block-library/src/social-link/index.php
 namespace PRC;
 
-class Social_Links extends PRC_Block_Library_Primitives {
+class Social_Links extends PRC_Block_Library_Core_Blocks {
 	public static $block_name = 'core/social-links';
 	public static $child_block_name = 'core/social-link';
 	public static $block_json = null;
@@ -12,7 +12,7 @@ class Social_Links extends PRC_Block_Library_Primitives {
 
 	public function __construct( $init = false ) {
 		if ( true === $init ) {
-			$block_json_file = PRC_BLOCK_LIBRARY_PRIMITIVES_DIR . '/build/social-links/block.json';
+			$block_json_file = PRC_BLOCK_LIBRARY_CORE_BLOCKS_DIR . '/build/social-links/block.json';
 			self::$block_json = wp_json_file_decode( $block_json_file, array( 'associative' => true ) );
 			self::$block_json['file'] = wp_normalize_path( realpath( $block_json_file ) );
 

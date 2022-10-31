@@ -12,7 +12,7 @@ import { InspectorAdvancedControls } from '@wordpress/block-editor';
 import { IconControl } from '../_shared';
 
 const BLOCKNAME = 'core/navigation-link';
-const BLOCKIDENTIFIER = 'prc-core-block-library/navigation-link';
+const BLOCKIDENTIFIER = 'prc-block-library-core-blocks/navigation-link';
 
 addFilter(
 	'editor.BlockEdit',

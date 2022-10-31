@@ -14,7 +14,7 @@ import { IconControl } from '../_shared';
 console.log('Hello World -> src/home-link/index.js');
 
 const BLOCKNAME = 'core/home-link';
-const BLOCKIDENTIFIER = 'prc-core-block-library/home-link';
+const BLOCKIDENTIFIER = 'prc-block-library-core-blocks/home-link';
 
 addFilter(
 	'editor.BlockEdit',
