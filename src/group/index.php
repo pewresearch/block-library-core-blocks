@@ -5,6 +5,7 @@ class Group extends PRC_Block_Library_Primitives {
 	public static $block_name = 'core/group';
 	public static $block_json = null;
 	public static $view_script_handle = null;
+	public static $view_style_handle = null;
 	public static $editor_script_handle = null;
 
 	public function __construct($init = false) {
@@ -24,6 +25,7 @@ class Group extends PRC_Block_Library_Primitives {
 
 	public function init_assets() {
 		self::$view_script_handle = register_block_style_handle( self::$block_json, 'viewScript' );
+		self::$view_style_handle = register_block_style_handle( self::$block_json, 'style' );
 		self::$editor_script_handle = register_block_script_handle( self::$block_json, 'editorScript' );
 	}
 
@@ -86,6 +88,7 @@ class Group extends PRC_Block_Library_Primitives {
 			// $responsive_threshold = is_array($block['attrs']) && array_key_exists('responsiveThreshold', $block['attrs']) ? $block['attrs']['responsiveThreshold'] : false;
 			// if ( $is_sticky || $responsive_attach_id || $responsive_threshold ) {
 				wp_enqueue_script( self::$view_script_handle );
+				wp_enqueue_style( self::$view_style_handle );
 			// }
 		}
 	}
