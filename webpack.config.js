@@ -15,7 +15,6 @@ module.exports = {
 			requestToExternal(request) {
 				/* My externals */
 				if (request.includes('enquire.js')) {
-					console.log('ENQUIRE JS!!!!', request);
 					return 'enquire';
 				}
 			},
