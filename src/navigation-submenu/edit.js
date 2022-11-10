@@ -12,7 +12,6 @@ import { TextControl, PanelBody } from '@wordpress/components';
  * Internal Dependencies
  */
 import './edit.scss';
-import { use } from '@wordpress/data';
 
 const BLOCKNAME = 'core/navigation-submenu';
 const BLOCKIDENTIFIER = 'prc-block-library-core-blocks/navigation-submenu';

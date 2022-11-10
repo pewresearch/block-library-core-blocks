@@ -4,6 +4,6 @@
     "name": "prc-block/group",
 	"title": "Group",
     "editorScript": "file:./edit.js",
-	"viewScript": "file:./view.js",
+	"viewScript": ["file:./view.js", "enquire.js"],
 	"style": "file:./view.css"
 }

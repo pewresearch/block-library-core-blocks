@@ -2158,6 +2158,7 @@ __metadata:
     "@wordpress/components": ^20.0.0
     "@wordpress/compose": ^5.14.0
     "@wordpress/data": ^7.0.0
+    "@wordpress/dependency-extraction-webpack-plugin": ^4.4.0
     "@wordpress/edit-post": ^6.13.0
     "@wordpress/edit-site": ^4.13.0
     "@wordpress/element": ^4.14.0
@@ -3746,6 +3747,18 @@ __metadata:
   peerDependencies:
     webpack: ^4.8.3 || ^5.0.0
   checksum: 0dc0f1da2a17ac99660e3004325942e389655d8b92360caa8223ff2f65e3179fe1d3d038bce5691d8703542ecedb35242e8c8e9b10389320d7cc2ab044567ffc
+  languageName: node
+  linkType: hard
+
+"@wordpress/dependency-extraction-webpack-plugin@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@wordpress/dependency-extraction-webpack-plugin@npm:4.4.0"
+  dependencies:
+    json2php: ^0.0.5
+    webpack-sources: ^3.2.2
+  peerDependencies:
+    webpack: ^4.8.3 || ^5.0.0
+  checksum: 70beece5631635f16e0715b7c1e57281cb53da202bdafea39156ea1843ced35a7e27ae1716e6f94edf8ab1fa6dacb0741125110083855bee3526511d498c0142
   languageName: node
   linkType: hard
 
@@ -9671,6 +9684,13 @@ __metadata:
   version: 0.0.4
   resolution: "json2php@npm:0.0.4"
   checksum: e17c8e21dc50e18253a1ef9c4ff5f5a212598444605b2152fba3b2e9945c4689da1c1e76e8e0eae2b00d3ec1c20ec081fca9f0c4c8968d1289a059b82ff88eb5
+  languageName: node
+  linkType: hard
+
+"json2php@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "json2php@npm:0.0.5"
+  checksum: 854305b6a164130e0f5c668e13baaeb76ff8a002dea60d26e541a3f2cbd06529fab4214d726647f2549aa89acc109ccdb443fd9f442059df08124cbd0c72e0fa
   languageName: node
   linkType: hard
 

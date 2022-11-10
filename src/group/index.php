@@ -19,15 +19,15 @@ class Group extends PRC_Block_Library_Core_Blocks {
 			add_filter( 'block_type_metadata', array( $this, 'add_attributes' ), 100, 1 );
 			add_filter( 'block_type_metadata_settings', array( $this, 'add_settings' ), 100, 2 );
 			add_filter( 'render_block', array( $this, 'render' ), 10, 2 );
-			add_action( 'wp_enqueue_scripts', array($this, 'enqueue_view_script') );
 		}
 	}
 
 	public function init_assets() {
-		self::$view_script_handle = register_block_style_handle( self::$block_json, 'viewScript' );
-		self::$view_style_handle = register_block_style_handle( self::$block_json, 'style' );
 		self::$editor_script_handle = register_block_script_handle( self::$block_json, 'editorScript' );
+		self::$view_script_handle   = register_block_script_handle( self::$block_json, 'viewScript' );
+		self::$view_style_handle    = register_block_style_handle( self::$block_json, 'style' );
 	}
+
 
 	public function register_editor_assets() {
 		wp_enqueue_script( self::$editor_script_handle );
@@ -81,18 +81,6 @@ class Group extends PRC_Block_Library_Core_Blocks {
 		return $settings;
 	}
 
-	public function enqueue_view_script() {
-		if ( has_block(self::$block_name) && !is_admin() ) {
-			// $is_sticky = is_array($block['attrs']) && array_key_exists('isSticky', $block['attrs']) ? $block['attrs']['isSticky'] : false;
-			// $responsive_attach_id = is_array($block['attrs']) && array_key_exists('responsiveAttachId', $block['attrs']) ? $block['attrs']['responsiveAttachId'] : false;
-			// $responsive_threshold = is_array($block['attrs']) && array_key_exists('responsiveThreshold', $block['attrs']) ? $block['attrs']['responsiveThreshold'] : false;
-			// if ( $is_sticky || $responsive_attach_id || $responsive_threshold ) {
-				wp_enqueue_script( self::$view_script_handle );
-				wp_enqueue_style( self::$view_style_handle );
-			// }
-		}
-	}
-
 	public function render( $block_content, $block ) {
 		if ( self::$block_name !== $block['blockName'] || is_admin() ) {
 			return $block_content;
@@ -102,7 +90,12 @@ class Group extends PRC_Block_Library_Core_Blocks {
 		$responsive_attach_id = is_array($block['attrs']) && array_key_exists('responsiveAttachId', $block['attrs']) ? $block['attrs']['responsiveAttachId'] : false;
 		$responsive_threshold = is_array($block['attrs']) && array_key_exists('responsiveThreshold', $block['attrs']) ? $block['attrs']['responsiveThreshold'] : false;
 
-		$block_content = apply_filters( 'prc_cbl_group_block_content', $block_content, $block );
+		if ( $is_sticky || $responsive_attach_id || $responsive_threshold ) {
+			wp_enqueue_script( self::$view_script_handle );
+			wp_enqueue_style( self::$view_style_handle );
+		}
+
+		$block_content = apply_filters( 'prc_group_block_content', $block_content, $block );
 
 		if ( $is_sticky ) {
 			$block_content = wp_sprintf(

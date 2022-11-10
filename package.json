@@ -5,8 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@wordpress/scripts": "^24.0.0",
-    "comma-separated-values": "^3.6.4",
-    "enquire.js": "^2.1.6"
+    "comma-separated-values": "^3.6.4"
   },
   "devDependencies": {
     "@pewresearch/eslint-config": "^1.0.7",
@@ -16,6 +15,7 @@
     "@wordpress/components": "^20.0.0",
     "@wordpress/compose": "^5.14.0",
     "@wordpress/data": "^7.0.0",
+    "@wordpress/dependency-extraction-webpack-plugin": "^4.4.0",
     "@wordpress/edit-post": "^6.13.0",
     "@wordpress/edit-site": "^4.13.0",
     "@wordpress/element": "^4.14.0",
@@ -24,7 +24,8 @@
     "classnames": "^2.3.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "underscore": "^1.13.4"
+    "underscore": "^1.13.4",
+		"enquire.js": "^2.1.6"
   },
   "prettier": "@pewresearch/prettier-config",
   "scripts": {

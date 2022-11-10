@@ -16,8 +16,6 @@ import {
 const BLOCKNAME = 'core/group';
 const BLOCKIDENTIFIER = 'prc-block-library/group';
 
-console.log('Hello World -> src/group/edit.js');
-
 addFilter(
 	'editor.BlockEdit',
 	BLOCKIDENTIFIER,
